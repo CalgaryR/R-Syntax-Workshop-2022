@@ -1,0 +1,501 @@
+---
+title: "R Syntax Part 4"
+pagetitle: "R Syntax: user functions"
+output:
+  learnr::tutorial:
+    theme: spacelab
+    ace_theme: cobalt
+    progressive: true
+    allow_skip: true
+    highlight: pygments
+    toc: yes
+    toc_depth: 2
+    code_folding: hide
+runtime: shiny_prerendered
+bibliography: bib.bib
+description: "Part of the workshop on basic R syntax and data structures"
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<!-- ======================== -->
+## About this tutorial
+<!-- ======================== -->
+
+This introductory tutorial about the R syntax is designed to be guided by an instructor. It contains explanations, code exercises, and quizzes that make it very interactive. If time allows during the guided session the student can execute some of the code and try variations of its own. The instructor may also ask short questions regarding the material. Should you fall behind or need more time to go over code or concepts, please do so after the live session. Actually this is very important in order to cement the concepts and test your understanding.
+
+
+The emphasis will be on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
+
+Dr. Amelia McNamara describes three types of R Syntax [@RSyntax-Cheatsheet]: the dollar sign, the formula, and the Tidyverse. These syntax are interchangeable, the important thing is to be consistent when using them. The formula syntax tends to be more compact but less readable while the Tidyverse syntax is more readable but also more verbose. We will focus here on the dollar sign syntax in order to meet our time goal for these two sessions. However, the student will have enough fundamental concepts to tackle the other two syntax on his own by the end of this tutorials.
+
+This tutorial was built using an R package called `learnr` and was deployed using an Rstudio solution on a ShinyR server. You can also do these things if you move forward in your R journey.
+
+Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it. If you want to reset your answers and the code  you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel. 
+
+Let's get started.
+
+
+<!-- ======================== -->
+## Learning outcomes
+<!-- ======================== -->
+
+The main goal of this tutorial is to teach patterns of the R language basic syntax. We believe that this knowledge will set you on a positive trajectory at any point in your R language journey. R has specific properties that set it apart from other languages and can make it easier to learn for a beginner. However, those same differences can make it confusing at first for people with experience.
+
+By the end of this tutorial, you will know what data structures to use to store your data in memory. You will select the data type according to the data you have for your specific problem. You will know the syntax to use R as a powerful calculation tool to generate statistical and data insights by subsetting, filtering, and computing in R native data structures.
+
+You will know how to build complex expressions that compute using R data structures with simplicity, whether they are vectors, lists, or data frames.
+
+You will know how to search for built-in R functions to help you process the data and achieve your goals. You will also create your own if no other from the built-ins or publicly available R packages meets your needs.
+
+
+
+
+## Built-in functions
+
+R offers predefined functions. When you use an R package you also use functions to get many complex tasks done with ease. It is important to familiarize yourself with their syntax. This requires that we start simple and build up the concepts gradually. The goal is to learn how to pass information to them and how to obtain results in two forms: as direct returned objects or as side effects. A side effect would be something like a file being written to the local disk or to a file service in the cloud.
+
+### Finding the type of a variable
+
+Functions in general may take arguments and return computed values when executed. Let's revisit the type and mode of variables.
+
+```{r type-of-variables, exercise=TRUE, exercise.lines=8}
+i <- 54
+typeof(i)
+j <- 54L
+typeof(j)
+x <- 3.1416
+typeof(x)
+first_name <- "Rob"
+typeof(first_name)
+```
+
+The mode can be obtained by applying the function with the namesake:
+
+```{r mode-of-variables, exercise=TRUE, exercise.lines=8}
+i <- 54
+mode(i)
+j <- 54L
+mode(j)
+x <- 3.1416
+mode(x)
+first_name <- "Rob"
+mode(first_name)
+```
+
+Let's investigate the type and mode of the R function `mode` itself.
+
+```{r mode-of-mode, exercise=TRUE, exercise.lines=2}
+typeof(mode)
+mode(mode)
+```
+
+In computer language _lingo_ a closure is a function and an environment to evaluate it, let's leave it at that for now. R is a unique language in more ways than one, let's move on with more basic concepts.
+
+
+### Assignment of values returned from built-ins
+
+Some expressions may be made up of a function with its arguments and the assignment operator to store the returned value from the function in a new variable. Let's look at the result of running the following lines:
+
+```{r executing-function, exercise.lines=4, exercise=TRUE}
+# assign the result of the function call to the variable 'e'
+e <- exp(1)
+# print the contents of 'e' to the output
+e
+```
+
+The first line executes the expression on the right of the assignment operator, itself a function call to `exp()` with argument `1` and assigns the returned value to the variable `e`. The second line prints the value stored in `e` as `2.718282`.
+
+Try running the line 1 by itself below.
+
+```{r executing-function-oneline, exercise.lines=1, exercise=TRUE}
+e <- exp(1)
+```
+
+There should be no output. The value of the function `exp` with the argument `1` was computed and stored in the variable `e`. The assignment operation leaves no trace on the output. Another way of saying this is _the assignment operator produces no side effects in the console_. Its only effect is to create a name-value pair, (e, 2.718282) in the global environment, so the value can be recalled later by its assigned name.
+
+*Note:* As it is usually the case in R, there is more than one way of getting things done. You can get a two-for-one effect by printing and doing assignment in a single expression on the console by surrounding the assignment with parenthesis. Try it!
+
+```{r two-for-one,  exercise = TRUE, exercise.lines=2}
+# this accomplishes the assignment and prints the value of the variable in one line
+(e <- exp(1))
+```
+
+### Other built-in functions
+
+To compute logarithms, R offers the following predefined functions:
+
+```
+     log(x, base = exp(1))
+     logb(x, base = exp(1))
+     log10(x)
+     log2(x)
+
+     log1p(x)
+```
+
+The most fundamental R built-in functions come bundled in the `base` package.
+To read about an R package use the function call `library(help = "base")` at the command line. Packages are loaded by issuing the function `libray("base")`  but the `base` package is loaded by default when an R session is started. Try it below.
+
+```{r functions-base-package, exercise=TRUE, exercise.lines=1}
+library(help = "base")
+```
+
+The language R provides a standard work-flow to build packages that contain functions, variables, and data targeting a specific problem. Contributors write R packages and share them mainly via the CRAN repository. To find out what comes built-in with the `base` package we can call the
+`builtins()` function to produce the list of `r length(builtins())` objects that are loaded in the base environment when you start R the first time.
+
+```{r number-functions-base-package, exercise=TRUE, exercise.lines=5}
+# get the number of objects loaded from the base R package
+length(builtins())
+# test if a object (a function) is part of the built-ins in the base environment
+"exp" %in% builtins()
+```
+
+
+========================
+### Test your understanding
+========================
+
+```{r quiz-complex-expressions, echo=FALSE, cache=FALSE}
+quiz(
+    question("Consider the expression:
+
+            a <- 1 + log10(10)
+
+  What is the result of executing the line above in the R console?",
+    answer("the value 2 gets assigned to _a_ and printed to the console", message = "the operaror _assignment_ has no side effects so nothing should be printed to the console"),
+    answer("error, _log10_ of 10 is undefined", message = "That's not quite right, check your the definition of a logarithm and try again"),
+    answer("nothing gets printed", correct = TRUE, message = "The operator _assignment_ has no side effects so nothing gest printed after the value 2 gets associated with the variable _a_"),
+    answer("the value of _a_ gets printed", message = "The operator _assignment_ has no other effect than to associate a value with a variable name"),
+    allow_retry = TRUE,
+    random_answer_order = TRUE
+  )
+)
+```
+
+
+
+### The assignment operators and their uses
+
+Experiment now to compute logarithms in base 10 and natural logarithms (base _e_). Try to answer the following:
+
+ - What is the logarithm of 10 in base 10?
+ - What is the natural logarithm of _e_?
+ - What is the logarithm of 512 in base 2?
+
+Try using the two variables already predefined in the first two lines. Add as many lines of code as you need to experiment.
+
+```{r other-operators, exercise=TRUE, exercise.lines=12}
+a <- 10
+e = exp(1)
+
+print(paste0("a = ", a, "; e = ", round( x = e, digits = 4)))
+
+# logarithm of 10 in base 10
+
+# natural logarithm of e
+
+# binary logarithm of 512
+
+```
+
+```{r other-operators-hint}
+log10(a)
+log(e, base = e)
+```
+
+From the previous exercise you might have noticed that the operators `<-` and `=` behave identically in stand alone expressions. Technically speaking, their effect is to create name-value pairs for each variable, (_a_, 10) and (_e_, 2.7183), in the global environment.
+
+So, you might ask: why are there two operators to do the same in R?
+Read on for the answer.
+
+### Function arguments: positional and named
+
+R functions may be built-in or user created, they may also have none, one, or more arguments. The arguments are given in between parenthesis, separated by commas, and they may be named or not. An example of a named parameter to a function is `base` in the `log` function: `log(x, base = exp(1))`. Examine the code below and guess the output before running it, did you expect the result?
+
+```{r named-param-1, exercise = TRUE, exercise.lines=9}
+three <- log(1000, base = 10)
+
+# Does 'base' exist in the global environment after log gets valuated?
+# let's  check it out and print a nice message accordingly
+if (exists("base")) {
+  print(paste0("base exists outside of log, base = ", base))
+} else {
+   print("base does not exist outside of log")
+}
+```
+
+In the call to the function `log`, the first argument is positional, taking exactly the position number one. The second argument is named and may receive a value via the `=` operator if the function requires it during its execution.
+
+If the function is called without a second argument, and `base` is used for computation inside the function, the assignment operator will use the value resulting from evaluating the expression `exp(1)` and associate it with `base`. This is  how a default value for a named argument can be given.
+
+If the user prefers to pass a different value from the default then the named argument can be given as in `log(10, base = 10)` or just  `log(10, 10)`.
+
+```{r named-param-2, exercise = TRUE}
+# use the name for the second argument
+log(1000, base = 10)
+# use only a value for the second argument, still ok!
+log(1000, 10)
+```
+
+Now compare the flexibility of using the explicit name assignment.
+
+```{r named-param-3, exercise = TRUE}
+# the first argument is now a named argument so the second gets position one instead
+log(base = 10, 1000)
+# in absence of hints x = 10 (position one) and base = 1000 (named)
+log(10, 1000)
+```
+
+### More on variable assignment
+
+We already saw how the `=` operator for a named argument does not affect the global environment where the function is created. Variable assignment is like creating a pair (variable-name, expression) that lives in a scope where it can be reached for further evaluation.
+
+We could use the `<-` operator for the named argument, the expression `log(x, base <- exp(1))` would assign the expression `exp(1)` to the local variable `base`. However, before that gets done, the name-expression pair gets created in the global environment. That implies that there will be a global variable `base` with the value of evaluating `exp(1)` outside of the function `log` after exiting `log`. Let's test that.
+
+
+```{r named-param-4, exercise = TRUE}
+log(1000, base <- 10)
+# Does 'base' exist in the global environment after log gest evaluated?
+if (exists("base")) {
+  print(paste0("base exists outside of log, base = ", base))
+} else {
+  print("base does not exist outside of log")
+}
+```
+
+
+If we use the global assignment operator `<-` in the first position it might have an unexpected result compared to using the local assignment operator `=`.  Check for yourself with the code below.
+
+```{r named-param-5, exercise = TRUE}
+log(base <- 10, 1000)
+# try now using the local assignment = for the named parameter
+log(base = 10, 1000)
+```
+
+Did you get the same result of using `log(base = 10, 1000)`? That is almost true, the difference is that now there is a variable assignment represented by the pair `(base, 10)` that outlives the call to `log`.
+
+In summary, to avoid ambiguities and unplanned side effects, when assigning values to variables use `<-` for stand-alone expressions and `=` for function named parameters. On the next section there are a few exercises to solidify these concepts.
+
+
+
+
+
+## User functions
+
+If you start writing a lot of R code, sooner or later you will find the need to reuse the same functionality over and over. Functions help you package that functionality in a single scope and reuse it in a convenient form.
+
+A user function behaves like a built-in function, although their scopes (the environments where they operate) are different.
+
+The values that the function receives are called <span style=color:blue">parameters</span>  in the definition of the function. The values actually passed to the function  when called are referred to as the <span style=color:blue">arguments</span>.
+
+### How to write a user-defined function
+
+In R the body of a function is written between curly braces and the last statement is the returned value.
+
+Now write a function that adds any two numbers and then call it.
+
+```{r add-function, exercise=TRUE, exercise.lines = 3}
+add2numbers <- function(a, b) {
+
+}
+```
+
+```{r add-function-hint}
+add2numbers <- function(a, b) {
+  return(a + b)
+}
+```
+
+An R user-defined function is called exactly the way you would call a built-in function.
+
+
+```{r, calling-a-user-defined-funciton, exercise=T, exercise.lines=4}
+subract2numbers <- function(a, b) {
+  return(a - b)
+}
+(result <- subract2numbers(5, 4))
+```
+
+The value returned by a function is the one defined by the last expression within the function body. The `return` is not necessary.
+
+```{r, calling-a-user-defined-funciton-simple, exercise=T, exercise.lines=4}
+add_2_numbers <- function(a, b) {
+  a + b
+}
+(result_2 <- add_2_numbers(5, 4))
+```
+
+<!-- **Note: ** A user-defined function that modifies an object creates a copy of  it  before affecting it. If the object was passed from the environment where the function was created then it will maintain all references to it unchanged but it will be a copy in memory nonetheless. Only primitive functions modify objects without making copies. That is why to make the fastest possible user-defined R function try to reuse as many primitive functions as you can to write its functionality. -->
+
+
+### Named parameters
+
+Just like with built-ins you can name parameters. You can also use default values.
+
+```{r, named-parameters-in-user-defined-functions, exercise=T, exercise.lines=9}
+add_2_vectors <- function(x, y) {
+  sum(x, y)
+}
+# now use the function
+set.seed(1234)
+(a <- sample(c(1:100), size = 10, replace = T))
+(b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T))))
+add_2_vectors(x = a,
+              y = b)
+```
+We might want to fix this hiccup by adding a default parameter to indicate that if `NA`s are found they can be safely ignored.
+
+```{r, named-parameters-in-user-defined-functions-NAs-addressed-setup}
+set.seed(1234)
+a <- sample(c(1:100), size = 10, replace = T)
+b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T)))
+```
+
+```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=T, exercise.lines=4, exercise.setup="named-parameters-in-user-defined-functions-NAs-addressed-setup"}
+add_2_vectors <- function(x, y, remove.na = TRUE) {
+  sum(x, y, na.rm = remove.na)
+}
+add_2_vectors(x = a, y = b)
+```
+
+Most R functions have parameters to ignore the presence of missing values when processing the input.
+
+## Control of execution
+
+For a program or a function to do interesting calculations it is necessary to operate repetitively over data structures like vectors and lists to generate new values or a single one representing the desired target.
+
+The line by line flow of execution of an R program can be altered with the use of functions or statements. Both methods are available in R.  Using functions leads to a functional style of programming while using statements leads to procedural style.
+
+### The procedural statements
+
+The procedural style syntax for looping or iterating uses the following structures:
+
+```{r, if-statement,  eval=FALSE, echo=TRUE, include=TRUE}
+if (condition) {
+  Do something
+} else {
+  Do something different
+}
+```
+
+```{r while-statement, eval=FALSE,  echo=TRUE, include=TRUE}
+while (condition) {
+  Do something
+}
+```
+
+```{r for-statement, eval=FALSE,  echo=TRUE, include=TRUE}
+for (variable in sequence) {
+  Do something
+}
+```
+
+### The functional style
+
+The functional forms of these structures can be formulated depending on the object that the user-function is applied to. For a vector the applications are straight forward.
+
+The functional and procedural styles of writing programs are  equivalent, however for the majority of the applications in statistics and linear algebra R is optimized to use the functional style. More recently packages like `purr` from the `tidyverse` syntax have added all the functional tools that make it extremely succinct to express standard transformations on vectorized data structures like lists, matrices, arrays, and data frames.
+
+Let's have a look at concrete examples.
+
+### Iterating  over a vector
+
+
+ First illustrate the  `sapply` function to square all the elements of a numeric vector.
+
+```{r, sapply-example-on-vector, exercise=T, exercise.lines=4}
+set.seed(456)
+v <- runif(5, 1, 5)
+# now iterate over the vector applying your operation to square each element
+(squares2 <- sapply(v, function(a) {a*a}))
+```
+
+```{r, sapply-vs-for-loop-comparison-setup}
+set.seed(456)
+v <- runif(5, 1, 5)
+```
+
+Now use the for-loop to achieve the same transformation.
+
+```{r, for-loop-example-on-vector, exercise=T, exercise.lines=11, exercise.setup="sapply-vs-for-loop-comparison-setup"}
+set.seed(456)
+v <- runif(5, 1, 5)
+# pre-allocate space in the vector
+square_vals <- rep(0, length(v))
+i = 1
+for (a in v) {
+  square_vals[i] = a*a
+  i = i + 1
+}
+# display the answer
+square_vals
+```
+### Conditionally removing values from a vector
+
+In functional style this is done via subsetting. In procedural style  a combination of a for-loop and the conditional-statements with if-else can achieve the same result. Let us have a look at the air fare to sun destinations at or below $1200.
+
+```{r, conditionally-removing-with-filter, exercise=T, exercise.lines=2}
+air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
+(results <- air_fares[air_fares <= 1200])
+```
+Now let's do it in procedural style.
+```{r, conditionally-removing-with-for-loop-and-if-statement-setup}
+air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
+```
+
+
+```{r, conditionally-removing-with-for-loop-and-if-statement, exercise=T, exercise.lines=9, exercise.setup="conditionally-removing-with-for-loop-and-if-statement-setup"}
+results <- c()
+if (length(air_fares) > 0) {
+  n <- length(air_fares)
+  for (i in 1:n) {
+    if (air_fares[i] <= 1200) {
+      results <- c(results, air_fares[i])
+    }
+  }
+}
+results
+```
+
+## License
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+## Tutorials &  online-resources
+
+  General:
+  
+  1. https://cran.r-project.org/manuals.html (all of them)
+  2. https://statisticsglobe.com/r-programming-language [@StatisticsGlobe]
+  3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
+  4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
+  5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
+  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  
+  Computing: 
+  
+  1. http://adv-r.had.co.nz/ (Free access to Advanced R book by Wickham himself)
+  2. https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf (writing R packages)
+  2. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
+  3. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
+  
+  Data cleaning:
+  
+  1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
+  
+  Statistics:
+  
+  1. https://www.stat.berkeley.edu/~spector/s243/
+  2. https://www.bioconductor.org/ (for bio-statistics)
+  
+  Language Reference:
+  
+  1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
+  
+## References
+
