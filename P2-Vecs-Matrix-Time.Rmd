@@ -1,6 +1,6 @@
 ---
 title: "R Syntax Part 2"
-pagetitle: "R Syntax: vectors and lists"
+pagetitle: "R Syntax: vectors and matrices"
 output:
   learnr::tutorial:
     theme: spacelab
