@@ -42,4 +42,5 @@ vignettes/*.pdf
 # RMarkdown
 *.log
 
-
+# html created by Rmd compilation
+*.html
