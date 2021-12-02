@@ -42,4 +42,7 @@ vignettes/*.pdf
 # RMarkdown
 *.log
 
+# HTML created by knitr
+*.html
+/src/*.html
 
