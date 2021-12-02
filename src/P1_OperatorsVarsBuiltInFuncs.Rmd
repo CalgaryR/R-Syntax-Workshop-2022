@@ -45,11 +45,9 @@ Let's get started.
 
 The main goal of this tutorial is to teach patterns of the R language basic syntax. We believe that this knowledge will set you on a positive trajectory at any point in your R language journey. R has specific properties that set it apart from other languages and can make it easier to learn for a beginner. However, those same differences can make it confusing at first for people with experience in other languages.
 
-By the end of this tutorial, you will know the basics of R operators and operator precedence, how to create variables to hold values, and how  You will select the data type according to the data you have for your specific problem. You will know the syntax to use R as a powerful calculation tool to generate statistical and data insights by subsetting, filtering, and computing in R native data structures.
+By the end of this tutorial, you will know the basics of R operators and operator precedence, how to create variables to hold values, and how to find and use built-in functions to get things done with R. Chances are there is already a function to do what you need. Armed with this knowledge you will be able to use R at the command line or in a script file as a powerful calculator and automation tool.
 
-You will know how to build complex expressions that compute using R data structures with simplicity, whether they are vectors, lists, or data frames.
-
-You will know how to search for built-in R functions to help you process the data and achieve your goals. You will also create your own if no other from the built-ins or publicly available R packages meets your needs.
+In another tutorial of this series you will learn the syntax to create your own functions. This will be fundamental to avoid repetitive code and also for when no other existing function from among the thousand of built-ins and those in publicly available R packages meets your needs.
 
 
 <!-- ======================== -->
