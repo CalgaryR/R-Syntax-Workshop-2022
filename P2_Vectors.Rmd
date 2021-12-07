@@ -22,6 +22,21 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <!-- ======================== -->
+## What you will learn
+<!-- ======================== -->
+
+By the end of this tutorial, you will know the basics of vectors in R. 
+You will know the properties of a vector, when you need to use vectors, how to construct them, and how to modify them.
+In addition to this you will learn peculiar properties of R like vector recycling, sub-setting, and the introduction of undetermined values or `NA`s.
+You will also learn how to create logical masks or filters to sub-set vectors.
+Finally you will learn how to work with a special kind of vector called a factor, specifically designed to handle categorical values.
+
+Knowing these concepts and how to use them will become very handy because you will reuse them while learning other data types like matrices, lists and data frames.
+Therefore your efforts will be rewarded many fold.
+March on.
+
+
+<!-- ======================== -->
 ## About this tutorial
 <!-- ======================== -->
 
@@ -38,24 +53,6 @@ Finally, if you are following this material on a browser, every time you reopen 
 
 Let's get started.
 
-
-<!-- ======================== -->
-## Learning outcomes
-<!-- ======================== -->
-
-The main goal of this tutorial is to teach patterns of the R language basic syntax. We believe that this knowledge will set you on a positive trajectory at any point in your R language journey. 
-R has specific properties that set it apart from other languages and can make it easier to learn for a beginner. 
-However, those same differences can make it confusing at first for people with experience in other languages.
-
-By the end of this tutorial, you will know the basics of vectors in R. 
-You will know the properties of a vector, when you need to use vectors, how to construct them, and how to modify them.
-In addition to this you will learn peculiar properties of R like vector recycling, sub-setting, and the introduction of undetermined values or `NA`s.
-You will also learn how to create logical masks or filters to sub-set vectors.
-Finally you will learn how to work with a special kind of vector called a factor, specifically designed to handle categorical values.
-
-The benefit of knowing these concepts is that you will reuse them while learning other data types like matrices, lists and data frames.
-Therefore your efforts will be rewarded many fold.
-March on.
 
 
 <!-- ======================== -->
@@ -730,8 +727,9 @@ From the table we just saw one could read: if you need a one-dimension data stru
 
 A vector of six integer values would be represented graphically as a long structure of six boxes of equal size:
 
-```{r vector, echo=FALSE, results='asis'}
-knitr::include_graphics("../images/vector.png", dpi = 86)
+```{r vector, echo=FALSE, warning=FALSE, results='asis'}
+library(here)
+knitr::include_graphics(here("images","vector.png"), dpi = 86)
 ```
 
 And as code you would use the function `c()`:
