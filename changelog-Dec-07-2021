@@ -1,0 +1,10 @@
+===
+Changelog Dec-07-2021
+===
+
+1. Split content into multiple modules to allow multiple sessions on 
+   each specific topic
+2. Kept source R markdown files and bib file at project root level
+   because knitr::include_graphics does not accept a path that is not
+   under the location of the source markdown file, see 
+
