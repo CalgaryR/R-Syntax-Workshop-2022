@@ -1708,19 +1708,32 @@ Arrays are the natural extension of vector and matrices to n-dimensions.
 knitr::include_graphics("images/array.png", dpi = 86)
 ```
 
-The image illustrates a three-dimensional array with rows, columns, and frames. These data structures are very useful for tensor analysis and in particular for deep learning.
+The image illustrates a three-dimensional array with rows, columns, and frames. 
 
 ```{r arrray-creation, echo=T}
 array(1:18, dim = c(2, 3, 3))
 ```
 
-Here we  created a tensor of 2 rows by 3 columns by 3 frames with the numbers 1 to 18. Study the output to verify this.
+Here we  created a tensor of 2 rows by 3 columns by 3 frames with the numbers 1 to 18. 
+Study the output to verify it.
 
-Let's leave this data structure for deep learning practice and move on now.
+A typical use for arrays is to represent color images by storing each of the three values of color for each pixel on a separate frame. 
+The resulting array representation for a pixel at the location $(x_i,y_j)$ with $\text{rgb}=(z_1,z_2,z_3)$ would be $(x_i,y_j,z_1)$, $(x_i,y_j,z_2)$, and $(x_i,y_j,z_3)$.
+Additional information about the pixels, like transparency alpha-values can be mapped on to additional frames like $(x_i,y_j,\alpha_{i,j})$ where $0\geq \alpha_{i,j} \geq 1$.
+
+Please note that arrays can only store a homogeneous data type, therefore the rules of coercion will apply when assigning values.
+In general have in mind that in order to avoid information loss, R will try to coerce all values in an array to the most general type.
+For example, if there are logical and integer values in the same array they will all be coerced to numeric without any user intervention.
+
+These data structures are very useful in image recognition using deep learning.
+In that application, each layer of a neural network can apply tensor operations on the original image to identify features like edges or colour/shade boundaries.
+
 
 ## Date and Time
 
-In R Date and time can be represented as vectors of `double` with special classes that meet different needs. Dr. Spector's notes bring a clear and easily accessible summary of the available classes for date and time in R [@DatesAndTimesInR].
+Let's take a side tour at this point in our R journey to explore the non-trivial task of modelling date and time.
+
+In R these concepts are represented as vectors of `double` with special classes that meet different needs. Dr. Spector's notes bring a clear and easily accessible summary of the available classes for date and time in R [@DatesAndTimesInR].
 
   1. The function `as.date` handles dates without times.
   2. The library `chron` handles dates and times without time zones.
