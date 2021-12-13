@@ -1739,16 +1739,39 @@ In that application, each layer of a neural network can apply tensor operations 
 Let's build a $2\times2\imes3$ array with random values between 0 and 64.
 
 
-```{r, 2by2by3array, exercise=TRUE, exercise.lines=8}
+
+```{r, 2by2by3array, exercise=TRUE, exercise.lines=4}
 set.seed(673912)
-( a <- array(sample.int(64,size = 12,replace = TRUE), dim = c(2,2,3)) )
+( a <- array(sample.int(64,size = 12,replace = TRUE), 
+             dim = c(2,2,3),
+             dimnames = list(c(),c(),c('red','green','blue'))) )
 ```
 
 Now let's build a logical mask to nullify the second frame and apply it to the original array.
 
-```{r, logical-mask-for-an-array, exercise=TRUE, exercise.lines=8}
-no_green_mask <- array(c(rep(1,4), rep(0,4), c(1,4)), dim = c(2,2,3))
-( a * no_green_mask )
+```{r, logical-mask-for-an-array, exercise=TRUE, exercise.lines=5}
+(mask <- array(rep(1,12), 
+               dim = c(2,2,3),
+               dimnames = list(c(),c(),c('red','green','blue'))))
+print("Introduce a frame of zeros")
+(mask[,,2]<- matrix(rep(0,4), ncol = 2))
+```
+
+Now apply the mask to the orininal array.
+
+
+```{r, setup-for-array-mask, exercise=FALSE}
+set.seed(673912)
+a <- array(sample.int(64,size = 12,replace = TRUE), 
+             dim = c(2,2,3),
+             dimnames = list(c(),c(),c('red','green','blue'))) 
+mask <- array(rep(1,12), dim = c(2,2,3))
+mask[,,2]<- matrix(rep(0,4), ncol = 2)
+```
+
+
+```{r, apply-mask-on-array, exercise=TRUE, exercise.lines=2, exercise.setup="setup-for-array-mask"}
+a * mask
 ```
 
 
