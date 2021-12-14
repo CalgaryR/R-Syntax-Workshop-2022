@@ -1736,7 +1736,7 @@ These data structures are very useful in image recognition using deep learning.
 In that application, each layer of a neural network can apply tensor operations on the original image to identify features like edges or colour/shade boundaries.
 
 
-Let's build a $2\times2\imes3$ array with random values between 0 and 64.
+Let's build a $2\times2\times3$ array with random values between 0 and 64.
 
 
 
@@ -1754,10 +1754,10 @@ Now let's build a logical mask to nullify the second frame and apply it to the o
                dim = c(2,2,3),
                dimnames = list(c(),c(),c('red','green','blue'))))
 print("Introduce a frame of zeros")
-(mask[,,2]<- matrix(rep(0,4), ncol = 2))
+(mask[,,'green']<- matrix(rep(0,4), ncol = 2))
 ```
 
-Now apply the mask to the orininal array.
+Now apply the mask to the original array.
 
 
 ```{r, setup-for-array-mask, exercise=FALSE}
@@ -1765,8 +1765,10 @@ set.seed(673912)
 a <- array(sample.int(64,size = 12,replace = TRUE), 
              dim = c(2,2,3),
              dimnames = list(c(),c(),c('red','green','blue'))) 
-mask <- array(rep(1,12), dim = c(2,2,3))
-mask[,,2]<- matrix(rep(0,4), ncol = 2)
+mask <- array(rep(1,12), 
+               dim = c(2,2,3),
+               dimnames = list(c(),c(),c('red','green','blue')))
+mask[,,'green'] <- matrix(rep(0,4), ncol = 2)
 ```
 
 
