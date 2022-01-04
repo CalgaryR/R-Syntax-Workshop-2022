@@ -9,7 +9,7 @@ output:
     allow_skip: true
     highlight: pygments
     toc: yes
-    toc_depth: 2
+    toc_depth: 3
     code_folding: hide
 runtime: shiny_prerendered
 bibliography: bib.bib
@@ -1947,14 +1947,14 @@ Let's get started.
 
 
 <!-- ====================== -->
-# Lists
+## What are Lists?
 <!-- ====================== -->
 
 
-Lists are one-dimensional vector objects that can store information of heterogeneous type, a list can even contain other lists. R's linear model object, with constructor `lm()`, is a list. Lists are very versatile and are at the center of R's model and data handling strengths.
+Lists are one-dimensional vector objects that can store information of heterogeneous type, a list can even contain other lists. R's linear model object, with constructor `lm()`, is a list. Lists are very versatile and are at the center of R's model and data handling capabilities.
 
 
-### Constructing lists
+## Constructing lists
 
 Here is a graphical representation of a list with three components.
 
@@ -2007,7 +2007,9 @@ new_object
 ```
 In general, passing two or more lists as arguments to `c()` merges them all into a single list.
 
+<!-- =========================== -->
 ## Appending a new element
+<!-- =========================== -->
 
 In order to append a new element to an existing list the `c()` operator works well. The caveat is to use the `list()` constructor around the new element. This is useful to prevent the flattening of a vector into individual list elements when appended. It creates a new object leaving the original list unchanged.
 
@@ -2035,8 +2037,9 @@ my_list[[length(my_list)]]
 ```
 
 
-
+<!-- =============================== -->
 ## Accessing nested lists
+<!-- =============================== -->
 
 When passing lists as argument to the `list()` constructor there is no need for coercion of any kind. Try the following code to make sure you grasp the concept. This will become very important to do amazing data analysis later.
 
@@ -2063,7 +2066,10 @@ to_do_list[[3]]$drinks
 to_do_list$items$drinks
 ```
 
+
+<!-- =============================== -->
 ## Referencing elements by name
+<!-- =============================== -->
 
 From the exercise of the previous section we saw that either the `[[1]]` positional or the `$drinks` name syntax extract the vector stored at the list returned by `to_do_list[[3]]`.
 
@@ -2110,7 +2116,10 @@ to_buy <- to_do_list$items
 to_buy$drinks
 ```
 
+<!-- =============================== -->
 ## Conversion of lists to vectors
+<!-- =============================== -->
+
 
 A list can be coerced into a vector using the `unlist()` function. It uses the sale coercion rules that `c()` uses to create homogeneous types for each element.
 
@@ -2123,8 +2132,9 @@ vector_version <- unlist(a_list)
 str(vector_version)
 ```
 
-
+<!-- =============================== -->
 ## Test your knowledge
+<!-- =============================== -->
 
 ```{r quiz-lists, echo=FALSE, cache=FALSE}
 quiz(
@@ -2723,12 +2733,15 @@ quiz(
 <!-- results -->
 <!-- ``` -->
 
-# License
-
+<!-- =============================== -->
+## License
+<!-- =============================== -->
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
+<!-- =============================== -->
 ## Tutorials &  online-resources
+<!-- =============================== -->
 
   General:
   
@@ -2737,7 +2750,7 @@ quiz(
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
-  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
   
   Computing: 
   
@@ -2758,6 +2771,7 @@ quiz(
   Language Reference:
   
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
-  
-# References
-
+ 
+<!-- =============================== -->  
+## References
+<!-- =============================== -->
