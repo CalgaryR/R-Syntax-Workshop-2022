@@ -879,9 +879,9 @@ all.equal(sum_calc, sum_expected)
 <!-- ``` -->
 
 
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 <!-- ### Time to practice -->
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 
 <!-- ```{r quiz-constructing-vectors, echo=FALSE, cache=FALSE} -->
 <!-- quiz( -->
@@ -1081,19 +1081,19 @@ all.equal(sum_calc, sum_expected)
 <!-- ``` -->
 
 
-<!-- <!-- The double ampersand operator `&&` always returns a single value, thus when used on two vectors it returns the result of comparing only the first element of each of the two vectors. --> -->
+<!-- <!-- The double ampersand operator `&&` always returns a single value, thus when used on two vectors it returns the result of comparing only the first element of each of the two vectors. -->
 
 
-<!-- <!-- ```{r double-ampersand-on-vectors, exercise=T, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} --> -->
-<!-- <!-- gt_mean_mornings && gt_mean_afternoons --> -->
-<!-- <!-- ``` --> -->
+<!-- <!-- ```{r double-ampersand-on-vectors, exercise=T, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} -->
+<!-- <!-- gt_mean_mornings && gt_mean_afternoons -->
+<!-- <!-- ``` -->
 
-<!-- <!-- Similarly with the double pipe operator `||` or logical OR. --> -->
+<!-- <!-- Similarly with the double pipe operator `||` or logical OR. -->
 
 
-<!-- <!-- ```{r double-pipe-on-vectors, exercise=T, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} --> -->
-<!-- <!-- gt_mean_mornings || gt_mean_afternoons --> -->
-<!-- <!-- ``` --> -->
+<!-- <!-- ```{r double-pipe-on-vectors, exercise=T, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} -->
+<!-- <!-- gt_mean_mornings || gt_mean_afternoons -->
+<!-- <!-- ``` -->
 
 
 
@@ -1286,22 +1286,22 @@ all.equal(sum_calc, sum_expected)
 <!-- dim(v) -->
 <!-- ``` -->
 
-<!-- <!-- Names can be changed in place with the assignment operator. Run this code and compare the two vectors of names from `v` after creation and after the reassignment. --> -->
+<!-- <!-- Names can be changed in place with the assignment operator. Run this code and compare the two vectors of names from `v` after creation and after the reassignment. -->
 
-<!-- <!-- ```{r assigning-vector-names, exercise=TRUE} --> -->
-<!-- <!-- v <- c(p1 = T, p2 = T, p3 = F, p4 = T) --> -->
-<!-- <!-- # check the original names --> -->
-<!-- <!-- names(v) --> -->
-<!-- <!-- # reassigned names --> -->
-<!-- <!-- names(v) <- c("val1", "val2", "val3", "val4") --> -->
-<!-- <!-- # new names --> -->
-<!-- <!-- names(v) --> -->
-<!-- <!-- ``` --> -->
+<!-- <!-- ```{r assigning-vector-names, exercise=TRUE} -->
+<!-- <!-- v <- c(p1 = T, p2 = T, p3 = F, p4 = T) -->
+<!-- <!-- # check the original names -->
+<!-- <!-- names(v) -->
+<!-- <!-- # reassigned names -->
+<!-- <!-- names(v) <- c("val1", "val2", "val3", "val4") -->
+<!-- <!-- # new names -->
+<!-- <!-- names(v) -->
+<!-- <!-- ``` -->
 
 
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 <!-- ### Time to practice -->
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 
 <!-- ```{r quiz-more-on-vectors, echo=FALSE, cache=FALSE} -->
 <!-- quiz( -->
@@ -1486,9 +1486,9 @@ all.equal(sum_calc, sum_expected)
 <!-- table(music_genres_2) -->
 <!-- ``` -->
 
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 <!-- ### Time to practice -->
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 
 <!-- ```{r quiz-factors, echo=FALSE, cache=FALSE} -->
 <!-- quiz( -->
@@ -1619,9 +1619,9 @@ all.equal(sum_calc, sum_expected)
 <!-- started_LON - started_YYC -->
 <!-- ``` -->
 
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 <!-- ### _Time_ to practice -->
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 
 <!-- ```{r quiz-date-time, echo=FALSE, cache=FALSE} -->
 <!-- quiz( -->
@@ -1669,7 +1669,7 @@ all.equal(sum_calc, sum_expected)
 <!-- ``` -->
 
 
-<!-- <!-- seq(as.Date("1996-01-31"), as.Date("2006-12-31"), by="1 mon") --> -->
+<!-- <!-- seq(as.Date("1996-01-31"), as.Date("2006-12-31"), by="1 mon") -->
 
 
 <!-- ## Matrices -->
@@ -1802,9 +1802,9 @@ all.equal(sum_calc, sum_expected)
 <!-- m * zero_to_4th_row -->
 <!-- ``` -->
 
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 <!-- ### Time to practice -->
-<!-- <!-- ======================== --> -->
+<!-- <!-- ======================== -->
 
 <!-- ```{r quiz-matrices, echo=FALSE, cache=FALSE} -->
 <!-- quiz( -->
@@ -1866,9 +1866,9 @@ all.equal(sum_calc, sum_expected)
 <!-- Let's leave this data structure for deep learning practice and move on now. -->
 
 
-<!-- <!-- ====================== --> -->
+<!-- <!-- ====================== -->
 <!-- ## Lists -->
-<!-- <!-- ====================== --> -->
+<!-- <!-- ====================== -->
 
 
 <!-- Lists are one-dimensional vector objects that can store information of heterogeneous type, a list can even contain other lists. R's linear model object, with constructor `lm()`, is a list. Lists are very versatile and are at the center of R's model and data handling strengths. -->
@@ -2513,7 +2513,7 @@ all.equal(sum_calc, sum_expected)
 <!-- (result_2 <- add_2_numbers(5, 4)) -->
 <!-- ``` -->
 
-<!-- <!-- **Note: ** A user-defined function that modifies an object creates a copy of  it  before affecting it. If the object was passed from the environment where the function was created then it will maintain all references to it unchanged but it will be a copy in memory nonetheless. Only primitive functions modify objects without making copies. That is why to make the fastest possible user-defined R function try to reuse as many primitive functions as you can to write its functionality. --> -->
+<!-- <!-- **Note: ** A user-defined function that modifies an object creates a copy of  it  before affecting it. If the object was passed from the environment where the function was created then it will maintain all references to it unchanged but it will be a copy in memory nonetheless. Only primitive functions modify objects without making copies. That is why to make the fastest possible user-defined R function try to reuse as many primitive functions as you can to write its functionality. -->
 
 
 <!-- ### Named parameters -->
@@ -2657,7 +2657,7 @@ all.equal(sum_calc, sum_expected)
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
-  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
   
   Computing: 
   
@@ -2666,9 +2666,9 @@ all.equal(sum_calc, sum_expected)
   2. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
   3. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
   
-  Data cleaning:
-  
-  1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
+  <!-- Data cleaning: -->
+
+  <!-- 1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf -->
   
   Statistics:
   
