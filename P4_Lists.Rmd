@@ -9,7 +9,7 @@ output:
     allow_skip: true
     highlight: pygments
     toc: yes
-    toc_depth: 3
+    toc_depth: 2
     code_folding: hide
 runtime: shiny_prerendered
 bibliography: bib.bib
@@ -1984,13 +1984,13 @@ my_list[[1]]
 
 Did you notice the use of double square brackets, `[[]]` to access the vectors stored in the list of the previous section? Had you chosen to use single brackets `[]` the result would have been a  named list of one vector as its only element, try it now if you did not before:
 
-```{r, subsetting-lists-single-bracket-setup}
+```{r, subsettingListsSingleBracketSetup}
 my_list <- list(some_strings = c("hello", "world"),
           some_numbers = 10:15,
           some_booleans = c(T,T,T,F))
 ```
 
-```{r, subsetting-lists-single-bracket, exercise=T, exercise.lines=4, exercise.setup="subsetting-lists-single-bracket-setup"}
+```{r, subsetting-lists-single-bracket, exercise=T, exercise.lines=4, exercise.setup="subsettingListsSingleBracketSetup"}
 my_list <- list(some_strings = c("hello", "world"),
           some_numbers = 10:15,
           some_booleans = c(T,T,T,F))
@@ -2013,7 +2013,7 @@ In general, passing two or more lists as arguments to `c()` merges them all into
 
 In order to append a new element to an existing list the `c()` operator works well. The caveat is to use the `list()` constructor around the new element. This is useful to prevent the flattening of a vector into individual list elements when appended. It creates a new object leaving the original list unchanged.
 
-```{r, new-element-appending-in-new-list, exercise=T, exercise.lines=9, exercise.setup="subsetting-lists-single-bracket-setup"}
+```{r, new-element-appending-in-new-list, exercise=T, exercise.lines=9, exercise.setup="subsettingListsSingleBracketSetup"}
 length(my_list)
 # this creates a new list
 new_list <- c(my_list, list(rep(-1,3)))
@@ -2026,7 +2026,7 @@ new_list[[length(new_list)]]
 ```
 The `[[]]` operator allows insertion of new elements of any type into a list, that means no coercion will be used. This is the similar functionality of the operator `[]` for vectors.
 
-```{r, new-element-of-list-appending-in-place, exercise=T, exercise.lines=7, exercise.setup="subsetting-lists-single-bracket-setup"}
+```{r, new-element-of-list-appending-in-place, exercise=T, exercise.lines=7, exercise.setup="subsettingListsSingleBracketSetup"}
 length(my_list)
 # this modifies in place
 my_list[[length(my_list) + 1]] <- rep(-1,3)
@@ -2078,7 +2078,7 @@ The `$` operator can be used to reference named elements of a list.
 
 Compare the effect of using single square brackets as opposed to the double square brackets on a list.
 
-```{r, setup-list-of-lists}
+```{r, setupListOfLists}
 party_items = list( drinks = c("pop", "wine", "beer", "water"),
                     furniture = c(chairs = 8, tables = 2, hammocks = 1))
 
@@ -2088,7 +2088,7 @@ to_do_list <- list(guests = c("Uncle Bob", "Friendly neighbour", "Joe Best"),
 ```
 
 
-```{r, example-list-from-a-list, exercise=T, exercise.lines=8, exercise.setup="setup-list-of-lists"}
+```{r, example-list-from-a-list, exercise=T, exercise.lines=8, exercise.setup="setupListOfLists"}
 # these two options are equivalent and return single element lists
 to_do_list[2]
 to_do_list["invited"]
@@ -2100,7 +2100,7 @@ class(to_do_list$invited)
 ```
 
 
-```{r list-dollar-setup}
+```{r listDollarSetup}
 party_items = list( drinks = c("pop", "wine", "beer", "water"),
                     furniture = c(chairs = 8, tables = 2, hammocks = 1))
 
@@ -2111,7 +2111,7 @@ to_do_list <- list(guests = c("Uncle Bob", "Friendly neighbour", "Joe Best"),
 
 Thanks to the `$` and assignment operators one can simplify printing the drinks for the party.
 
-```{r list-dollar-show, exercise=TRUE, exercise.setup="list-dollar-setup", exercise.lines=2 }
+```{r list-dollar-show, exercise=TRUE, exercise.setup="listDollarSetup", exercise.lines=2 }
 to_buy <- to_do_list$items
 to_buy$drinks
 ```
@@ -2759,9 +2759,9 @@ quiz(
   2. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
   3. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
   
-  Data cleaning:
-  
-  1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
+  <!-- Data cleaning: -->
+
+  <!-- 1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf -->
   
   Statistics:
   
