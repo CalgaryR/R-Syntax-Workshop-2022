@@ -190,21 +190,28 @@ kable( data.frame(relation1, value1, and, relation2, value2, equals, result,
 Finally the negation or NOT logical operator is represented in R by the exclamation mark `!`. It negates or turns the logical value into its opposite.
 
 ```{r negation-logical-operator, exercise=TRUE, exercise.lines=2}
-!(4 > 1)
-!TRUE
+!(-4 > 0 )
+
 ```
-Notice the presence of the parenthesis around the last expression. What do you think would have been the meaning of `!4 > 6`?
 
-Try it.
+Thanks to the parenthesis the negation operator can be applied to the result of a more complex logical operation on the results of two relational operators.
 
-```{r negation-precedence, exercise=TRUE}
-!4 < 1
-# furthermore try just the first element
-!4
+```{r negation-logical-operator-complex-exp, exercise=TRUE, exercise.lines=3}
+!(-4 > 0  & 0 > 1)
+
 ```
-As it turns out R coerces the values of `TRUE` to 1 and `FALSE` to 0. By the same token, any non-zero value is interpreted as `TRUE`, thus the last expression `!4` translates into `!TRUE` or `0`, which makes `!4 < 1` `TRUE` as opposed to `FALSE` for `!(4 < 1)`.
 
-The change in final result depending on the order of evaluation brings us into the subject of operator precedence.
+
+The relational operators require numbers while the logical operators require true or false values. What does R do when a logical operator is applied to a number? Let's assume that the parenthesis is left out accidentally from the previous expression.
+
+
+```{r negation-precedence, exercise=TRUE, exercise.lines=3}
+!-4 > 0  & 0 > 1
+```
+As it turns out R coerces a value of `0` to `FALSE` and any non-zero to `TRUE` when in need to calculate using a logical operator, like `!` on -4. Thus the expression `!-4` translates into `!TRUE = FALSE` or `0`, which in turn makes `!-4 > 0` `FALSE`.
+
+The change in final result depending on the order of evaluation of the operators brings us into the subject of operator precedence.
+
 
 ### Operator precedence
 
