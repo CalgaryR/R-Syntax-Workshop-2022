@@ -2222,10 +2222,10 @@ First create a data frame with some results from a fictional experiment that was
 set.seed(5529)
 treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
 results <- round(runif(6), digits = 2)
-passes <- results>0.7
+passes.GT.0.7 <- results>0.7
 (experiments <- data.frame(treatment=treatment, 
                  val_1=results,
-                 passes=passes))
+                 passes=passes.GT.0.7))
 ```
 
 Then subset by treatment while adding `Val_1` and counting the number of observations that pass our test (are greater than `0.7` by the definition of column `passes`).
@@ -2234,10 +2234,10 @@ Then subset by treatment while adding `Val_1` and counting the number of observa
 set.seed(5529)
 treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
 results <- round(runif(6), digits = 2)
-passes <- results>0.7
+passes.GT.0.7 <- results>0.7
 experiments <- data.frame(treatment=treatment, 
                  val_1=results,
-                 passes=passes)
+                 passes=passes.GT.0.7)
 ```
 
 ```{r, aggregation-example-adding, exercise=T, exercise.lines=12, exercise.setup="aggregationExamplesSetup"}
@@ -2260,9 +2260,9 @@ aggregated_df
 
 Did you notice that in the previous section we got the countries as a vector of factors with 6 levels? Remember that special case of vectors called factors specialized on manipulating categorical variables? Well here we go again. 
 
-When you construct a data frame from vectors the type, or class, of  each vector will be interpreted by the data frame constructor. R will try to coerce all the elements of the vector to the most general data type to be able to work with them. An ordering of types from more  general to more specific is `character` > `complex` > `double` > `integer` > `logical`. 
+When you construct a data frame from vectors the type of each vector will be interpreted by the data frame constructor. R will coerce the elements of the vector to the most general data type to be able to work with them. An ordering of types from more  general to more specific is `character` > `complex` > `double` > `integer` > `logical`. 
 
-You can give R hints, though, for instance you can tell it to interpret the strings in vectors as factors or not, base R will do it by default.
+You can give R hints, though, for instance you can tell it to interpret the strings in vectors as factors or not, base R will do so by default.
 
 ```{r example-data-frame-strings-as-factors, exercise=T, exercise.lines=7}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
@@ -2294,25 +2294,36 @@ Some mathematical operations may create values that are not amenable to be furth
 
 An exercise will clarify the identification of all these values.
 
+```{r, createDataFrameWithNAsInfsAndNaNsSetup}
+set.seed(7777)
+experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
+                  run=rep(1:3,3), 
+                  results=round(runif(n = 9, min = 0.0, max = 10.0), digits = 2))
+# introduce some NA, NaN, Inf
+experiments$results[c(3,5,8)] <- c(NA, NaN, Inf) 
+```
 
-```{r, detect-NAs-in-a-data-frame, exercise=T, exercise.lines=15}
+```{r, createDataFrameWithNAsInfsAndNaNs, exercise=T}
 set.seed(7777)
 (experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
                   run=rep(1:3,3), 
                   results=round(runif(n = 9, min = 0.0, max = 10.0), digits = 2)))
 # introduce some NA, NaN, Inf
 experiments$results[c(3,5,8)] <- c(NA, NaN, Inf) 
+```
+
+
+```{r, detect-NAs-in-a-data-frame, exercise=T, exercise.setup="createDataFrameWithNAsInfsAndNaNsSetup"}
 # find if there are any missing values
 any(is.na(experiments$results) | is.infinite(experiments$results))
 # Find what observations are missing values. 
-# First get a logical vector to be used as filter for the rows with incomplete cases
+# First get a logical vector to be used as a mask for the rows with incomplete cases
 missing_values <- !complete.cases(experiments) 
-# then get a filter for the cases with infinite values
+# then get a mask for the cases with infinite values
 infinites <- is.infinite(experiments$results)
 # now filter out those observations
 experiments[(missing_values | infinites),]
 ```
-
 
 
 ### Test your knowledge
