@@ -2034,7 +2034,7 @@ Try the `str()` function on the data frame we just created. R has a special voca
 
 Similarly to subsetting vectors, we can slice and extract sections of the data frame as we please following the row, column convention of matrices and the `[]` syntax or the `$` syntax of vectors and lists, respectively.
 
-```{r slice-n-dice-df-setup}
+```{r sliceAndDiceDfSetup}
 # for better documentation name the vectors
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
@@ -2042,7 +2042,7 @@ census2019 <- c(T,T,T,T,F,T)
 df <- data.frame(country, population, census2019)
 ```
 
-```{r slice-n-dice-df, exercise=T, exercise.setup="slice-n-dice-df-setup", exercise.lines=9}
+```{r slice-n-dice-df, exercise=T, exercise.setup="sliceAndDiceDfSetup", exercise.lines=9}
 # using the $ operator like in a named list
 df$country
 df$"country"
@@ -2056,7 +2056,7 @@ df[["country"]]
 
 Let's  extract all the information for Canada. 
 
-```{r subset-df-by-row-setup}
+```{r subsetDfByRowSetup}
 # for better documentation name the vectors
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
@@ -2064,20 +2064,20 @@ census2019 <- c(T,T,T,T,F,T)
 df <- data.frame(country, population, census2019)
 ```
 
-```{r subset-df-by-row, exercise=T, exercise.setup="subset-df-by-row-setup", exercise.lines=2}
+```{r subset-df-by-row, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=2}
 df[df$country == "Canada",]
 ```
 
 We can extract the countries with population greater than 80 million.
 
-```{r subset-df-by-multiple-rows, exercise=T, exercise.setup="subset-df-by-row-setup,", exercise.lines=4}
+```{r subset-df-by-multiple-rows, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=4}
 # extract only the names of the counties  in the rows filtered
 df[df$population > 80, 'country']
 # display all the columns for the rows filtered
 df[df$population > 80,]
 ```
 
-This way of subsetting a data frame uses what is called a **_logical mask_**. The mask is nothing but a boolean vector generated using a logical operator. The boolean vector is then used to subsetting another vector using the `[]` operator selecting the elements of the vector at the positions where the mask is `TRUE`. Since the columns of a data frame are vectors, this is a natural way of subsetting. 
+This way of sub-setting a data frame uses a **_logical mask_**. The mask is nothing but a boolean vector generated using a logical operator. The boolean vector is then used to sub-setting another vector using the `[]` operator selecting the elements of the vector at the positions where the mask is `TRUE`. Since the columns of a data frame are vectors, this is a natural way of sub-setting. 
 
 This image helps explain it.
 
@@ -2089,12 +2089,12 @@ And here is a step by step description:
 
   1. Build the mask using a logical operator expressing a condition over one of the columns of the data frame.
 
-```{r explain-logical-mask-1, exercise=T, exercise.lines=1, exercise.setup="subset-df-by-row-setup"}
+```{r explain-logical-mask-1, exercise=T, exercise.lines=1, exercise.setup="subsetDfByRowSetup"}
 (row_filter <- df$population > 80)
 ```
   2. Subset the data frame by rows using this logical mask. A `TRUE` at a given position on the mask  will let the value at that position on each row of the data frame pass _as is_. Conversely, a `FALSE` will eliminate it so it does not appear on the result.
 
-```{r explain-logical-mask-setup}
+```{r explainLogicalMaskSetup}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
 census2019 <- c(T,T,T,T,F,T)
@@ -2103,13 +2103,13 @@ row_filter <- df$population > 80
 ```
 
 
-```{r explain-logical-mask-2, exercise=T, exercise.lines=2, exercise.setup="explain-logical-mask-setup"}
+```{r explain-logical-mask-2, exercise=T, exercise.lines=2, exercise.setup="explainLogicalMaskSetup"}
 # apply the same filter to every column of the data frame by
 (result <- df[row_filter,])
 ```
   3. Show the column for country from the 2019 census:
 
-```{r explain-logical-mask-3-setup}
+```{r explainLogicalMask3Setup}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
 census2019 <- c(T,T,T,T,F,T)
@@ -2119,7 +2119,7 @@ result <- df[filter,]
 ```
 
 
-```{r explain-logical-mask-3, exercise=T, exercise.lines=2, exercise.setup="explain-logical-mask-3-setup"}
+```{r explain-logical-mask-3, exercise=T, exercise.lines=2, exercise.setup="explainLogicalMask3Setup"}
 # apply the filter to all the vectors of the data frame
 result[c("country", "population")]
 ```
@@ -2141,31 +2141,82 @@ The built-in function `subset` takes a data frame and returns a new object with 
 
 As an example let's take the time series for quarterly earnings per share for Johnson and Johnson from 1960 to 1980, part of the `datasets` package included in modern default R installations. We are  asked to extract the years when the last quarter earnings were greater than 60% of the annual earning per share and show the last quarter and the total earnings.
 
-```{r, example-using-subset-function, exercise=T, exercise.lines=11}
-# create  a data frame based on the time series using coercion from 'ts' to matrix
+Normally we would first explore the data set.
+
+```{r, JAndJDataSetup}
+J_and_J <- data.frame( matrix(JohnsonJohnson, 
+                              ncol=4, 
+                              dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4"))))
+```
+
+```{r, explore_J_and_J_data, exercise=T}
+class(JohnsonJohnson)
+# "ts" is a time series object, do ?ts at the R command prompt
+# turn it into a matrix with 4 columns, then turn it into a data frame
+matrix(JohnsonJohnson, ncol=4)
+```
+
+Now the matrix can be turned into a data frame. We could have also kept the matrix, can you answer why and what differences if any we would ahve encoutered? 
+
+When we construct the new data frame we can assign names to each column and row labels as each year of company financial results. Please note how we are using list and vector constructors to supply 
+the names  for the two dimensions of the data frame. remember the `:` operator we learned as a shortcut for the `seq()` function in the section creating vectors with patterns?
+
+```{R, constructAProperDataFrame, exercise=T}
 (J_and_J <- data.frame( matrix(JohnsonJohnson, 
                               ncol=4, 
                               dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4")))))
+```
+
+We want a new column with the total sales per year. This can be accomplish creating a 
+vector of totals per row and then appending it to the data frame as a new column 
+with the name `Annual`. Does the new column fulfill the requirements of a data frame? 
+Remember: the columns of a data frame are vectors that may be of different types each but all of them have to be of the same length.
+
+
+```{r, addColumnToDataFrame, exercise=T, exercise.setup="JAndJDataSetup"}
 # add a new column with the annual earnings
+(J_and_J <- cbind(J_and_J, Annual=rowSums(J_and_J)))
+```
+
+```{r, JAndJDataSetupWithTotals}
+J_and_J <- data.frame( matrix(JohnsonJohnson, 
+                              ncol=4, 
+                              dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4"))))
 J_and_J <- cbind(J_and_J, Annual=rowSums(J_and_J))
-# create a vector with the 4th quarter earnings as a percentage of the annual earnings 
 Qtr4_percent <- J_and_J$Qtr4 / J_and_J$Annual * 100
-# subset by row using a logical vector and show  the required columns  in one step
-# J_and_J[Qtr4_percent > 60, c(4,5)] # using base-R syntax
-subset(J_and_J, subset = Qtr4_percent > 60, select = c(4,5)) # using built-in function
+mask.Q4.GT.60.pct.Total <- ( Qtr4_percent > 60 )
+```
+
+Now you are ready to create a mask to extract the desired values. You will use R's vectorized
+nature and dollar syntax to select the desired columns from the data frame. This 
+code would have looked slightly different had we decided to work with the matrix instead
+of a data frame, however the results would have been equivalent.
+
+```{r, buildAMaskForJAndJDataFrame, exercise=T, exercise.setup="JAndJDataSetupWithTotals"}
+# create a vector with the 4th quarter earnings as a percentage of the annual earnings 
+(Qtr4_percent <- 
+    J_and_J$Qtr4 / J_and_J$Annual * 100)
+# create the logical mask
+(mask.Q4.GT.60.pct.Total <- (Qtr4_percent > 60))
+```
+
+At this point all the components are available to apply the builtin function `subset` to
+answer the main question.
+
+```{r, finalSubsetJAndJDataFrame, exercise=T, exercise.setup="JAndJDataSetupWithTotals"}
+subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c(4,5)) 
 ```
 
 That was a company on a roll in the 70's!
 
-**Note:** this function is one of the few that exposes a behaviour called non-standard evaluation in R. That means that when setting the arguments on a call to the function the argument can be interpreted as a character string first if it exists. They are very convenient in interactive work at the command line (the REPL, [Read-evaluate-print-loop](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), as it is known) because you have in mind what you are interacting with but on a written script it may lead to out of context interpretations. The best practice is not to use `subset` in programs. The packages derived from the seminal work of Wickham [@tidy-data] provide consistent syntax to do these and many more operations on data.   
-
+**Note:** this function is one of the few that exposes a behaviour called non-standard evaluation in R. That means that when setting the arguments on a call to the function, the argument can be interpreted as a character string first if it exists. They are very convenient in interactive work at the command line (the REPL, [Read-evaluate-print-loop](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), as it is known). In this scenario the user has in mind what he/she is interacting with, however the use of this function in a written script may lead to unintended interpretations of the arguments. The best practice is not to use `subset` in programs. The packages derived from the seminal work of Wickham [@tidy-data] provide consistent syntax to do these and many more operations on data.
 
 
 ### Subsetting and transforming at the same time
 
 A very common operation on data frames is to aggregate the values in one or more columns of observations that belong to the same category. The nature of the aggregation can be an operation like counting, adding, or by extension, applying any function that takes a value and returns it in a transformed state.
 
-First create a data frame with some results from an fictional experiment that was done by triplicate.
+First create a data frame with some results from a fictional experiment that was done by triplicate.
 
 ```{r, aggregating-examples, exercise=T, exercise.lines=7}
 set.seed(5529)
@@ -2179,7 +2230,7 @@ passes <- results>0.7
 
 Then subset by treatment while adding `Val_1` and counting the number of observations that pass our test (are greater than `0.7` by the definition of column `passes`).
 
-```{r, aggregation-examples-setup}
+```{r, aggregationExamplesSetup}
 set.seed(5529)
 treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
 results <- round(runif(6), digits = 2)
@@ -2189,7 +2240,7 @@ experiments <- data.frame(treatment=treatment,
                  passes=passes)
 ```
 
-```{r, aggregation-example-adding, exercise=T, exercise.lines=12, exercise.setup="aggregation-examples-setup"}
+```{r, aggregation-example-adding, exercise=T, exercise.lines=12, exercise.setup="aggregationExamplesSetup"}
 # first calculate the mean of val_1 by treatment
 (val_1_by_treatment <- aggregate(x = experiments$val_1,
                                  by = list(experiments$treatment), 
@@ -2224,13 +2275,13 @@ str(country_stats)
 ```
 The R constructor for data frames interpreted the strings as 6 factors. Perhaps not what you expected, compare with this case.
 
-```{r example-data-frame-strings-as-is-setup}
+```{r exampleDataFrameStringsAsIsSetup}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
 ```
 
 
-```{r example-data-frame-strings-as-is, exercise=T, exercise.lines=2, exercise.setup="example-data-frame-strings-as-is-setup"}
+```{r example-data-frame-strings-as-is, exercise=T, exercise.lines=2, exercise.setup="exampleDataFrameStringsAsIsSetup"}
 country_stats <- data.frame( country, population, stringsAsFactors = FALSE)
 str(country_stats)
 ```
@@ -2337,7 +2388,6 @@ The 'runif' functions computes n random values from a uniformly distributed vari
   correct = "You got it, the R subsetting syntax of vectors and matrices nicely extends to data frames!")
 )
 ```
-
 
 
 ## User functions
