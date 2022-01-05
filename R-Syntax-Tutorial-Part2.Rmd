@@ -2466,13 +2466,13 @@ add_2_vectors(x = a,
 ```
 We might want to fix this hiccup by adding a default parameter to indicate that if `NA`s are found they can be safely ignored.
 
-```{r, named-parameters-in-user-defined-functions-NAs-addressed-setup}
+```{r, namedParametersInUserDefinedFunctionsNAsAddressedSetup}
 set.seed(1234)
 a <- sample(c(1:100), size = 10, replace = T)
 b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T)))
 ```
 
-```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=T, exercise.lines=4, exercise.setup="named-parameters-in-user-defined-functions-NAs-addressed-setup"}
+```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=T, exercise.lines=4, exercise.setup="namedParametersInUserDefinedFunctionsNAsAddressedSetup"}
 add_2_vectors <- function(x, y, remove.na = TRUE) {
   sum(x, y, na.rm = remove.na)
 }
@@ -2526,22 +2526,19 @@ Let's have a look at concrete examples.
 
 ```{r, sapply-example-on-vector, exercise=T, exercise.lines=4}
 set.seed(456)
-v <- runif(5, 1, 5)
+(v <- runif(5, 1, 5))
 # now iterate over the vector applying your operation to square each element
 (squares2 <- sapply(v, function(a) {a*a}))
 ```
 
-```{r, sapply-vs-for-loop-comparison-setup}
+```{r, sapplyVsForLoopComparisonSetup}
 set.seed(456)
 v <- runif(5, 1, 5)
 ```
 
 Now use the for-loop to achieve the same transformation.
 
-```{r, for-loop-example-on-vector, exercise=T, exercise.lines=11, exercise.setup="sapply-vs-for-loop-comparison-setup"}
-set.seed(456)
-v <- runif(5, 1, 5)
-# pre-allocate space in the vector
+```{r, for-loop-example-on-vector, exercise=T, exercise.setup="sapplyVsForLoopComparisonSetup"}
 square_vals <- rep(0, length(v))
 i = 1
 for (a in v) {
@@ -2551,21 +2548,26 @@ for (a in v) {
 # display the answer
 square_vals
 ```
+
+Notice the preallocation of space for the vector in the first line. 
+
+
 ### Conditionally removing values from a vector
 
-In functional style this is done via subsetting. In procedural style  a combination of a for-loop and the conditional-statements with if-else can achieve the same result. Let us have a look at the air fare to sun destinations at or below $1200.
+In functional style this is done via sub-setting. In procedural style  a combination of a for-loop and the conditional-statements with if-else can achieve the same result. Let us have a look at the air fare to sun destinations at or below $1200, first using functional style.
 
 ```{r, conditionally-removing-with-filter, exercise=T, exercise.lines=2}
 air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
 (results <- air_fares[air_fares <= 1200])
 ```
 Now let's do it in procedural style.
-```{r, conditionally-removing-with-for-loop-and-if-statement-setup}
+
+```{r, conditionallyRemovingWithForLoopAndIfStatementSetup}
 air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
 ```
 
 
-```{r, conditionally-removing-with-for-loop-and-if-statement, exercise=T, exercise.lines=9, exercise.setup="conditionally-removing-with-for-loop-and-if-statement-setup"}
+```{r, conditionally-removing-with-for-loop-and-if-statement, exercise=T, exercise.lines=9, exercise.setup="conditionallyRemovingWithForLoopAndIfStatementSetup"}
 results <- c()
 if (length(air_fares) > 0) {
   n <- length(air_fares)
@@ -2577,6 +2579,10 @@ if (length(air_fares) > 0) {
 }
 results
 ```
+
+Now you choose your style according to the task at hand. Practice will make you a master!
+
+
 
 ## License
 
