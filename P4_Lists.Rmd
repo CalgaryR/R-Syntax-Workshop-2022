@@ -2038,12 +2038,12 @@ my_list[[length(my_list)]]
 
 
 <!-- =============================== -->
-## Accessing nested lists
+### Accessing nested lists
 <!-- =============================== -->
 
 When passing lists as argument to the `list()` constructor there is no need for coercion of any kind. Try the following code to make sure you grasp the concept. This will become very important to do amazing data analysis later.
 
-Would would have thought that R would come in handy for that party you are planning for friends and family? The list of items for the party can be nested within the list of party items, how convenient!
+Would you have thought that R could come in handy for that party you are planning for friends and family? The list of items for the party can be nested within the list of party items, how convenient!
 
 ```{r list-nesting, exercise=TRUE, exercise.lines=14}
 # get organized for that party you are throwing for friends and family
@@ -2121,7 +2121,8 @@ to_buy$drinks
 <!-- =============================== -->
 
 
-A list can be coerced into a vector using the `unlist()` function. It uses the sale coercion rules that `c()` uses to create homogeneous types for each element.
+A list can be coerced into a vector using the `unlist()` function. 
+It uses the same coercion rules that `c()` uses to create homogeneous types for each element.
 
 
 ```{r, using-unlist-to-convert-list-to-vector, exercise=T, exercise.lines=5}

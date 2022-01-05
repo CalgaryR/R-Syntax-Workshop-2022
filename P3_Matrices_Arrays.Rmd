@@ -1650,16 +1650,16 @@ cbind(m[,1], rep(6,2), m[,2:3])
 
 If you remember the rules of recycling and the fact that by default matrices are traversed element-wise along the columns from top to bottom, let's multiply a matrix by a vector:
 
-```{r, multiply-matrix-times-vector, exercise=TRUE, exercise.lines=8}
+```{r, multiply-matrix-times-vector, exercise=TRUE}
 # the following will make the pseudo random number generation produce the same result for reproducibility
 set.seed(673912) # this is an arbitrary number, nothing special about it
 # sample 16 integers from 1 to 99
 values <- sample.int(n = 99, size = 16, replace = TRUE)
 (m <- matrix(values, nrow = 4))
 print("a mask to nullify the 4th row of the matrix")
-( zero_to_4th_row <- c(1,1,1,0) )
+( zero.to.4th.row <- c(1,1,1,0) )
 print("The result after applying the mask")
-m * zero_to_4th_row
+m * zero.to.4th.row
 ```
 
 <!-- ======================== -->
