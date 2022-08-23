@@ -1,0 +1,294 @@
+---
+title: "Introduction to R Syntax 2022"
+pagetitle: "Part 6: User Functions and Programming"
+output:
+  learnr::tutorial:
+    theme: spacelab
+    ace_theme: cobalt
+    progressive: true
+    allow_skip: true
+    highlight: pygments
+    toc: yes
+    toc_depth: 2
+    code_folding: hide
+runtime: shiny_prerendered
+bibliography: bib.bib
+description: "User functions and programming"
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<!-- ======================== -->
+
+## What you will learn
+
+<!-- ======================== -->
+
+The main goal of this tutorial is to teach patterns of the R language basic syntax. We believe that this knowledge will set you on a positive trajectory at any point in your R language journey. 
+R has specific properties that set it apart from other languages and can make it easier to learn for a beginner. 
+However, those same differences can make it confusing at first for people with experience.
+
+In this module you will learn how to write functions, how to control the flow of execution, and how to use functional and procedural styles to accomplish the same task.
+
+
+<!-- ======================== -->
+
+## About this tutorial
+
+<!-- ======================== -->
+
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide.
+It contains explanations, fully functional code boxes, and quizzes that make it very interactive.
+If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback.
+The instructor may also ask short questions regarding the material.
+Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
+
+The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes.
+In doing so we hope to get you excited about this useful and expressive language.
+R was designed from the ground up to be vectorized and object oriented.
+Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
+
+Dr. Amelia McNamara describes three types of R Syntax [@RSyntax-Cheatsheet]: the dollar sign, the formula, and the Tidyverse.
+These syntax are interchangeable, the important thing is to be consistent when using them.
+The formula syntax tends to be more compact but less readable while the Tidyverse syntax is more readable but also more verbose.
+We will initially focus on the dollar sign syntax.
+Later we introduce the formula syntax and finally the tidyverse syntax.
+
+This tutorial was built entirely in R using a package called `learnr`.
+It was compiled to an html document using Rmarkdown syntax and the `Knitr` package.
+If you receive the source code and have RStudio, you can render it as a fully interactive web page.
+Using an Rstudio solution it can also be deployed on a ShinyR server.
+You can also do these things and much more if you move forward in your R journey.
+
+Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it.
+If you want to reset your answers and the code you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel.
+
+Let's get started.
+
+
+
+## User functions
+
+If you start writing a lot of R code, sooner or later you will find the need to reuse the same functionality over and over. Functions help you package that functionality in a single scope and reuse it in a convenient form.
+
+A user function behaves like a built-in function, although their scopes (the environments where they operate) are different.
+
+The values that the function receives are called <span style=color:blue">parameters</span>  in the definition of the function. The values actually passed to the function  when called are refered to as the <span style=color:blue">arguments</span>.
+
+### How to write a user-defined function
+
+In R the body of a function is written between curly braces and the last statement is the returned value.
+
+Now write a function that adds any two numbers and then call it.
+
+```{r add-function, exercise=TRUE, exercise.lines = 3}
+add2numbers <- function(a, b) {
+
+}
+```
+
+```{r add-function-hint}
+add2numbers <- function(a, b) {
+  return(a + b)
+}
+```
+
+An R user-defined function is called exactly the way you would call a built-in function.
+
+
+```{r, calling-a-user-defined-funciton, exercise=T, exercise.lines=4}
+subract2numbers <- function(a, b) {
+  return(a - b)
+}
+(result <- subract2numbers(5, 4))
+```
+
+The value returned by a function is the one defined by the last expression within the function body. The `return` is not necessary.
+
+```{r, calling-a-user-defined-funciton-simple, exercise=T, exercise.lines=4}
+add_2_numbers <- function(a, b) {
+  a + b
+}
+(result_2 <- add_2_numbers(5, 4))
+```
+
+<!-- **Note: ** A user-defined function that modifies an object creates a copy of  it  before affecting it. If the object was passed from the environment where the function was created then it will maintain all references to it unchanged but it will be a copy in memory nonetheless. Only primitive functions modify objects without making copies. That is why to make the fastest possible user-defined R function try to reuse as many primitive functions as you can to write its functionality. -->
+
+
+## Named parameters
+
+Just like with built-ins you can name parameters. You can also use default values.
+
+```{r, named-parameters-in-user-defined-functions, exercise=T, exercise.lines=9}
+add_2_vectors <- function(x, y) {
+  sum(x, y)
+}
+# now use the function
+set.seed(1234)
+(a <- sample(c(1:100), size = 10, replace = T))
+(b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T))))
+add_2_vectors(x = a,
+              y = b)
+```
+We might want to fix this hiccup by adding a default parameter to indicate that if `NA`s are found they can be safely ignored.
+
+```{r, namedParametersInUserDefinedFunctionsNAsAddressedSetup}
+set.seed(1234)
+a <- sample(c(1:100), size = 10, replace = T)
+b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T)))
+```
+
+```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=T, exercise.lines=4, exercise.setup="namedParametersInUserDefinedFunctionsNAsAddressedSetup"}
+add_2_vectors <- function(x, y, remove.na = TRUE) {
+  sum(x, y, na.rm = remove.na)
+}
+add_2_vectors(x = a, y = b)
+```
+
+Most R functions have parameters to ignore the presence of missing values when processing the input.
+
+## Control of execution
+
+For a program or a function to do interesting calculations it is necessary to operate repetitively over data structures like vectors and lists to generate new values or a single one representing the desired target.
+
+The line by line flow of execution of an R program can be altered with the use of functions or statements. Both methods are available in R.  Using functions leads to a functional style of programming while using statements leads to procedural style.
+
+### The procedural statements
+
+The procedural style syntax for looping or iterating uses the following structures:
+
+```{r, if-statement,  eval=FALSE, echo=TRUE, include=TRUE}
+if (condition) {
+  Do something
+} else {
+  Do something different
+}
+```
+
+```{r while-statement, eval=FALSE,  echo=TRUE, include=TRUE}
+while (condition) {
+  Do something
+}
+```
+
+```{r for-statement, eval=FALSE,  echo=TRUE, include=TRUE}
+for (variable in sequence) {
+  Do something
+}
+```
+
+## The functional style
+
+The functional forms of these structures can be formulated depending on the object that the user-function is applied to. For a vector the applications are straight forward.
+
+The functional and procedural styles of writing programs are  equivalent, however for the majority of the applications in statistics and linear algebra R is optimized to use the functional style. More recently packages like `purr` from the `tidyverse` syntax have added all the functional tools that make it extremely succinct to express standard transformations on vectorized data structures like lists, matrices, arrays, and data frames.
+
+Let's have a look at concrete examples.
+
+## Iterating  over a vector
+
+
+ First illustrate the  `sapply` function to square all the elements of a numeric vector.
+
+```{r, sapply-example-on-vector, exercise=T, exercise.lines=4}
+set.seed(456)
+(v <- runif(5, 1, 5))
+# now iterate over the vector applying your operation to square each element
+(squares2 <- sapply(v, function(a) {a*a}))
+```
+
+```{r, sapplyVsForLoopComparisonSetup}
+set.seed(456)
+v <- runif(5, 1, 5)
+```
+
+Now use the for-loop to achieve the same transformation.
+
+```{r, for-loop-example-on-vector, exercise=T, exercise.setup="sapplyVsForLoopComparisonSetup"}
+square_vals <- rep(0, length(v))
+i = 1
+for (a in v) {
+  square_vals[i] = a*a
+  i = i + 1
+}
+# display the answer
+square_vals
+```
+
+Notice the preallocation of space for the vector in the first line. 
+
+
+## Conditionally walking over a vector
+
+In functional style this is done via sub-setting. In procedural style  a combination of a for-loop and the conditional-statements with if-else can achieve the same result. Let us have a look at the air fare to sun destinations at or below $1200, first using functional style.
+
+```{r, conditionally-removing-with-filter, exercise=T, exercise.lines=2}
+air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
+(results <- air_fares[air_fares <= 1200])
+```
+Now let's do it in procedural style.
+
+```{r, conditionallyRemovingWithForLoopAndIfStatementSetup}
+air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
+```
+
+
+```{r, conditionally-removing-with-for-loop-and-if-statement, exercise=T, exercise.lines=9, exercise.setup="conditionallyRemovingWithForLoopAndIfStatementSetup"}
+results <- c()
+if (length(air_fares) > 0) {
+  n <- length(air_fares)
+  for (i in 1:n) {
+    if (air_fares[i] <= 1200) {
+      results <- c(results, air_fares[i])
+    }
+  }
+}
+results
+```
+
+Now you choose your style according to the task at hand. Practice will make you a master!
+
+
+
+## License
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+## Tutorials &  online-resources
+
+  General:
+  
+  1. https://cran.r-project.org/manuals.html (all of them)
+  2. https://statisticsglobe.com/r-programming-language [@StatisticsGlobe]
+  3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
+  4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
+  5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
+  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  
+  Computing: 
+  
+  1. http://adv-r.had.co.nz/ (Free access to Advanced R book by Wickham himself)
+  2. https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf (writing R packages)
+  2. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
+  3. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
+  
+  Data cleaning:
+  
+  1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
+  
+  Statistics:
+  
+  1. https://www.stat.berkeley.edu/~spector/s243/
+  2. https://www.bioconductor.org/ (for bio-statistics)
+  
+  Language Reference:
+  
+  1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
+  
+## References
+

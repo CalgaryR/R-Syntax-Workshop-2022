@@ -208,7 +208,7 @@ The relational operators require numbers while the logical operators require tru
 ```{r negation-precedence, exercise=TRUE, exercise.lines=3}
 !-4 > 0  & 0 > 1
 ```
-As it turns out R coerces a value of `0` to `FALSE` and any non-zero to `TRUE` when in need to calculate using a logical operator, like `!` on -4. Thus the expression `!-4` translates into `!TRUE = FALSE` or `0`, which in turn makes `!-4 > 0` `FALSE`.
+As it turns out R coerces a value of `0` to `FALSE` and any non-zero to `TRUE` when in need to calculate using a logical operator, like `!` on -4. Thus the expression `!-4` translates into `!TRUE = FALSE = 0`, which in turn makes `!-4 > 0` into `0 > 0` and therefore it computes `FALSE`.
 
 The change in final result depending on the order of evaluation of the operators brings us into the subject of operator precedence.
 

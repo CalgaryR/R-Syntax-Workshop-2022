@@ -1,0 +1,527 @@
+---
+title: "Introduction to R Syntax 2022"
+pagetitle: "Part 5: Data frames"
+output:
+  learnr::tutorial:
+    theme: spacelab
+    ace_theme: cobalt
+    progressive: true
+    allow_skip: true
+    highlight: pygments
+    toc: yes
+    toc_depth: 2
+    code_folding: hide
+runtime: shiny_prerendered
+bibliography: bib.bib
+description: "Data frames and applications in Rs"
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+<!-- ======================== -->
+
+## What you will learn
+
+<!-- ======================== -->
+
+The main goal of this tutorial is to teach patterns of the R language basic syntax. We believe that this knowledge will set you on a positive trajectory at any point in your R language journey. 
+R has specific properties that set it apart from other languages and can make it easier to learn for a beginner. 
+However, those same differences can make it confusing at first for people with experience.
+
+In particular you will be able to leverage your knowledge of lists and vectors to create and manipulate data frames for powerful data analysis.
+
+
+<!-- ======================== -->
+
+## About this tutorial
+
+<!-- ======================== -->
+
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide.
+It contains explanations, fully functional code boxes, and quizzes that make it very interactive.
+If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback.
+The instructor may also ask short questions regarding the material.
+Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
+
+The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes.
+In doing so we hope to get you excited about this useful and expressive language.
+R was designed from the ground up to be vectorized and object oriented.
+Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
+
+Dr. Amelia McNamara describes three types of R Syntax [@RSyntax-Cheatsheet]: the dollar sign, the formula, and the Tidyverse.
+These syntax are interchangeable, the important thing is to be consistent when using them.
+The formula syntax tends to be more compact but less readable while the Tidyverse syntax is more readable but also more verbose.
+We will initially focus on the dollar sign syntax.
+Later we introduce the formula syntax and finally the tidyverse syntax.
+
+This tutorial was built entirely in R using a package called `learnr`.
+It was compiled to an html document using Rmarkdown syntax and the `Knitr` package.
+If you receive the source code and have RStudio, you can render it as a fully interactive web page.
+Using an Rstudio solution it can also be deployed on a ShinyR server.
+You can also do these things and much more if you move forward in your R journey.
+
+Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it.
+If you want to reset your answers and the code you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel.
+
+Let's get started.
+
+
+## Data frames
+
+If you have followed the data structure section then this section should be relatively easy. Like a list, data frames store information of heterogeneous type, however there are some rules:
+
+  - Two dimensional only, like a table.
+  - Any number of rows or columns
+  - The columns have to be of the same type and length
+
+
+Follow these rules and data frames are an almost ideal data structure for data analysis, as convenient but safer than spreadsheets, whether in memory or saved as a file to a disk, locally or in the cloud. 
+
+Data frames are similar to tables of a sophisticated relational data base, where you can store procedures (like R expressions) and even other tables in the cells.
+
+### Why is a data frame different?
+
+Under the hood a data frame is implemented as a list of vectors of the same length. The algorithms to search and select items in data frames can be optimized because its two more prominent features: table-like geometry and vector columns of equal length. The elements of a vectors are stored in contiguous memory of constant size and this gives the data frame some advantages. They are natively implemented so the `$` and `[` syntax we have already covered can be safely reused for data frames.
+
+
+## Constructing a data frame
+
+```{r, data-frame, echo=FALSE, results='asis', dpi=70}
+knitr::include_graphics("images/dataframe.png")
+```
+
+Let's create this data frame using code using the constructor function `data.frame`.
+
+```{r, data-frame-constructor, exercise=T, exercise.lines=6}
+# for better documentation name the vectors
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+census2019 <- c(T,T,T,T,F,T)
+# the dot in names means nothing special in R, see note below for explanation
+(df <- data.frame(country, population, census2019))
+```
+
+*Note:* In R the dot for names has no special meaning, it is like `_`. The dot syntax for formulas and in generic object dispatch has special meaning, but those are topics for more advanced material.
+
+If any of the vectors has a different length there will be error messages, R will not be happy about it. Try it for yourself in the previous exercise.
+
+In the above example the vector of country names, of type `character`, was converted to factors by a default named argument `stringsAsFactors = T` in the constructor `data.frame()`. A special note about this later in this section.
+
+Try the `str()` function on the data frame we just created. R has a special vocabulary for the rows and columns of a data frame. Each of the <span style="color:blue">vectors</span> in the list are mapped to a <span style="color:blue">variable</span> while each <span style="color:red">row</span> represents an <span style="color:red">observation</span>.
+
+
+## Subsetting a data frame
+
+Similarly to subsetting vectors, we can slice and extract sections of the data frame as we please following the row, column convention of matrices and the `[]` syntax or the `$` syntax of vectors and lists, respectively.
+
+```{r sliceAndDiceDfSetup}
+# for better documentation name the vectors
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+census2019 <- c(T,T,T,T,F,T)
+df <- data.frame(country, population, census2019)
+```
+
+```{r slice-n-dice-df, exercise=T, exercise.setup="sliceAndDiceDfSetup", exercise.lines=9}
+# using the $ operator like in a named list
+df$country
+df$"country"
+# using the [] operator similar to a matrix and a vector
+df[,1]
+df[,"country"]
+# using the fact that a data frame is a list under the hood
+df[[1]]
+df[["country"]]
+```
+
+Let's  extract all the information for Canada. 
+
+```{r subsetDfByRowSetup}
+# for better documentation name the vectors
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+census2019 <- c(T,T,T,T,F,T)
+df <- data.frame(country, population, census2019)
+```
+
+```{r subset-df-by-row, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=2}
+df[df$country == "Canada",]
+```
+
+We can extract the countries with population greater than 80 million.
+
+```{r subset-df-by-multiple-rows, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=4}
+# extract only the names of the counties  in the rows filtered
+df[df$population > 80, 'country']
+# display all the columns for the rows filtered
+df[df$population > 80,]
+```
+
+This way of sub-setting a data frame uses a **_logical mask_**. The mask is nothing but a boolean vector generated using a logical operator. The boolean vector is then used to sub-setting another vector using the `[]` operator selecting the elements of the vector at the positions where the mask is `TRUE`. Since the columns of a data frame are vectors, this is a natural way of sub-setting. 
+
+This image helps explain it.
+
+```{r data-frame-row-filter, echo=FALSE, results='asis', fig.height=1}
+knitr::include_graphics("images/dataframe-row-filter.png", dpi = 126)
+```
+
+And here is a step by step description:
+
+  1. Build the mask using a logical operator expressing a condition over one of the columns of the data frame.
+
+```{r explain-logical-mask-1, exercise=T, exercise.lines=1, exercise.setup="subsetDfByRowSetup"}
+(row_filter <- df$population > 80)
+```
+  2. Subset the data frame by rows using this logical mask. A `TRUE` at a given position on the mask  will let the value at that position on each row of the data frame pass _as is_. Conversely, a `FALSE` will eliminate it so it does not appear on the result.
+
+```{r explainLogicalMaskSetup}
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+census2019 <- c(T,T,T,T,F,T)
+df <- data.frame(country, population, census2019)
+row_filter <- df$population > 80
+```
+
+
+```{r explain-logical-mask-2, exercise=T, exercise.lines=2, exercise.setup="explainLogicalMaskSetup"}
+# apply the same filter to every column of the data frame by
+(result <- df[row_filter,])
+```
+  3. Show the column for country from the 2019 census:
+
+```{r explainLogicalMask3Setup}
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+census2019 <- c(T,T,T,T,F,T)
+df <- data.frame(country, population, census2019)
+filter <- df$population > 80
+result <- df[filter,]
+```
+
+
+```{r explain-logical-mask-3, exercise=T, exercise.lines=2, exercise.setup="explainLogicalMask3Setup"}
+# apply the filter to all the vectors of the data frame
+result[c("country", "population")]
+```
+
+
+## Reusing your knowledge of R Syntax
+
+At this point in your R Syntax journey you may start to appreciate that some patterns. Here is an image taken from @BaseR-Cheatsheet that might show some of these patterns.
+
+```{r, data-frame-sheat-sheet-example, echo=FALSE, results='asis'}
+  knitr::include_graphics("images/Dataframe_shortcuts_from_BaseR_Cheat_Sheet.png", dpi = 96)
+```
+
+As a very special case of a list, you would expect to be able to reuse some of your list manipulation knowledge, right? In a similar way, with the _table-like_ shape you would expect to be able to re-use some of your knowledge of `cbind` and `rbind`, correct?
+
+### The subsetting function
+
+The built-in function `subset` takes a data frame and returns a new object with the requested data frame. This function receives a logical vector as named argument `subset`, this vector signals with `TRUE` the elements that should be included and `FALSE` otherwise. Another optional parameter called `select` is a vector with the column positions or names to include by default, unless a third parameter called `drop` is set to TRUE, in which case the selected values are dropped from the resulting subset.
+
+As an example let's take the time series for quarterly earnings per share for Johnson and Johnson from 1960 to 1980, part of the `datasets` package included in modern default R installations. We are  asked to extract the years when the last quarter earnings were greater than 60% of the annual earning per share and show the last quarter and the total earnings.
+
+Normally we would first explore the data set.
+
+```{r, JAndJDataSetup}
+J_and_J <- data.frame( matrix(JohnsonJohnson, 
+                              ncol=4, 
+                              dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4"))))
+```
+
+```{r, explore_J_and_J_data, exercise=T}
+class(JohnsonJohnson)
+# "ts" is a time series object, do ?ts at the R command prompt
+# turn it into a matrix with 4 columns, then turn it into a data frame
+matrix(JohnsonJohnson, ncol=4)
+```
+
+Now the matrix can be turned into a data frame. We could have also kept the matrix, can you answer why and what differences if any we would ahve encoutered? 
+
+When we construct the new data frame we can assign names to each column and row labels as each year of company financial results. Please note how we are using list and vector constructors to supply 
+the names  for the two dimensions of the data frame. remember the `:` operator we learned as a shortcut for the `seq()` function in the section creating vectors with patterns?
+
+```{R, constructAProperDataFrame, exercise=T}
+(J_and_J <- data.frame( matrix(JohnsonJohnson, 
+                              ncol=4, 
+                              dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4")))))
+```
+
+We want a new column with the total sales per year. This can be accomplish creating a 
+vector of totals per row and then appending it to the data frame as a new column 
+with the name `Annual`. Does the new column fulfill the requirements of a data frame? 
+Remember: the columns of a data frame are vectors that may be of different types each but all of them have to be of the same length.
+
+
+```{r, addColumnToDataFrame, exercise=T, exercise.setup="JAndJDataSetup"}
+# add a new column with the annual earnings
+(J_and_J <- cbind(J_and_J, Annual=rowSums(J_and_J)))
+```
+
+```{r, JAndJDataSetupWithTotals}
+J_and_J <- data.frame( matrix(JohnsonJohnson, 
+                              ncol=4, 
+                              dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4"))))
+J_and_J <- cbind(J_and_J, Annual=rowSums(J_and_J))
+Qtr4_percent <- J_and_J$Qtr4 / J_and_J$Annual * 100
+mask.Q4.GT.60.pct.Total <- ( Qtr4_percent > 60 )
+```
+
+Now you are ready to create a mask to extract the desired values. You will use R's vectorized
+nature and dollar syntax to select the desired columns from the data frame. This 
+code would have looked slightly different had we decided to work with the matrix instead
+of a data frame, however the results would have been equivalent.
+
+```{r, buildAMaskForJAndJDataFrame, exercise=T, exercise.setup="JAndJDataSetupWithTotals"}
+# create a vector with the 4th quarter earnings as a percentage of the annual earnings 
+(Qtr4_percent <- 
+    J_and_J$Qtr4 / J_and_J$Annual * 100)
+# create the logical mask
+(mask.Q4.GT.60.pct.Total <- (Qtr4_percent > 60))
+```
+
+At this point all the components are available to apply the builtin function `subset` to
+answer the main question.
+
+```{r, finalSubsetJAndJDataFrame, exercise=T, exercise.setup="JAndJDataSetupWithTotals"}
+subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c(4,5)) 
+```
+
+That was a company on a roll in the 70's!
+
+**Note:** this function is one of the few that exposes a behaviour called non-standard evaluation in R. That means that when setting the arguments on a call to the function, the argument can be interpreted as a character string first if it exists. They are very convenient in interactive work at the command line (the REPL, [Read-evaluate-print-loop](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), as it is known). In this scenario the user has in mind what he/she is interacting with, however the use of this function in a written script may lead to unintended interpretations of the arguments. The best practice is not to use `subset` in programs. The packages derived from the seminal work of Wickham [@tidy-data] provide consistent syntax to do these and many more operations on data.
+
+
+## Subsetting and transforming
+
+A very common operation on data frames is to aggregate the values in one or more columns of observations that belong to the same category. The nature of the aggregation can be an operation like counting, adding, or by extension, applying any function that takes a value and returns it in a transformed state.
+
+First create a data frame with some results from a fictional experiment that was done by triplicate.
+Notice a convenient use or R's vector recycling property to make the code expressive.
+
+```{r, aggregating-examples, exercise=T, exercise.lines=7}
+set.seed(5529)
+treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
+results <- round(runif(6), digits = 2)
+passes.GT.0.7 <- results>0.7
+(experiments <- data.frame(treatment=treatment, 
+                 val_1=results,
+                 passes=passes.GT.0.7))
+```
+
+Then subset by treatment while adding `Val_1` and counting the number of observations that pass our test (are greater than `0.7` by the definition of column `passes`).
+
+```{r, aggregationExamplesSetup}
+set.seed(5529)
+treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
+results <- round(runif(6), digits = 2)
+passes.GT.0.7 <- results>0.7
+experiments <- data.frame(treatment=treatment, 
+                 val_1=results,
+                 passes=passes.GT.0.7)
+```
+
+```{r, aggregation-example-adding, exercise=T, exercise.lines=12, exercise.setup="aggregationExamplesSetup"}
+# first calculate the mean of val_1 by treatment
+(val_1_by_treatment <- aggregate(x = experiments$val_1,
+                                 by = list(experiments$treatment), 
+                                 FUN = "mean"))
+# the calculate the number of results that are greater than 0.7
+(num_gt_point_seven_by_treatment <- aggregate(x = experiments$passes, 
+                                     by = list(experiments$treatment), 
+                                     FUN = "sum"))
+# now put them together in a single data frame
+aggregated_df <- cbind(val_1_by_treatment, num_gt_point_seven_by_treatment$x)
+names(aggregated_df) <- c("treatment", "mean_val_1", "num_gt_0_pt_7")
+aggregated_df
+```
+
+
+## Factors or strings
+
+Did you notice that in the previous section we got the countries as a vector of factors with 6 levels? Remember that special case of vectors called factors specialized on manipulating categorical variables? Well here we go again. 
+
+When you construct a data frame from vectors the type of each vector will be interpreted by the data frame constructor. R will coerce the elements of the vector to the most general data type to be able to work with them. An ordering of types from more  general to more specific is `character` > `complex` > `double` > `integer` > `logical`. 
+
+You can give R hints, though, for instance you can tell it to interpret the strings in vectors as factors or not, base R will do so by default.
+
+```{r example-data-frame-strings-as-factors, exercise=T, exercise.lines=7}
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+# strings as factors is the default
+country_stats <- data.frame( country,
+                             population, stringsAsFactors = TRUE)
+# the function 'str()' shows us the structure of the object
+str(country_stats)
+```
+The R constructor for data frames interpreted the strings as 6 factors. Perhaps not what you expected, compare with this case.
+
+```{r exampleDataFrameStringsAsIsSetup}
+country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
+population <- c(37, 331, 67, 83, 60, 39)
+```
+
+
+```{r example-data-frame-strings-as-is, exercise=T, exercise.lines=2, exercise.setup="exampleDataFrameStringsAsIsSetup"}
+country_stats <- data.frame( country, population, stringsAsFactors = FALSE)
+str(country_stats)
+```
+
+## NAs in a data frame
+
+Because each row on a data frame is associated with an experimental observation of some sort, sometimes an observation may genuinely have missing entries for some of the variables that were simply not measured or are not available in the data set. The function `is.na()` can be used on the whole data frame to return a data frame of logical vectors with `TRUE`  if an `NA` exists at that position or `FALSE` otherwise. The function `complete.cases()` identifies the observations with missing values. 
+
+Some mathematical operations may create values that are not amenable to be further processed, for example dividing 0/0 or any number by 0, in the first case the result is `NaN` and in the second `Inf`. 
+
+An exercise will clarify the identification of all these values.
+
+```{r, createDataFrameWithNAsInfsAndNaNsSetup}
+set.seed(7777)
+experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
+                  run=rep(1:3,3), 
+                  results=round(runif(n = 9, min = 0.0, max = 10.0), digits = 2))
+# introduce some NA, NaN, Inf
+experiments$results[c(3,5,8)] <- c(NA, NaN, Inf) 
+```
+
+```{r, createDataFrameWithNAsInfsAndNaNs, exercise=T}
+set.seed(7777)
+(experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
+                  run=rep(1:3,3), 
+                  results=round(runif(n = 9, min = 0.0, max = 10.0), digits = 2)))
+# introduce some NA, NaN, Inf
+experiments$results[c(3,5,8)] <- c(NA, NaN, Inf) 
+```
+
+
+```{r, detect-NAs-in-a-data-frame, exercise=T, exercise.setup="createDataFrameWithNAsInfsAndNaNsSetup"}
+# find if there are any missing values
+any(is.na(experiments$results) | is.infinite(experiments$results))
+# Find what observations are missing values. 
+# First get a logical vector to be used as a mask for the rows with incomplete cases
+missing_values <- !complete.cases(experiments) 
+# then get a mask for the cases with infinite values
+infinites <- is.infinite(experiments$results)
+# now filter out those observations
+experiments[(missing_values | infinites),]
+```
+
+
+## Test your knowledge
+
+```{r quiz-data-frames, echo=FALSE, cache=FALSE}
+quiz(
+  question_checkbox("
+  What code subsets the rows with missing values from this data frame?  
+  
+      df <- data.frame(obs=LETTERS[1:5],
+                       results=as.numeric(c(\"3.5\", \"1.9\", \"3.9\", \"5..4\", \"3.8\")))
+                    
+  Select all that apply)",
+           answer("df[is.na(df$results),]", correct = TRUE),
+           answer("df[!complete.cases(df),]", correct = TRUE),
+           answer("df[,is.na(df)]", correct = FALSE, message = 'Filtering columns, that is variables, might not be a good approach here!'),
+           answer("!df[[complete.cases(df)]]", correct = FALSE, message = "I must admit some of these options are just gibberish, be warned."),
+           answer("df[complete.cases(df),]", correct = FALSE, message = "The answer has to answer the exact question, a second read might clarify the target."),
+           random_answer_order = TRUE,
+           allow_retry = TRUE,
+           correct = 'This has been the most complicated subsetting question you have solved today, pat yourself in the back!',
+           incorrect = "One or more correct answers may be missing and/or you have selected wrong answers, in the former case more information follows."),
+  question(
+    "How many variables and observations are there in this data frame?
+      
+      n <- 10
+      df <- data.frame(x=1:n, y = runif(n))
+      df <- cbind(df, pass = df$y > 0.9)
+    
+The 'runif' functions computes n random values from a uniformly distributed variable between 0 and 1.0",
+  answer("3 variables and 10 observations", correct = TRUE),
+  answer("10 observations and 3 variables", correct = FALSE, message = 'I would reconsider this option.'),
+  answer("10 variables and 2 observations", correct = FALSE, message = 'Have you tried to run the code on an exercise sandbox?'),
+  answer("2 variables, 10 observations, 1 condition", correct = FALSE, message = 'Something is not right with this answer, I would leave the way variables are calculated out of it.'),
+  answer("2 variables and 11 observations", correct = FALSE, message = 'May I suggest you identify how many columns this data frame will have after the two lines are executed?'),
+  random_answer_order = TRUE,
+  allow_retry = TRUE,
+  correct = 'Bravo! I see you are starting to speak R quite fluently.'
+  ),
+  question_radio(
+    "Data frames were designed as a list of atomic vectors.",
+  answer("True", correct = FALSE, message = 'The correct answer is a list of any vectors, atomic or lists'),
+  answer("False", correct = TRUE, message = 'Is this is your first choice and you feel sure about it, I must admit you are solid on data frame theory principles.'),
+  random_answer_order = TRUE,
+  allow_retry = TRUE),
+  question_radio(
+    "Can a data frame store lists in its columns?",
+  answer("Yes", correct = TRUE, message = 'As a followup to the previous question, if data frames can store vectors of heterogeneous elements, those are precisely lists, congratulations!'),
+  answer("No", correct = FALSE, message = 'Remember that a vector can be of  type atomic or list and a data frame can store any vector.'),
+  random_answer_order = TRUE,
+  allow_retry = TRUE),
+  question_radio(
+    "Can a data frame store other data frames in its columns?",
+  answer("Yes", correct = TRUE, message = 'By definition lists are recursive data structures, meaning they can store instances of its own type as elements, so this is the right answer because data frames are lists of vectors of the same length.'),
+  answer("No", correct = FALSE, message = 'Data frames are based upon a list of vectors and lists by definition can store other lists, therefore  this is the incorrect answer.'),
+  random_answer_order = TRUE,
+  allow_retry = TRUE),
+  question(
+    "Select the code that subsets the population of the countries with the smallest population that were included by the 2019 census:
+    
+      country <- c(\"Canada\", \"EEUU\", \"UK\", \"Germany\", \"Italy\", \"Poland\")
+      population <- c(37, 331, 67, 83, 60, 39)
+      census2019 <- c(T,T,T,T,F,T)
+      df <- data.frame(country, population, census2019)
+  
+  ",
+  answer("df[df$population == min(df$population) & census2019==TRUE,]$population", correct = TRUE),
+  answer("df[df$population == min(df$population) & census2019==TRUE,]", correct = FALSE, message = 'The question is very specific, perhaps you are missing an extra bit of code.'),
+  answer("df[min(df$population) & census2019==TRUE,]", correct = FALSE, message = 'This would not work as intended because the function min returns a vector of length 1 that gets recycled as a TRUE value to match the length of the census2019 vector, try it.'),
+  answer("df[,df$population<min(df$population) & census2019==TRUE]]", correct = FALSE, message = 'We are subsetting by rows so the conditions should be placed on rows, the first parameter to the [ operator, just like in matrix subsetting.'),
+  random_answer_order = TRUE,
+  allow_retry = TRUE,
+  correct = "You got it, the R subsetting syntax of vectors and matrices nicely extends to data frames!")
+)
+```
+
+
+
+## License
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+## Tutorials &  online-resources
+
+  General:
+  
+  1. https://cran.r-project.org/manuals.html (all of them)
+  2. https://statisticsglobe.com/r-programming-language [@StatisticsGlobe]
+  3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
+  4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
+  5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
+  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  
+  Computing: 
+  
+  1. http://adv-r.had.co.nz/ (Free access to Advanced R book by Wickham himself)
+  2. https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf (writing R packages)
+  2. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
+  3. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
+  
+  Data cleaning:
+  
+  1. https://cran.r-project.org/doc/contrib/de_Jonge+van_der_Loo-Introduction_to_data_cleaning_with_R.pdf
+  
+  Statistics:
+  
+  1. https://www.stat.berkeley.edu/~spector/s243/
+  2. https://www.bioconductor.org/ (for bio-statistics)
+  
+  Language Reference:
+  
+  1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
+  
+## References
+

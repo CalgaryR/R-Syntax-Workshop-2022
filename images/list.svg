@@ -7,8 +7,11 @@
    viewBox="0 0 210 297"
    version="1.1"
    id="svg880"
-   inkscape:version="1.1.1 (eb90963e84, 2021-10-02)"
+   inkscape:version="1.2.1 (ef4d3fba62, 2022-07-19, custom)"
    sodipodi:docname="list.svg"
+   inkscape:export-filename="list.png"
+   inkscape:export-xdpi="60"
+   inkscape:export-ydpi="60"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -83,18 +86,20 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.7550694"
-     inkscape:cx="217.37032"
-     inkscape:cy="375.19884"
+     inkscape:cx="145.2934"
+     inkscape:cy="374.91395"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1018"
-     inkscape:window-x="0"
-     inkscape:window-y="490"
+     inkscape:window-width="1680"
+     inkscape:window-height="1022"
+     inkscape:window-x="101"
+     inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:pagecheckerboard="0"
-     inkscape:snap-bbox="true" />
+     inkscape:snap-bbox="true"
+     inkscape:showpageshadow="2"
+     inkscape:deskcolor="#d1d1d1" />
   <metadata
      id="metadata877">
     <rdf:RDF>
@@ -574,5 +579,13 @@
        style="fill:none;stroke:#000000;stroke-width:0.264583px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#marker1813);marker-end:url(#Arrow2Lend)"
        d="M 94.975658,68.214168 H 110.99125"
        id="path1809" />
+    <rect
+       style="opacity:0.99;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#140607;stroke-width:0.926042;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.894958;paint-order:stroke fill markers"
+       id="rect250"
+       width="111.43326"
+       height="35.749313"
+       x="28.936153"
+       y="49.534393"
+       ry="0" />
   </g>
 </svg>
