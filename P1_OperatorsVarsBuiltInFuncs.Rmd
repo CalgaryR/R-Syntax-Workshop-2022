@@ -565,14 +565,16 @@ From the previous exercise you might have noticed that the operators `<-` and `=
 So, you might ask: why are there two operators to do the same in R?
 Read on for the answer.
 
-## The function arguments 
+## Named and positional arguments 
 
 R functions may be built-in or user created, they may also have none, one, or more arguments. The arguments are given in between parenthesis, separated by commas, and they may be named or not. An example of a named parameter to a function is `base` in the `log` function: `log(x, base = exp(1))`. Examine the code below and guess the output before running it, did you expect the result?
 
-```{r named-param-1, exercise = TRUE, exercise.lines=3}
+```{r named-param-1, exercise = TRUE, exercise.lines=5}
 (three <- log(1000, base = 10))
 # un-comment to check if base exists after executing the line above
 # base
+# now go back and change the 'base = 10' for 'base <- 10' and re-run this box
+
 ```
 
 <!-- ```{r named-param-1, exercise = TRUE, exercise.lines=9}
@@ -587,9 +589,9 @@ if (exists("base")) {
 }
 ```--->
 
-In the call to the function `log`, the first argument is positional, taking exactly the position number one. The second argument is named and may receive a value via the `=` operator if the function requires it during its execution.
+In the call to the function `log`, the first argument is positional, taking exactly the position number one. The second argument is named and may receive a value via the `=` operator for assignment from right to left.
 
-If the function is called without a second argument, and `base` is used for computation inside the function, the assignment operator will use the value resulting from evaluating the expression `exp(1)` and associate it with `base`. This is  how a default value for a named argument can be given. 
+If the function is called without a second argument, and if `base` is required for computation inside the function, the assignment operator will use the value resulting from evaluating the expression `exp(1)` and associate it with `base` because that is how the built-in is defined. This is  how a default value for a named argument can be given. 
 
 If the user prefers to pass a different value from the default then the named argument can be given as in `log(10, base = 10)` or just  `log(10, 10)`. 
 
