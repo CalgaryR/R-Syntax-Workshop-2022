@@ -85,7 +85,7 @@ In R the body of a function is written between curly braces and the last stateme
 
 Now write a function that adds any two numbers and then call it.
 
-```{r add-function, exercise=TRUE, exercise.lines = 3}
+```{r add-function, exercise=TRUE, exercise.lines = 4}
 add2numbers <- function(a, b) {
 
 }

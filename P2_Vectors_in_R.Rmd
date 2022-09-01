@@ -68,17 +68,18 @@ Let's consider these cases:
 
 A simple spreadsheet could have been enough up to storing the data. However, automation of a repetitive task, reporting or visualization, and further data processing using algorithms, make a language like R more attractive for these tasks.
 
-Although solving this problem is beyond the scope of this tutorial, the idea of using a programming language forces you to think of the type of data and the structures that you need to store and manipulate it in order to accomplish your goal. That is exactly the reason we need to address now the syntax of those data types and structures in the R language.
+Although solving this problem is beyond the scope of this tutorial, the idea of using a programming language forces you to think of the type of data and the structures that you need to store and manipulate it in order to accomplish your goal. That is exactly the reason we need to address the syntax of those data types and structures in the R language.
 
 
 ## Data Types
 
 The fundamental values that R can represent and manipulate in the computer memory are:
 
-  - integer
   - double (also called numeric)
+  - integer
+  - logical  
   - character
-  - logical
+
 
 There are two less commonly used: _complex_ and _raw_ that we will leave for another time.
 
@@ -101,7 +102,7 @@ kable( data.frame(Dimensions, Homogeneous, Heterogeneous,
 
 R was designed to manipulate data using these structures, they don't come from libraries or are add-ons to the language. This gives R a certain expressive power to work with data.
 
-This is important because a computer language has to allow the manipulation of values in memory using a certain recipe called an _algorithm_. These algorithms rely on the properties of the data structures and the data types themselves. They are intimately related. A computer language will allow a human to write a solution to a problem in terms of the data structures and types that  it provides. R has the fundamental data structures and types that we just discussed. Let's see how to start using them to represent information.
+This is important because a computer language has to allow the manipulation of values in memory using a certain recipe called an _algorithm_. These algorithms rely on the properties of the data structures and the data types themselves. They are intimately related. A computer language allows a human to write solutions to a problem in terms of the data structures and types that it provides. R has the fundamental data structures and types that we just discussed. Let's see how to start using them to represent information.
 
 **Note:** To reveal the data structure of R objects the built-in function `str()` may be handy although the output for complex objects may be difficult to interpret.
 
@@ -113,7 +114,7 @@ From the table we just saw one could read: if you need a one-dimension data stru
 
 A vector of six integer values would be represented graphically as a long structure of six boxes of equal size:
 
-```{r vector, echo=FALSE, warning=FALSE, results='asis'}
+```{r vector, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
 library(here)
 knitr::include_graphics(here("images","vector.png"), dpi = 86)
 ```
@@ -185,7 +186,7 @@ Creating vectors can become a tedious task so there are a number of techniques t
 
 ```{r seq-rep, exercise=TRUE, exercise.lines=2}
 rep(-1, times = 10)
-seq(1, 100, by = 5)
+seq(0, 100, by = 5)
 ```
 
 `rep` and `seq` can be combined to composed colorful patterns.
@@ -196,11 +197,11 @@ rep(seq(1,9), times = 2)
 # repeat the sequence of digits two at a time
 rep(seq(1:9), each = 2)
 # generate 5 numbers between 0 and 5
-seq(0,5, length=5)
+seq(0,5, length=5) # can you make this vector of type "integer"?
 ```
 
 
-As you might have guessed from the previous exercise, either `FALSE`, `F`, or `0` mean the same. Similarly `TRUE`, `T`, or `1` are synonymous. They are also called the boolean data type and can only have two values, each defined as the negation of the other. You can add logical values as if they were zeros and ones. This is useful to count the number of positive or TRUE values in a vector:
+As you may remember from a previous module of this tutorial series, either `FALSE`, `F`, or `0` mean the same. Similarly `TRUE`, `T`, or `1` are synonymous. They are also called the boolean data type and can only have two values, each defined as the negation of the other. You can add logical values as if they were zeros and ones. This is useful to count the number of positive or TRUE values in a vector:
 
 ```{r logical-sum, exercise= TRUE, exercise.lines=3}
 is_positive <- rep(rep(c(F, F, T, F, F, F, F, T, T, F, F, F, F, T), each = 2), times = 7)
@@ -249,6 +250,7 @@ weekly_values == special_week
 Continuing on from the previous examples, what would happen if the multiplier vector provided by the kitchen had had only estimates for two materials and we had multiplied it by the weekly estimates?
 
 ```{r multiplication-vectors-different-length-2, exercise=T, exercise.lines=2, exercise.setup="setup-element-wise-vectors"}
+weekly_values
 weekly_values * c(1.2, 1.3)
 ```
 This was a multiplication of a vector of length 4 with another vector of length 2. What did R do? The answer lies in a _useful_ but _risky_ operation R does in these cases, called <span style="color:red">recycling</span>. When doing the element-wise multiplication R reuses the shorter vector until all elements of the longer one are multiplied. It is useful if this is your intention and you are sure of the correctness of the results.
@@ -625,7 +627,7 @@ is.na(numbers_expected)
 sum(is.na(numbers_expected)) > 0
 ```
 
-The other common case for `NA` to be introduced generated happens subsetting by a position that is out of the range of positions in the vector.
+The other common case for `NA` creation happens when subsetting by a position that is out of the range of positions in the vector.
 
 ```{r, examples-introducing-NAs-position-out-of-range, exercise=TRUE, exercise.lines=5}
 control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_length")
@@ -635,7 +637,7 @@ control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_
 sum(is.na(manipulated)) > 0
 ```
 
-A big obstacle introduced by `NA` is that further doing arithmetic on the vector can be compromised.
+A big obstacle introduced by `NA` is that further doing arithmetic on the vector can be compromised because all results will be `NA`.
 
 ```{r, example-effect-of-NA-on-sum, exercise=T, exercise.lines=8}
 set.seed(3679)

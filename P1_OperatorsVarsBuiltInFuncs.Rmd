@@ -468,7 +468,7 @@ Try running the line 1 by itself below.
 e <- exp(1)
 ```
 
-There should be no output. The value of the function `exp` with the argument `1` was computed and stored in the variable `e`. The assignment operation leaves no trace on the output. Another way of saying this is _the assignment operator produces no side effects in the console_. Its only effect is to create a name-value pair, (e, 2.718282) in the global environment, so the value can be recalled later by its assigned name.
+There should be no output. The value of the function `exp` with the argument `1` was computed and stored in the variable `e`. The assignment operation leaves no trace on the output. Another way of saying this is _the assignment operator produces no side effects in the console_. Its only effect is to create a name-value pair,  <span style="color:red">(e, 2.718282)</span> in the global environment, so the value can be recalled later by its assigned name.
 
 *Note:* As it is usually the case in R, there is more than one way of getting things done. You can get a two-for-one effect by printing and doing assignment in a single expression on the console by surrounding the assignment with parenthesis. Try it!
 
@@ -560,7 +560,7 @@ log10(a)
 log(e, base = e)
 ```
 
-From the previous exercise you might have noticed that the operators `<-` and `=` behave identically in stand alone expressions. Technically speaking, their effect is to create name-value pairs for each variable, (_a_, 10) and (_e_, 2.7183), in the global environment.
+From the previous exercise you might have noticed that the operators `<-` and `=` behave identically in stand alone expressions. Technically speaking, their effect is to create name-value pairs for each variable,  <span style="color:red">(_a_, 10)</span> and  <span style="color:red">(_e_, 2.7183)</span>, in the global environment.
 
 So, you might ask: why are there two operators to do the same in R?
 Read on for the answer.
@@ -569,12 +569,10 @@ Read on for the answer.
 
 R functions may be built-in or user created, they may also have none, one, or more arguments. The arguments are given in between parenthesis, separated by commas, and they may be named or not. An example of a named parameter to a function is `base` in the `log` function: `log(x, base = exp(1))`. Examine the code below and guess the output before running it, did you expect the result?
 
-```{r named-param-1, exercise = TRUE, exercise.lines=5}
+```{r named-param-1, exercise = TRUE, exercise.lines=3}
 (three <- log(1000, base = 10))
 # un-comment to check if base exists after executing the line above
 # base
-# now go back and change the 'base = 10' for 'base <- 10' and re-run this box
-
 ```
 
 <!-- ```{r named-param-1, exercise = TRUE, exercise.lines=9}

@@ -83,7 +83,7 @@ Follow these rules and data frames are an almost ideal data structure for data a
 
 Data frames are similar to tables of a sophisticated relational data base, where you can store procedures (like R expressions) and even other tables in the cells.
 
-### Why is a data frame different?
+## Why is a data frame different?
 
 Under the hood a data frame is implemented as a list of vectors of the same length. The algorithms to search and select items in data frames can be optimized because its two more prominent features: table-like geometry and vector columns of equal length. The elements of a vectors are stored in contiguous memory of constant size and this gives the data frame some advantages. They are natively implemented so the `$` and `[` syntax we have already covered can be safely reused for data frames.
 
@@ -91,7 +91,7 @@ Under the hood a data frame is implemented as a list of vectors of the same leng
 ## Constructing a data frame
 
 ```{r, data-frame, echo=FALSE, results='asis', dpi=70}
-knitr::include_graphics("images/dataframe.png")
+knitr::include_graphics("images/dataframe1.png")
 ```
 
 Let's create this data frame using code using the constructor function `data.frame`.
@@ -154,7 +154,7 @@ df[df$country == "Canada",]
 
 We can extract the countries with population greater than 80 million.
 
-```{r subset-df-by-multiple-rows, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=4}
+```{r subset-df-by-multiple-rows, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=6}
 # extract only the names of the counties  in the rows filtered
 df[df$population > 80, 'country']
 # display all the columns for the rows filtered
@@ -219,7 +219,7 @@ At this point in your R Syntax journey you may start to appreciate that some pat
 
 As a very special case of a list, you would expect to be able to reuse some of your list manipulation knowledge, right? In a similar way, with the _table-like_ shape you would expect to be able to re-use some of your knowledge of `cbind` and `rbind`, correct?
 
-### The subsetting function
+## The subsetting function
 
 The built-in function `subset` takes a data frame and returns a new object with the requested data frame. This function receives a logical vector as named argument `subset`, this vector signals with `TRUE` the elements that should be included and `FALSE` otherwise. Another optional parameter called `select` is a vector with the column positions or names to include by default, unless a third parameter called `drop` is set to TRUE, in which case the selected values are dropped from the resulting subset.
 
@@ -293,7 +293,7 @@ subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c(4,5))
 
 That was a company on a roll in the 70's!
 
-**Note:** this function is one of the few that exposes a behaviour called non-standard evaluation in R. That means that when setting the arguments on a call to the function, the argument can be interpreted as a character string first if it exists. They are very convenient in interactive work at the command line (the REPL, [Read-evaluate-print-loop](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), as it is known). In this scenario the user has in mind what he/she is interacting with, however the use of this function in a written script may lead to unintended interpretations of the arguments. The best practice is not to use `subset` in programs. The packages derived from the seminal work of Wickham [@tidy-data] provide consistent syntax to do these and many more operations on data.
+**Note:** this function is one of the few that exposes a behaviour called non-standard evaluation in R. That means that when setting the arguments on a call to the function, the argument can be interpreted as a character string first even if it exists as a variable name. They are very convenient in interactive work at the command line (the REPL, [Read-evaluate-print-loop](https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop), as it is known). The best practice is not to use `subset` in programs. The packages derived from the seminal work of Wickham [@tidy-data] provide consistent syntax to do these and many more operations on data.
 
 
 ## Subsetting and transforming
@@ -390,11 +390,12 @@ experiments$results[c(3,5,8)] <- c(NA, NaN, Inf)
 
 ```{r, createDataFrameWithNAsInfsAndNaNs, exercise=T}
 set.seed(7777)
-(experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
+experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
                   run=rep(1:3,3), 
-                  results=round(runif(n = 9, min = 0.0, max = 10.0), digits = 2)))
+                  results=round(runif(n = 9, min = 0.0, max = 10.0), digits = 2))
 # introduce some NA, NaN, Inf
-experiments$results[c(3,5,8)] <- c(NA, NaN, Inf) 
+experiments$results[c(3,5,8)] <- c(NA, NaN, Inf)
+experiments
 ```
 
 
@@ -407,7 +408,7 @@ missing_values <- !complete.cases(experiments)
 # then get a mask for the cases with infinite values
 infinites <- is.infinite(experiments$results)
 # now filter out those observations
-experiments[(missing_values | infinites),]
+experiments[!(missing_values | infinites),]
 ```
 
 
