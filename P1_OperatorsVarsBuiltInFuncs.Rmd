@@ -715,8 +715,10 @@ all.equal(sum_calc, sum_expected)
   
   Statistics:
   
-  1. https://www.stat.berkeley.edu/~spector/s243/
-  2. https://www.bioconductor.org/ (for bio-statistics)
+  1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
+  2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  3. https://www.stat.berkeley.edu/~spector/s243/
+  4. https://www.bioconductor.org/ (for bio-statistics)
   
   Language Reference:
   
