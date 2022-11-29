@@ -527,11 +527,14 @@ Is this a suitable selection for your data?",
   1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
   2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
   3. https://www.stat.berkeley.edu/~spector/s243/
-  4. https://www.bioconductor.org/ (for bio-statistics)
   
+  Biology:
+  
+  1. https://www.bioconductor.org/ (packages for bio-statistics)
+  2. https://github.com/eacton/CAGEF (University of Toronto - Centre for the Analysis of Genome Evolution & Function)
+
   Language Reference:
   
-  1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
-  
-## References
+  1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)  
 
+## References
