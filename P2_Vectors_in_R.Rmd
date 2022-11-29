@@ -75,10 +75,10 @@ Although solving this problem is beyond the scope of this tutorial, the idea of 
 
 The fundamental values that R can represent and manipulate in the computer memory are:
 
-  - double (also called numeric)
-  - integer
-  - logical  
-  - character
+  - double (also called numeric): `2.0`, `43.9`, `10`
+  - integer: `2`, `2L`
+  - logical: `TRUE`, `T`, `FALSE`, `F`  
+  - character: `"home"`, `'home2'`, `"123"`, `'$#.'`
 
 
 There are two less commonly used: _complex_ and _raw_ that we will leave for another time.

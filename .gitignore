@@ -46,3 +46,10 @@ vignettes/*.pdf
 *.html
 /src/*.html
 
+#tex compilation files
+*.aux
+*.bbl
+*.blg
+*.out
+*.pdf
+*.gz
