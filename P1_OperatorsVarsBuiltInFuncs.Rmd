@@ -7,7 +7,7 @@ output:
     ace_theme: cobalt
     progressive: true
     allow_skip: true
-    highlight: pygments
+    highlight: espresso
     toc: yes
     toc_depth: 2
     code_folding: hide
@@ -25,9 +25,9 @@ knitr::opts_chunk$set(echo = FALSE)
 ## What you will learn
 <!-- ======================== -->
 
-By the end of this tutorial, you will know the basics of R operators and operator precedence, how to create variables to hold values, and how to find and use built-in functions to get things done quickly. 
+By the end of this tutorial, you will know the basics of R operators and operator precedence, how to store values in variables, how to find and use built-in functions to get things done quickly, and how to get help within R.
 <!-- Chances are there is already a function to do what you need.  -->
-Armed with this knowledge you will be able to use R at the command line or in a script file as a powerful programmable calculator and automation tool.
+Armed with this knowledge you will be able to use R at the command line as a powerful programmable calculator or in a script file as and automation tool.
 
 In another tutorial of this series you will learn the syntax to create your own functions.
 This will be fundamental to avoid repetitive code and to write more readable programs.
@@ -649,7 +649,7 @@ In summary, to avoid ambiguities and unplanned side effects, when assigning valu
 
 
 
-## On number representation
+## On number representation (Adv.)
 
 Computers can only store and operate on numbers in the binary system, meaning only with two states that we will call  "off" and "on" or zeros and ones. Due to this limitation there are round off errors intrinsic to the arithmetic of converting from binary to decimal, a counting system we humans are more familiar with. Let's investigate the problem and find a solution in R [@CRAN.FAQ.RDoesNotThinkNumbersAreEqual].
 
