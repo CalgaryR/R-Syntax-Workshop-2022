@@ -701,6 +701,7 @@ all.equal(sum_calc, sum_expected)
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
+  6. https://www.w3schools.in/r-programming
   <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
   
   Computing: 

@@ -68,7 +68,7 @@ knitr::include_graphics("images/matrix.png", dpi = 106)
 ```
 
 And in code it would be constructed with:
-```{r matrix-construction, exercise=T, exercise.lines=1}
+```{r matrix-construction, exercise=TRUE, exercise.lines=1}
 matrix(c(5, -1, 3, 0, -4, 1), ncol = 3, nrow = 2, byrow = T)
 ```
 
@@ -127,7 +127,7 @@ As a task, find out how to name rows and columns in a matrix.
 
 The `[]` operator can be used on the two dimensions of the matrix. For example subset the first row and the second column:
 
-```{r subsetting-matrix-rows, exercise=T, exercise.lines=3}
+```{r subsetting-matrix-rows, exercise=TRUE, exercise.lines=3}
 (m <- matrix(rep(c(rep(1:2,2), rep(3:4, 2)),2), byrow = T, nrow = 4))
 m[1,]
 m[,2]
@@ -138,7 +138,7 @@ m <- matrix(rep(c(rep(1:2,2), rep(3:4, 2)),2), byrow = T, nrow = 4)
 
 Now extract a sub-matrix defined by the first two rows and the third and fourth columns of the original matrix:
 
-```{r, subsetting-matrix-from-within-matrix, exercise=T, exercise.setup="setup-subsetting-matrices", exercise.lines=2}
+```{r, subsetting-matrix-from-within-matrix, exercise=TRUE, exercise.setup="setup-subsetting-matrices", exercise.lines=2}
 m[1:2, 3:4]
 ```
 
@@ -357,7 +357,7 @@ To create a date without time one can use text and a format string using the fol
 <tr><td><tt>%Y</tt></td><td>Year (4 digit)</td></tr></table>
 </center>
 
-```{r, creating-simple-date-withot-time, exercise=T, exercise.lines=5}
+```{r, creating-simple-date-withot-time, exercise=TRUE, exercise.lines=5}
 # let's use the default format: 4-digit year, 2-digit month, 2-digit day, separated by either - or /
 c(as.Date("2021-2-16"),  as.Date('2021/02/17'))
 # Lets add formats: %d= Day as a decimal number; %
@@ -369,7 +369,7 @@ If you need to read a date written in a non-standard convention, the named param
 
 `Date` objects are stored as the number of days since January 1, 1970. There are functions to compute on dates, for instance to return the day of the week a certain date corresponds to. There are similarly functions to compute the month, day and the  quarter corresponding to a date.
 
-```{r, examples-compute-stuff-from-date, exercise=T, exercise.lines=7}
+```{r, examples-compute-stuff-from-date, exercise=TRUE, exercise.lines=7}
 famous_events <- c(Storming_of_the_Bastille=as.Date('14 July 1789', format="%d %B %Y"),
                    First_Canadian_Constitution_Act=as.Date('29th March 1867', format="%dth %B %Y"),
                    First_inauguration_of_Obama=as.Date('January 20, 2009', format='%B %d, %Y'))
@@ -390,7 +390,7 @@ The usual choice is to use POSIXct unless you really need the list version.
 The creation of instances is done with the functions `as.POSIXct` and `as.POSIXlt`. 
 There is a standard format for the date and the time parts of the input, execute the code below to confirm this.
 
-```{r, create-dates-as-POSIX, exercise=T, exercise.lines=3}
+```{r, create-dates-as-POSIX, exercise=TRUE, exercise.lines=3}
 # for better results all dates should have date and time parts
 text_dates <- c('2021-02-16 16:00', '2021-02-16 16:45', '2021-02-16 17:00:01')
 as.POSIXct(text_dates)
@@ -416,7 +416,7 @@ To tell R the input is in non-standard form use the function `strptime` and the 
 <tr><td><tt>%z</tt></td><td>Offset from GMT</td><td><tt>%Z</tt></td><td>Time zone (character)</td></tr></tbody></table>
 </center>
 
-```{r, inputing-time-POSIX-non-standard-format, exercise=T, exercise.lines=3}
+```{r, inputing-time-POSIX-non-standard-format, exercise=TRUE, exercise.lines=3}
 (started_YYC = strptime('16/Feb/2021T16:01:00',format='%d/%b/%YT%H:%M:%S'))
 (started_LON = strptime('16/Feb/2021T16:01:00',format='%d/%b/%YT%H:%M:%S',tz = 'UTC'))
 started_LON - started_YYC
@@ -508,6 +508,8 @@ Is this a suitable selection for your data?",
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
+  
+  6. https://www.w3schools.in/r-programming
   <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
 
   Computing: 

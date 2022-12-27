@@ -100,7 +100,7 @@ add2numbers <- function(a, b) {
 An R user-defined function is called exactly the way you would call a built-in function.
 
 
-```{r, calling-a-user-defined-funciton, exercise=T, exercise.lines=4}
+```{r, calling-a-user-defined-funciton, exercise=TRUE, exercise.lines=4}
 subract2numbers <- function(a, b) {
   return(a - b)
 }
@@ -109,7 +109,7 @@ subract2numbers <- function(a, b) {
 
 The value returned by a function is the one defined by the last expression within the function body. The `return` is not necessary.
 
-```{r, calling-a-user-defined-funciton-simple, exercise=T, exercise.lines=4}
+```{r, calling-a-user-defined-funciton-simple, exercise=TRUE, exercise.lines=4}
 add_2_numbers <- function(a, b) {
   a + b
 }
@@ -123,7 +123,7 @@ add_2_numbers <- function(a, b) {
 
 Just like with built-ins you can name parameters. You can also use default values.
 
-```{r, named-parameters-in-user-defined-functions, exercise=T, exercise.lines=9}
+```{r, named-parameters-in-user-defined-functions, exercise=TRUE, exercise.lines=9}
 add_2_vectors <- function(x, y) {
   sum(x, y)
 }
@@ -142,7 +142,7 @@ a <- sample(c(1:100), size = 10, replace = T)
 b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T)))
 ```
 
-```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=T, exercise.lines=4, exercise.setup="namedParametersInUserDefinedFunctionsNAsAddressedSetup"}
+```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=TRUE, exercise.lines=4, exercise.setup="namedParametersInUserDefinedFunctionsNAsAddressedSetup"}
 add_2_vectors <- function(x, y, remove.na = TRUE) {
   sum(x, y, na.rm = remove.na)
 }
@@ -194,7 +194,7 @@ Let's have a look at concrete examples.
 
  First illustrate the  `sapply` function to square all the elements of a numeric vector.
 
-```{r, sapply-example-on-vector, exercise=T, exercise.lines=4}
+```{r, sapply-example-on-vector, exercise=TRUE, exercise.lines=4}
 set.seed(456)
 (v <- runif(5, 1, 5))
 # now iterate over the vector applying your operation to square each element
@@ -208,7 +208,7 @@ v <- runif(5, 1, 5)
 
 Now use the for-loop to achieve the same transformation.
 
-```{r, for-loop-example-on-vector, exercise=T, exercise.setup="sapplyVsForLoopComparisonSetup"}
+```{r, for-loop-example-on-vector, exercise=TRUE, exercise.setup="sapplyVsForLoopComparisonSetup"}
 square_vals <- rep(0, length(v))
 i = 1
 for (a in v) {
@@ -226,7 +226,7 @@ Notice the preallocation of space for the vector in the first line.
 
 In functional style this is done via sub-setting. In procedural style  a combination of a for-loop and the conditional-statements with if-else can achieve the same result. Let us have a look at the air fare to sun destinations at or below $1200, first using functional style.
 
-```{r, conditionally-removing-with-filter, exercise=T, exercise.lines=2}
+```{r, conditionally-removing-with-filter, exercise=TRUE, exercise.lines=2}
 air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
 (results <- air_fares[air_fares <= 1200])
 ```
@@ -237,7 +237,7 @@ air_fares <- c(Habana=1200, Cancun=1150, Los_cabos=960, Costa_Rica=1250)
 ```
 
 
-```{r, conditionally-removing-with-for-loop-and-if-statement, exercise=T, exercise.lines=9, exercise.setup="conditionallyRemovingWithForLoopAndIfStatementSetup"}
+```{r, conditionally-removing-with-for-loop-and-if-statement, exercise=TRUE, exercise.lines=9, exercise.setup="conditionallyRemovingWithForLoopAndIfStatementSetup"}
 results <- c()
 if (length(air_fares) > 0) {
   n <- length(air_fares)
@@ -268,7 +268,9 @@ Now you choose your style according to the task at hand. Practice will make you 
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
-  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  6. https://www.w3schools.in/r-programming
+  
+  <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
   
   Computing: 
   

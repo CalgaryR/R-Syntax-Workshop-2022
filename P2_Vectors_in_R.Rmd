@@ -168,7 +168,7 @@ is.vector(first_element)
 A vector can also have named elements. These may help future you or another reader of the code to understand the intended meaning of the data. These names can be assigned when creating the vector or later with the _unary_ function `names`. Here are examples for you to try.
 
 
-```{r examples-named-vectors, exercise=T, exercise.lines=10}
+```{r examples-named-vectors1, exercise=TRUE, exercise.lines=10}
 x <- c(5, -1, 10)
 temperature_labels = c("current_temp", "low_forecast", "high_forecast")
 # assign the names after creation of the vector
@@ -227,7 +227,7 @@ The binary operator `:` can be used with integer values as a short version of `s
 
 How about arithmetic operations? R applies the arithmetic operators element-wise by default. Have a look below.
 
-```{r multiplication-vectors-different-length-1, exercise=T, exercise.lines=4}
+```{r multiplication-vectors-different-length-1, exercise=TRUE, exercise.lines=4}
 # weekly consumption of ingredients at a bakery (in undisclosed  units)
 weekly_values <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
 # estimate the annual consumption given 52.18 weeks per year
@@ -239,7 +239,7 @@ weekly_values <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
 
 Two vectors are operated element-wise as well. The bakery needs to plan raw materials for a special-event week where more cakes than bread will be needed. The kitchen produces a multiplier vector to adjust the weekly estimates.
 
-```{r element-wise-vector-multiplication, exercise=T, exercise.lines=3, exercise.setup="setup-element-wise-vectors"}
+```{r element-wise-vector-multiplication, exercise=TRUE, exercise.lines=3, exercise.setup="setup-element-wise-vectors"}
 special_cake_contract_week <- c(1.2, 1.3, 1.2, 1)
 special_week <- weekly_values * special_cake_contract_week
 weekly_values == special_week
@@ -249,7 +249,7 @@ weekly_values == special_week
 
 Continuing on from the previous examples, what would happen if the multiplier vector provided by the kitchen had had only estimates for two materials and we had multiplied it by the weekly estimates?
 
-```{r multiplication-vectors-different-length-2, exercise=T, exercise.lines=2, exercise.setup="setup-element-wise-vectors"}
+```{r multiplication-vectors-different-length-2, exercise=TRUE, exercise.lines=2, exercise.setup="setup-element-wise-vectors"}
 weekly_values
 weekly_values * c(1.2, 1.3)
 ```
@@ -257,7 +257,7 @@ This was a multiplication of a vector of length 4 with another vector of length 
 
 In other words the previous operation is the equivalent of having multiplied `weekly_values` by `c(1.2, 1.3, 1.2, 1.3)`. Note that if the shorter vector is not an exact multiple of the longer one the elements get clipped to fit the length of the longer vector.
 
-```{r clipping-recycled-vector-to-fit, exercise=T, exercise.lines=3, warning=F, exercise.setup="setup-element-wise-vectors"}
+```{r clipping-recycled-vector-to-fit, exercise=TRUE, exercise.lines=3, warning=F, exercise.setup="setup-element-wise-vectors"}
 new_weekly_estimates <- weekly_values * c(1.2, 1.3, 1.1)
 # test if the recycled value was as expected
 new_weekly_estimates[4] == weekly_values[4] * 1.2
@@ -340,7 +340,7 @@ The following are ways of subsetting a vector by selecting elements according to
 
 Combining the binary operator `:` and the subsetting operator one can extract ranges of elements of a vector.
 
-```{r subsetting-a-vector, exercise=T, exercise.lines=3}
+```{r subsetting-a-vector, exercise=TRUE, exercise.lines=3}
 x <- c(5, -1, 3, 0, -4, 1)
 # subset the range of elements from the third to the fifth one
 x[3:5]
@@ -367,7 +367,7 @@ x[length(x)]
 
 You can subset the elements at specific locations using a vector of positions.
 
-```{r, subsetting-vectors-with-vectos-of-positions, exercise=T, exercise.lines=4, exercise.setup="setup-vector-to-subset-examples"}
+```{r, subsetting-vectors-with-vectos-of-positions, exercise=TRUE, exercise.lines=4, exercise.setup="setup-vector-to-subset-examples"}
 # create a vector of positions
 pos <- c(1, 5)
 # subset (filter)
@@ -378,7 +378,7 @@ Subsetting selected elements can be done depending not only of position but on t
 
 The first example is using logical masks to extract a subset of the vector. The logical mask can be created with the target vector and the logical operators applied to satisfy a condition like elements equal to or less than a given value. R is vectorized so the syntax is straight forward:
 
-```{r, subsetting-vectors-with-logical-masks, exercise=T, exercise.lines=10, exercise.setup="setup-vector-to-subset-examples"}
+```{r, subsetting-vectors-with-logical-masks, exercise=TRUE, exercise.lines=10, exercise.setup="setup-vector-to-subset-examples"}
 # create a vector of logical types
 mask = x > 2
 # subset (filter)
@@ -393,7 +393,7 @@ mask2 <- x == 0
 
 Another way of subsetting a vector by selecting values is using the `%in%` operator. It checks if any of the elements of the vector  is present in the sequence provided as second argument to `%in%`. An exercise will clarify its use:
 
-```{r, subsetting-by-value-with-in-operator, exercise=T, exercise.lines=7, exercise.setup="setup-vector-to-subset-examples"}
+```{r, subsetting-by-value-with-in-operator, exercise=TRUE, exercise.lines=7, exercise.setup="setup-vector-to-subset-examples"}
 x
 # create a logical mask
 include_these <- seq(-4,0)
@@ -405,14 +405,14 @@ sort(x[filter])
 
 The names of the elements can be used as values to create subsets. The exercise below will illustrate this use.
 
-```{r, subsetting-by-value-with-element-name, exercise=T, exercise.lines=2}
+```{r, subsetting-by-value-with-element-name, exercise=TRUE, exercise.lines=2}
 y <- c(fruit="pears, bananas, apples", vegetables="lettuce, carrots")
 y["vegetables"]
 ```
 
 Remember vector recycling? What if we used a logical mask that was shorter than the vector `x` from the previous exercise? `x` has 6 elements.
 
-```{r recycling-a-logical-mask, exercise=T, exercise.lines=2, exercise.setup="setup-vector-to-subset-examples"}
+```{r recycling-a-logical-mask, exercise=TRUE, exercise.lines=2, exercise.setup="setup-vector-to-subset-examples"}
 mask_short <- c(TRUE, FALSE, TRUE, FALSE)
 x[mask_short]
 ```
@@ -465,7 +465,7 @@ gt_mean_mornings <- morning > mean(morning)
 gt_mean_afternoons <- afternoon > mean(afternoon)
 ```
 
-```{r ampersand-on-vectors, exercise=T, exercise.setup="ampersandonvectorssetup", exercise.lines=1}
+```{r ampersand-on-vectors, exercise=TRUE, exercise.setup="ampersandonvectorssetup", exercise.lines=1}
 week_days[gt_mean_mornings | gt_mean_afternoons]
 ```
 
@@ -475,14 +475,14 @@ that answer complex questions without  using a single if-then-else operation.
 <!-- The double ampersand operator `&&` always returns a single value, thus when used on two vectors it returns the result of comparing only the first element of each of the two vectors. -->
 
 
-<!-- ```{r double-ampersand-on-vectors, exercise=T, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} -->
+<!-- ```{r double-ampersand-on-vectors, exercise=TRUE, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} -->
 <!-- gt_mean_mornings && gt_mean_afternoons -->
 <!-- ``` -->
 
 <!-- Similarly with the double pipe operator `||` or logical OR. -->
 
 
-<!-- ```{r double-pipe-on-vectors, exercise=T, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} -->
+<!-- ```{r double-pipe-on-vectors, exercise=TRUE, exercise.setup="double-ampersand-on-vectors-setup", exercise.lines=1} -->
 <!-- gt_mean_mornings || gt_mean_afternoons -->
 <!-- ``` -->
 
@@ -492,7 +492,7 @@ that answer complex questions without  using a single if-then-else operation.
 
 When a vector is created within another vector the result is a longer one.
 
-```{r concatenated-vectors, exercise=T}
+```{r concatenated-vectors, exercise=TRUE}
 y <- 1:3
 # try nesting y within a new vector and see what happens
 c(0, y, 4)
@@ -514,7 +514,7 @@ Vectors of type `"character"`, `"numeric"`, `"logical"`, `"complex"`, or `"raw"`
 You cannot make nested structures with vectors. Incidentally this property becomes your way of appending elements to either end of a vector as we just did to the vector `y` above. However using the function `append` does a cleaner job because it keeps the original attributes of the vector like names, if there were  any. Try it below.
 
 
-```{r appendToVectorWithNames, exercise=T}
+```{r appendToVectorWithNames, exercise=TRUE}
 y <- letters[1:5]
 names(y) <- c("c1","c2", "c3","c4","c5")
 y
@@ -525,7 +525,7 @@ y <- letters[1:5]
 names(y) <- c("c1","c2", "c3","c4","c5")
 ```
 
-```{r append-to-vector-with-names-extended, exercise=T, exercise.setup="appendToVectorWithNamessetup"}
+```{r append-to-vector-with-names-extended, exercise=TRUE, exercise.setup="appendToVectorWithNamessetup"}
 # now add the sixth letter of the ascii character set
 y_extended <- append(y, letters[6])
 # check the new vector, are the first five names preserved?
@@ -551,7 +551,7 @@ y <-  append(letters[24], y)
 
 Let's assign integers and a string of characters to a vector and check the result.
 
-```{r vector-coersion-example, exercise=T, exercise.lines=3}
+```{r vector-coersion-example, exercise=TRUE, exercise.lines=3}
 number_vec <- c(10, 25, 46, "four")
 number_vec
 typeof(number_vec)
@@ -598,7 +598,7 @@ There are cases when special logical values, called `NA` will be  introduced by 
 
 In R, `NA` is a logical vector of length 1, (the fact that is a vector although it looks like a single isolated element should not be a surprise to you anymore at this point).
 
-```{r, type-of-NAs, exercise=T, exercise.length=1}
+```{r, type-of-NAs, exercise=TRUE, exercise.length=1}
 typeof(NA)
 ```
 
@@ -639,7 +639,7 @@ sum(is.na(manipulated)) > 0
 
 A big obstacle introduced by `NA` is that further doing arithmetic on the vector can be compromised because all results will be `NA`.
 
-```{r, example-effect-of-NA-on-sum, exercise=T, exercise.lines=8}
+```{r, example-effect-of-NA-on-sum, exercise=TRUE, exercise.lines=8}
 set.seed(3679)
 v <- sample(1:100, 10)
 # add NA at random simulating some noisy data source
@@ -655,7 +655,7 @@ sum(v, na.rm = TRUE)
 
 Vectors can also be interrogated for their class and their attributes.
 
-```{r vectors-class, exercise=T, exercise.lines=10}
+```{r vectors-class, exercise=TRUE, exercise.lines=10}
 # a vector of four truth values
 v <- c(T, T, F, T)
 # the same as typeof for this object
@@ -835,7 +835,7 @@ How would one obtain the last two names for any length of 'v'?",
 
 These are vectors used to model categorical variables that are better described by their discrete values. This is an example of a vector whose attribute `class` has been redefined to alter its behaviour. For example the vector of musical genres for a sample of music titles from a play list may be described by:
 
-```{r music-sample-genres, exercise=T, exercise.lines=5}
+```{r music-sample-genres, exercise=TRUE, exercise.lines=5}
 # The genres on an eclectic play list
 genre_sample <- c(rep("Indie", times = 5),
                 rep("Electronic", times = 9),
@@ -856,13 +856,13 @@ genre_sample <- c(rep("Indie", times = 5),
                 rep("Country", times = 27))
 ```
 
-```{r, music-sample-genres-as-factors, exercise=T, exercise.lines=2, exercise.setup="setup-music-sample-genres"}
+```{r, music-sample-genres-as-factors, exercise=TRUE, exercise.lines=2, exercise.setup="setup-music-sample-genres"}
 music_genres <- factor(genre_sample)
 attributes(music_genres)
 ```
 What if we get a recommendation to listen to a new genre but we have not actually listened to any song belonging to that category, this can be expressed with factors by adding a new character string to the vector of levels  without adding any element to the factor class.
 
-```{r, music-sample-adding_new-level, exercise=T, exercise.lines=4, exercise.setup="setup-music-sample-genres"}
+```{r, music-sample-adding_new-level, exercise=TRUE, exercise.lines=4, exercise.setup="setup-music-sample-genres"}
 # add a new musical genre (a new level of the categorical variable)
 music_genres <- factor(genre_sample)
 levels(music_genres) <- c(levels(music_genres), "Classical")
@@ -871,7 +871,7 @@ table(music_genres)
 
 When we start listening to songs of that new genre they will get reckoned appropriately. In R adding a new element to a factor has to be done on the original vector because factors <span style="color:red">cannot be combined or concatenated</span>.
 
-```{r, music-sample-genres-levels, exercise=T, exercise.lines=4, exercise.setup="setup-music-sample-genres"}
+```{r, music-sample-genres-levels, exercise=TRUE, exercise.lines=4, exercise.setup="setup-music-sample-genres"}
 # add new entries
 music_genres_2 <- factor(c(genre_sample, c("Classical", "Indie", "Indie", "Indie")))
 table(music_genres_2)
@@ -936,6 +936,7 @@ quiz(
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
+  6. https://www.w3schools.in/r-programming
   <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
   
   Computing: 

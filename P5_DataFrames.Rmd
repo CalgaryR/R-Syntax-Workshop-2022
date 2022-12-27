@@ -96,7 +96,7 @@ knitr::include_graphics("images/dataframe1.png")
 
 Let's create this data frame using code using the constructor function `data.frame`.
 
-```{r, data-frame-constructor, exercise=T, exercise.lines=6}
+```{r, data-frame-constructor, exercise=TRUE, exercise.lines=6}
 # for better documentation name the vectors
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
@@ -126,7 +126,7 @@ census2019 <- c(T,T,T,T,F,T)
 df <- data.frame(country, population, census2019)
 ```
 
-```{r slice-n-dice-df, exercise=T, exercise.setup="sliceAndDiceDfSetup", exercise.lines=9}
+```{r slice-n-dice-df, exercise=TRUE, exercise.setup="sliceAndDiceDfSetup", exercise.lines=9}
 # using the $ operator like in a named list
 df$country
 df$"country"
@@ -148,13 +148,13 @@ census2019 <- c(T,T,T,T,F,T)
 df <- data.frame(country, population, census2019)
 ```
 
-```{r subset-df-by-row, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=2}
+```{r subset-df-by-row, exercise=TRUE, exercise.setup="subsetDfByRowSetup", exercise.lines=2}
 df[df$country == "Canada",]
 ```
 
 We can extract the countries with population greater than 80 million.
 
-```{r subset-df-by-multiple-rows, exercise=T, exercise.setup="subsetDfByRowSetup", exercise.lines=6}
+```{r subset-df-by-multiple-rows, exercise=TRUE, exercise.setup="subsetDfByRowSetup", exercise.lines=6}
 # extract only the names of the counties  in the rows filtered
 df[df$population > 80, 'country']
 # display all the columns for the rows filtered
@@ -173,7 +173,7 @@ And here is a step by step description:
 
   1. Build the mask using a logical operator expressing a condition over one of the columns of the data frame.
 
-```{r explain-logical-mask-1, exercise=T, exercise.lines=1, exercise.setup="subsetDfByRowSetup"}
+```{r explain-logical-mask-1, exercise=TRUE, exercise.lines=1, exercise.setup="subsetDfByRowSetup"}
 (row_filter <- df$population > 80)
 ```
   2. Subset the data frame by rows using this logical mask. A `TRUE` at a given position on the mask  will let the value at that position on each row of the data frame pass _as is_. Conversely, a `FALSE` will eliminate it so it does not appear on the result.
@@ -187,7 +187,7 @@ row_filter <- df$population > 80
 ```
 
 
-```{r explain-logical-mask-2, exercise=T, exercise.lines=2, exercise.setup="explainLogicalMaskSetup"}
+```{r explain-logical-mask-2, exercise=TRUE, exercise.lines=2, exercise.setup="explainLogicalMaskSetup"}
 # apply the same filter to every column of the data frame by
 (result <- df[row_filter,])
 ```
@@ -203,7 +203,7 @@ result <- df[filter,]
 ```
 
 
-```{r explain-logical-mask-3, exercise=T, exercise.lines=2, exercise.setup="explainLogicalMask3Setup"}
+```{r explain-logical-mask-3, exercise=TRUE, exercise.lines=2, exercise.setup="explainLogicalMask3Setup"}
 # apply the filter to all the vectors of the data frame
 result[c("country", "population")]
 ```
@@ -233,7 +233,7 @@ J_and_J <- data.frame( matrix(JohnsonJohnson,
                               dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4"))))
 ```
 
-```{r, explore_J_and_J_data, exercise=T}
+```{r, explore_J_and_J_data, exercise=TRUE}
 class(JohnsonJohnson)
 # "ts" is a time series object, do ?ts at the R command prompt
 # turn it into a matrix with 4 columns, then turn it into a data frame
@@ -245,7 +245,7 @@ Now the matrix can be turned into a data frame. We could have also kept the matr
 When we construct the new data frame we can assign names to each column and row labels as each year of company financial results. Please note how we are using list and vector constructors to supply 
 the names  for the two dimensions of the data frame. remember the `:` operator we learned as a shortcut for the `seq()` function in the section creating vectors with patterns?
 
-```{R, constructAProperDataFrame, exercise=T}
+```{R, constructAProperDataFrame, exercise=TRUE}
 (J_and_J <- data.frame( matrix(JohnsonJohnson, 
                               ncol=4, 
                               dimnames = list( 1960:1980, c("Qtr1", "Qtr2", "Qtr3", "Qtr4")))))
@@ -257,7 +257,7 @@ with the name `Annual`. Does the new column fulfill the requirements of a data f
 Remember: the columns of a data frame are vectors that may be of different types each but all of them have to be of the same length.
 
 
-```{r, addColumnToDataFrame, exercise=T, exercise.setup="JAndJDataSetup"}
+```{r, addColumnToDataFrame, exercise=TRUE, exercise.setup="JAndJDataSetup"}
 # add a new column with the annual earnings
 (J_and_J <- cbind(J_and_J, Annual=rowSums(J_and_J)))
 ```
@@ -276,7 +276,7 @@ nature and dollar syntax to select the desired columns from the data frame. This
 code would have looked slightly different had we decided to work with the matrix instead
 of a data frame, however the results would have been equivalent.
 
-```{r, buildAMaskForJAndJDataFrame, exercise=T, exercise.setup="JAndJDataSetupWithTotals"}
+```{r, buildAMaskForJAndJDataFrame, exercise=TRUE, exercise.setup="JAndJDataSetupWithTotals"}
 # create a vector with the 4th quarter earnings as a percentage of the annual earnings 
 (Qtr4_percent <- 
     J_and_J$Qtr4 / J_and_J$Annual * 100)
@@ -287,7 +287,7 @@ of a data frame, however the results would have been equivalent.
 At this point all the components are available to apply the builtin function `subset` to
 answer the main question.
 
-```{r, finalSubsetJAndJDataFrame, exercise=T, exercise.setup="JAndJDataSetupWithTotals"}
+```{r, finalSubsetJAndJDataFrame, exercise=TRUE, exercise.setup="JAndJDataSetupWithTotals"}
 subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c(4,5)) 
 ```
 
@@ -303,7 +303,7 @@ A very common operation on data frames is to aggregate the values in one or more
 First create a data frame with some results from a fictional experiment that was done by triplicate.
 Notice a convenient use or R's vector recycling property to make the code expressive.
 
-```{r, aggregating-examples, exercise=T, exercise.lines=7}
+```{r, aggregating-examples, exercise=TRUE, exercise.lines=7}
 set.seed(5529)
 treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
 results <- round(runif(6), digits = 2)
@@ -325,7 +325,7 @@ experiments <- data.frame(treatment=treatment,
                  passes=passes.GT.0.7)
 ```
 
-```{r, aggregation-example-adding, exercise=T, exercise.lines=12, exercise.setup="aggregationExamplesSetup"}
+```{r, aggregation-example-adding, exercise=TRUE, exercise.lines=12, exercise.setup="aggregationExamplesSetup"}
 # first calculate the mean of val_1 by treatment
 (val_1_by_treatment <- aggregate(x = experiments$val_1,
                                  by = list(experiments$treatment), 
@@ -349,7 +349,7 @@ When you construct a data frame from vectors the type of each vector will be int
 
 You can give R hints, though, for instance you can tell it to interpret the strings in vectors as factors or not, base R will do so by default.
 
-```{r example-data-frame-strings-as-factors, exercise=T, exercise.lines=7}
+```{r example-data-frame-strings-as-factors, exercise=TRUE, exercise.lines=7}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
 population <- c(37, 331, 67, 83, 60, 39)
 # strings as factors is the default
@@ -366,7 +366,7 @@ population <- c(37, 331, 67, 83, 60, 39)
 ```
 
 
-```{r example-data-frame-strings-as-is, exercise=T, exercise.lines=2, exercise.setup="exampleDataFrameStringsAsIsSetup"}
+```{r example-data-frame-strings-as-is, exercise=TRUE, exercise.lines=2, exercise.setup="exampleDataFrameStringsAsIsSetup"}
 country_stats <- data.frame( country, population, stringsAsFactors = FALSE)
 str(country_stats)
 ```
@@ -388,7 +388,7 @@ experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3),
 experiments$results[c(3,5,8)] <- c(NA, NaN, Inf) 
 ```
 
-```{r, createDataFrameWithNAsInfsAndNaNs, exercise=T}
+```{r, createDataFrameWithNAsInfsAndNaNs, exercise=TRUE}
 set.seed(7777)
 experiments <- data.frame(experiment=rep(LETTERS[1:3], each=3), 
                   run=rep(1:3,3), 
@@ -399,7 +399,7 @@ experiments
 ```
 
 
-```{r, detect-NAs-in-a-data-frame, exercise=T, exercise.setup="createDataFrameWithNAsInfsAndNaNsSetup"}
+```{r, detect-NAs-in-a-data-frame, exercise=TRUE, exercise.setup="createDataFrameWithNAsInfsAndNaNsSetup"}
 # find if there are any missing values
 any(is.na(experiments$results) | is.infinite(experiments$results))
 # Find what observations are missing values. 
@@ -502,7 +502,9 @@ The 'runif' functions computes n random values from a uniformly distributed vari
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
-  6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations)
+  6. https://www.w3schools.in/r-programming
+  
+  <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
   
   Computing: 
   
