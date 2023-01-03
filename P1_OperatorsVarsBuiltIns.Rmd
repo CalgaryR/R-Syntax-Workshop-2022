@@ -315,9 +315,10 @@ quiz(
     allow_retry = TRUE
   ),
   question_checkbox(
-    " !(5 > 2) == (5 < 2)
+    "Select all that apply.
     
-    Select all that apply.",
+    !(5 > 2) == (5 < 2)
+",
     answer("Evaluates to TRUE", correct = TRUE),
     answer("Evaluates to TRUE because == has higher precendence that all other operators in the expression", correct = FALSE),
     answer("Evaluates to FALSE", correct = FALSE),
@@ -328,9 +329,10 @@ quiz(
     correct = "Well done, you have achieved a good understanding of relational and logical operators.",
     incorrect = "Not all true answers selected or maybe you have chosen good and bad answers."
   ),
-  question("What is the result of executing
+  question("What is the result of executing the following expression?
            
-           10 - 6 / 2 ?",
+           10 - 6 / 2
+",
     answer("2", message = "division has precedence over subtraction"),
     answer("7", correct = TRUE, message = "division has higher precedence than subtraction"),
     answer("8", message = "Good try, redo the calculation"),
@@ -403,12 +405,12 @@ quiz(
 
 In R the name used to label a variable is an object itself [@RLangDef.objects], in fact everything is an object in R and in this tutorial we will refer to objects and variables interchangeably.
 
-Variables have a type and a mode. To find out the type and the mode of R variables one needs to use built-in functions `typeof()` and `mode()`. Let's then go into the subject in the next section.
+Variables have types in R. The built-in function `typeof()` can be used to get the type of any object. Let's explore types in the next section.
 
 
 ## Finding the type of a variable
 
-When it comes to how R stores values, let's observe the type and mode of variables.
+By observing the type that R associates with some values we can start to appreciate how R works internally.
 
 ```{r type-of-variables, exercise=TRUE, exercise.lines=8}
 i <- 54
@@ -421,27 +423,13 @@ first_name <- "Rob"
 typeof(first_name)
 ```
 
-R stores variables using other, related, categories. These can be queried via the `mode` function:
-
-```{r mode-of-variables, exercise=TRUE, exercise.lines=8}
-i <- 54
-mode(i)
-j <- 54L
-mode(j)
-x <- 3.1416
-mode(x)
-first_name <- "Rob"
-mode(first_name)
-```
-
-Let's investigate the type and mode of the R function `mode` itself.
+Let's investigate the type of the R function `type` itself.
 
 ```{r mode-of-mode, exercise=TRUE, exercise.lines=2}
-typeof(mode)
-mode(mode)
+typeof(typeof)
 ```
 
-In computer language _lingo_ a closure is a function and an environment to evaluate it, let's leave it at that for now. R is a unique language in more ways than one, let's move on with more basic concepts.
+In computer language _lingo_ a closure is a function and the environment to evaluate it, let's leave it at that for now. R is a unique language in more ways than one, let's move on with more basic concepts.
 
 
 ## Built-in functions
@@ -452,7 +440,7 @@ R offers predefined functions. When you use an R package you also use functions 
 
 ## Assignment from built-ins 
 
-Some expressions may be made up of a function with its arguments and the assignment operator to store the returned value from the function in a new variable. Let's look at the result of running the following lines:
+Expressions can be made by assigning the value returned from a function to a variable. Let's look at the result of running the following lines:
 
 ```{r executing-function, exercise.lines=4, exercise=TRUE}
 # assign the result of the function call to the variable 'e'
@@ -590,7 +578,7 @@ if (exists("base")) {
 
 In the call to the function `log`, the first argument is positional, taking exactly the position number one. The second argument is named and may receive a value via the `=` operator for assignment from right to left.
 
-If the function is called without a second argument, and if `base` is required for computation inside the function, the assignment operator will use the value resulting from evaluating the expression `exp(1)` and associate it with `base` because that is how the built-in is defined. This is  how a default value for a named argument can be given. 
+If the function is called without a second argument, and if `base` is required for computation inside the function, the assignment operator will use the value resulting from evaluating the expression `exp(1)` and associate it with `base` because that is how the built-in function is defined. This is how a default value is defined for a named argument. 
 
 If the user prefers to pass a different value from the default then the named argument can be given as in `log(10, base = 10)` or just  `log(10, 10)`. 
 
@@ -606,11 +594,12 @@ Now compare the flexibility of using the explicit name assignment.
 ```{r named-param-3, exercise = TRUE}
 # the first argument is now a named argument so the second gets position one instead
 log(base = 10, 1000)
-# in absence of hints x = 10 (position one) and base = 1000 (named)
+# in absence of hints, x = 10 (position one) and base = 1000 (named)
 log(10, 1000)
 ```
 
-Some reference material can be found on-line at [@DataCarpentry.org-Funcs-and-Args].
+Check out the excellent, free material on this at [@DataCarpentry.org-Funcs-and-Args] (see the References section for an URL).
+
 
 ## More on variable assignment
 
@@ -621,7 +610,7 @@ We could use the `<-` operator for the named argument, the expression `log(x, ba
 ```{r named-param-4, exercise = TRUE}
 base = 100
 log(1000, base = 10)
-# Does 'base' exist in the global environment after log gest evaluated?
+# What value does 'base' have in the global environment after log gest evaluated?
 base
 ```
 
@@ -644,7 +633,7 @@ log(base <- 10, 1000)
 log(base = 10, 1000)
 ```
 
-Did you get the same result of using `log(base = 10, 1000)`? That is almost true, the difference is that now there is a variable assignment represented by the pair `(base, 10)` that outlives the call to `log`.
+Why `log(base <- 10, 1000)` does not do the named argument assignment as when using `base=10`? The difference is that `base <- 10` creates a pair `(base, 10)` in the global environment but does not create a local variable `base`, it only passes the value of `10` in position 1.
 
 In summary, to avoid ambiguities and unplanned side effects, when assigning values to variables use `<-` for stand-alone expressions and `=` for function named parameters. On the next section there are a few exercises to solidify these concepts.
 
