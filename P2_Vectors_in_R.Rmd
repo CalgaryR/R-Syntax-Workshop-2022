@@ -170,12 +170,13 @@ A vector can also have named elements. These may help future you or another read
 
 ```{r examples-named-vectors1, exercise=TRUE, exercise.lines=10}
 x <- c(5, -1, 10)
-temperature_labels = c("current_temp", "low_forecast", "high_forecast")
+temperature_labels = c("current_temp", "forecast_low", "forecast_high")
 # assign the names after creation of the vector
 names(x) <- temperature_labels
 # assign names while creating the vector
-y <- c(current_temp = 5, low_forecast = -1, high_forecast = 10)
+y <- c(current_temp = 5, forecast_low = -1, forecast_high = 10)
 # now print out the x and y vectors, do you see any differences?
+
 
 ```
 
@@ -200,6 +201,9 @@ rep(seq(1:9), each = 2)
 seq(0,5, length=5) # can you make this vector of type "integer"?
 ```
 
+```{r rep-seq-mix-hint, echo=TRUE}
+seq(0,5,length=6)
+```
 
 As you may remember from a previous module of this tutorial series, either `FALSE`, `F`, or `0` mean the same. Similarly `TRUE`, `T`, or `1` are synonymous. They are also called the boolean data type and can only have two values, each defined as the negation of the other. You can add logical values as if they were zeros and ones. This is useful to count the number of positive or TRUE values in a vector:
 
@@ -220,7 +224,7 @@ The binary operator `:` can be used with integer values as a short version of `s
 1:50
 ```
 
-*Note:* the execution of the previous expression creates a vector of doubles from 1 to 50. At this point in our tutorial, with the output of this vector spreading over more than one line on the console, we can interpret the meaning of the numbers in square brackets on the left of the output. They indicate the position within the vector of the first value presented in that line of the output. Therefore the second line of output begins with the 23rd element of the vector, which happens to be the number 23 in the sequence.
+*Note:* the execution of the previous expression creates a vector of doubles from 1 to 50. At this point in our tutorial, with the output of this vector spreading over more than one line on the console, we can interpret the meaning of the numbers in square brackets on the left of the output. They indicate the position within the vector of the first value presented in that line of the output. Therefore the second line of output begins with the 26th element of the vector, which happens to be the number 26 in the sequence.
 
 
 ## More operations on vectors
@@ -230,14 +234,14 @@ How about arithmetic operations? R applies the arithmetic operators element-wise
 ```{r multiplication-vectors-different-length-1, exercise=TRUE, exercise.lines=4}
 # weekly consumption of ingredients at a bakery (in undisclosed  units)
 weekly_values <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
-# estimate the annual consumption given 52.18 weeks per year
-weekly_values * 52.18
+# estimate the annual consumption of each material given 52.18 weeks per year
+weekly_values * rep(52.18, 4)
 ```
 ```{r setup-element-wise-vectors}
 weekly_values <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
 ```
 
-Two vectors are operated element-wise as well. The bakery needs to plan raw materials for a special-event week where more cakes than bread will be needed. The kitchen produces a multiplier vector to adjust the weekly estimates.
+The multiplication operator was applied element-wise as expected. Now the bakery needs to plan raw materials for a special-event week where more cakes than bread will be made. The kitchen produces a multiplier vector to adjust the weekly estimates.
 
 ```{r element-wise-vector-multiplication, exercise=TRUE, exercise.lines=3, exercise.setup="setup-element-wise-vectors"}
 special_cake_contract_week <- c(1.2, 1.3, 1.2, 1)
@@ -374,7 +378,7 @@ pos <- c(1, 5)
 x[pos]
 ```
 
-Subsetting selected elements can be done depending not only of position but on the values of the elements at any position in the vector. This is appropriately called  subsetting by **value**.
+Sub-setting selected elements can be done depending not only of position but also on the values of the elements at any position in the vector. This is appropriately called  sub-setting by **value**.
 
 The first example is using logical masks to extract a subset of the vector. The logical mask can be created with the target vector and the logical operators applied to satisfy a condition like elements equal to or less than a given value. R is vectorized so the syntax is straight forward:
 
@@ -391,7 +395,7 @@ mask2 <- x == 0
  sum(mask2)
 ```
 
-Another way of subsetting a vector by selecting values is using the `%in%` operator. It checks if any of the elements of the vector  is present in the sequence provided as second argument to `%in%`. An exercise will clarify its use:
+Another way of sub-setting a vector by selecting values is using the `%in%` operator. It checks if any of the elements of the vector  is present in the sequence provided as second argument to `%in%`. An exercise will clarify its use:
 
 ```{r, subsetting-by-value-with-in-operator, exercise=TRUE, exercise.lines=7, exercise.setup="setup-vector-to-subset-examples"}
 x
@@ -412,7 +416,7 @@ y["vegetables"]
 
 Remember vector recycling? What if we used a logical mask that was shorter than the vector `x` from the previous exercise? `x` has 6 elements.
 
-```{r recycling-a-logical-mask, exercise=TRUE, exercise.lines=2, exercise.setup="setup-vector-to-subset-examples"}
+```{r recycling-a-logical-mask, exercise=TRUE, exercise.lines=3, exercise.setup="setup-vector-to-subset-examples"}
 mask_short <- c(TRUE, FALSE, TRUE, FALSE)
 x[mask_short]
 ```
@@ -444,7 +448,7 @@ R is a vectorized language so operators work natively on vector objects.
 Let's find out on what days we got both morning and afternoon results below or above their weekly mean:
 
 
-```{r equal-operator-on-vectors, exercise=TRUE, exercise.setup="equalonvectorssetup", exercise.lines=7}
+```{r equal-operator-on-vectors, exercise=TRUE, exercise.setup="equalonvectorssetup", exercise.lines=9}
 week_days <- c("Mon", "Tue", "Wed", "Thu", "Fri")
 print(paste0("morning   mean = ", format(mean(morning), nsmall = 2)))
 print(paste0("afternoon mean = ", format(mean(afternoon), nsmall = 2)))

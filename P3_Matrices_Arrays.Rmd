@@ -58,7 +58,7 @@ Let's get started.
 Matrices are the two-dimensional extensions of vectors. They must store elements of the same type, so coercion rules will apply if they do not meet this requirement.
 
 
-### An exampl
+### An example
 
 A matrix of six integer values would be represented graphically as:
 
@@ -177,6 +177,7 @@ Append a new column to the matrix at different positions.
 
 
 ```{r add-column-to-matrix, exercise=TRUE, exercise.setup="matrix-m"}
+m
 print("append a column with the number 6 to matrix 'm' from the previous exercise")
 cbind(m, rep(6, 2))
 print("append the new column at the beginning instead")
