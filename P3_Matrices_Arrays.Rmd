@@ -4,7 +4,7 @@ pagetitle: "Part 3: Matrices Arrays"
 output:
   learnr::tutorial:
     theme: spacelab
-    ace_theme: cobalt
+    ace_theme: dawn
     progressive: true
     allow_skip: true
     highlight: pygments
@@ -40,10 +40,10 @@ This introductory tutorial about the base R syntax can be used as a presentation
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
 
-Dr. Amelia McNamara describes three types of R Syntax [@RSyntax-Cheatsheet]: the dollar sign, the formula, and the Tidyverse. These syntax are interchangeable, the important thing is to be consistent when using them. The formula syntax tends to be more compact but less readable while the Tidyverse syntax is more readable but also more verbose. We will initially focus on the dollar sign syntax.
-Later we introduce the formula syntax and finally the tidyverse syntax.
+Several sources describe the three types of R Syntax [@RSyntax-Cheatsheet], [@RSyntaxComparison-Cheatsheet]: the dollar sign, the formula, and the Tidyverse. These syntaxes are interchangeable, the important thing is to be consistent when using them. The formula syntax tends to be more compact but less readable while the Tidyverse syntax is more readable but also more verbose. We will focus on the dollar syntax.
+<!-- Later we introduce the formula syntax and finally the tidyverse syntax. -->
 
-This tutorial was built entirely in R using a package called `learnr`. It was compiled to an html document using Rmarkdown syntax and the `Knitr` package. If you receive the source code and have RStudio, you can render it as a fully interactive web page. Using an Rstudio solution it can also be deployed on a ShinyR server. You can also do these things and much more if you move forward in your R journey.
+This tutorial was built entirely in R using a package called `learnr`. It was compiled to an html document using Rmarkdown syntax and the `Knitr` package. If you receive the source code and have RStudio, you can render it as a fully interactive web page. Using an Rstudio (Posit) solution it can also be deployed on a ShinyR server. You can also do these things and much more if you move forward in your R journey.
 
 Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it. If you want to reset your answers and the code  you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel. 
 
@@ -508,7 +508,6 @@ Is this a suitable selection for your data?",
   3. https://datacarpentry.org/R-ecology-lesson/01-intro-to-r.html [@TheCarpentries.org.home]
   4. https://cran.r-project.org/doc/manuals/r-release/R-intro.html (Introduction)
   5. https://www.burns-stat.com/pages/Tutor/R_inferno.pdf [@TheRInferno] (no sugar coating)
-  
   6. https://www.w3schools.in/r-programming
   <!-- 6. http://courtneybrown.com/YouTube/R_Tutorial_Videos.html (time-proven simple explanations) -->
 
