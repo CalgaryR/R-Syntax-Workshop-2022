@@ -602,9 +602,25 @@ There are cases when special logical values, called `NA` will be  introduced by 
 
 In R, `NA` is a logical vector of length 1, (the fact that is a vector although it looks like a single isolated element should not be a surprise to you anymore at this point).
 
-```{r, type-of-NAs, exercise=TRUE, exercise.length=1}
-typeof(NA)
+```{r type-of-NAs, exercise=TRUE, exercise.lines=5}
+typeof(NA) # general type of missing value, coerced to this automatically
+# created automatically when needed (more specific)
+typeof(NA_integer_) 
+typeof(NA_real_)
+typeof(NA_character_)
 ```
+
+Some missing values are introduced by R code, for example trying to execute an illegal mathematical operation.
+
+
+```{r type-of-NaNs, exercise=TRUE, exercise.lines=4}
+35/0
+typeof(Inf) # for example what you get when dividing any number by zero
+log(-10)
+typeof(NaN)
+```
+
+
 
 Here are two important cases where `NA`s can be introduced and that you need to be aware of to use R effectively:
 
@@ -631,7 +647,7 @@ is.na(numbers_expected)
 sum(is.na(numbers_expected)) > 0
 ```
 
-The other common case for `NA` creation happens when subsetting by a position that is out of the range of positions in the vector.
+The other common case for `NA` creation happens when sub-setting by a position that is out of the range of positions in the vector.
 
 ```{r, examples-introducing-NAs-position-out-of-range, exercise=TRUE, exercise.lines=5}
 control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_length")
@@ -641,7 +657,8 @@ control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_
 sum(is.na(manipulated)) > 0
 ```
 
-A big obstacle introduced by `NA` is that further doing arithmetic on the vector can be compromised because all results will be `NA`.
+A big obstacle introduced by `NA` is that further doing arithmetic on the vector can be compromised because all results will be `NA`. 
+R _**propagates**_ missing values by default when doing computation with your data.
 
 ```{r, example-effect-of-NA-on-sum, exercise=TRUE, exercise.lines=8}
 set.seed(3679)
@@ -653,6 +670,8 @@ sum(v)
 # the argument TRUE for the parameter 'na.rm' allows the function to ignore missing values
 sum(v, na.rm = TRUE)
 ```
+
+An old but still very handy blog on NA treatment in R is [@NAsHandlingBlogByBruin]. 
 
 
 ## Vector attributes
@@ -895,12 +914,12 @@ quiz(
   What expression(s) produce this output? (Select all that apply)",
     answer("table(factor(c(rep(T, 456), rep(F,38))))", correct = TRUE),
     answer("table(factor(c(\"TRUE\"=456, \"FALSE\"=38)))", correct = FALSE),
-    answer("table(c(rep(T, 456), rep(F,38)))", correct = FALSE),
+    answer("table(c(rep(T, 456), rep(F,38)))", correct = TRUE),
     answer("c(\"FALSE\"=38, \"TRUE\"=456)", correct = TRUE),
     answer("table(factor(c(rep(F, 456), rep(T,38))))", correct = FALSE),
     allow_retry = TRUE,
     random_answer_order = TRUE,
-    correct = "The two right answers look very alike, I will give you that!",
+    correct = "The three right answers look very alike, I will give you that!",
     incorrect = "Check again, either you are missing correct answers or made one or more wrong selections."
   ),
     question_checkbox(
