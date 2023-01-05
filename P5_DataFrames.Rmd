@@ -27,11 +27,12 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <!-- ======================== -->
 
-The main goal of this tutorial is to teach patterns of the R language basic syntax. We believe that this knowledge will set you on a positive trajectory at any point in your R language journey. 
-R has specific properties that set it apart from other languages and can make it easier to learn for a beginner. 
-However, those same differences can make it confusing at first for people with experience.
 
-In particular you will be able to leverage your knowledge of lists and vectors to create and manipulate data frames for powerful data analysis.
+By the end of this tutorial, you will know how to build a data frame, how to subset it, create new columns and rows applying operators on existing ones, and how to handle missing values (NAs). 
+Transforming a data frame is the basis for powerful data analysis that will be illustrated with a brief example. 
+
+The data frame is a native data structure to R, so the syntax is very similar if not identical to the one used for vectors, matrices, and lists, making R code consistent and expressive.
+Missing value types are also native to R so their occurrence can be an accurate representation of their origin and potential meaning.
 
 
 <!-- ======================== -->
@@ -69,7 +70,7 @@ Let's get started.
 
 ## Data frames
 
-If you have followed the data structure section then this section should be relatively easy. Like a list, data frames store information of heterogeneous type, however there are some rules:
+If you have followed the Part 4 Lists, of this tutorial, then this section should be relatively easy. Like a list, data frames store information of heterogeneous type, however there are some rules:
 
   - Two dimensional only, like a table.
   - Any number of rows or columns
@@ -82,7 +83,7 @@ Data frames are similar to tables of a sophisticated relational data base, where
 
 ## Why is a data frame different?
 
-Under the hood a data frame is implemented as a list of vectors of the same length. The algorithms to search and select items in data frames can be optimized because its two more prominent features: table-like geometry and vector columns of equal length. The elements of a vectors are stored in contiguous memory of constant size and this gives the data frame some advantages. They are natively implemented so the `$` and `[` syntax we have already covered can be safely reused for data frames.
+Under the hood a data frame is implemented as a list of vectors of the same length. The algorithms to search and select items in data frames can be optimized because its two more prominent features: table-like geometry and vector columns of equal length. The elements of a vector are stored in contiguous memory of constant size and this gives the data frame some advantages. They are natively implemented so the `$` and `[` syntax we have already covered can be safely reused for data frames.
 
 
 ## Constructing a data frame
@@ -370,7 +371,7 @@ str(country_stats)
 
 ## NAs in a data frame
 
-Because each row on a data frame is associated with an experimental observation of some sort, sometimes an observation may genuinely have missing entries for some of the variables that were simply not measured or are not available in the data set. The function `is.na()` can be used on the whole data frame to return a data frame of logical vectors with `TRUE`  if an `NA` exists at that position or `FALSE` otherwise. The function `complete.cases()` identifies the observations with missing values. 
+Because each row on a data frame is associated with an experimental observation of some sort, sometimes an observation may genuinely have missing entries for some of the variables that were simply not measured or are not available in the data set. The function `is.na()` can be used on the whole data frame to return a data frame of logical vectors with `TRUE`  if an `NA` exists at that position or `FALSE` otherwise. The function `complete.cases()` identifies the observations without missing values. 
 
 Some mathematical operations may create values that are not amenable to be further processed, for example dividing 0/0 or any number by 0, in the first case the result is `NaN` and in the second `Inf`. 
 

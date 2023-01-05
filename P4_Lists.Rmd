@@ -125,11 +125,14 @@ my_list[[1]]
 ```
 
 The list class is kind of a super set of the vector class, thus R's coercion philosophy will be to coerce vectors into lists whenever confronted with the dilemma.
-In the following case, attempting to create a vector given a list and a vector, first coerces the vector into a list (a list is a more general concept than a vector) and then merges the two lists into a single one.
+In the following case, attempting to create a vector given a list and a vector, first coerces the vector into a list (a list is a more general concept than a vector) and then merges the two lists into a single one. The net effect is flattening the list.
 
-```{r, coercion-of-vector-to-list, exercise=TRUE, exercise.lines=2}
+```{r, coercion-of-vector-to-list, exercise=TRUE, exercise.lines=5}
 new_object <- c(list(1,"a"), c(0,2,4))
-new_object
+list(1,"a")
+c(0,2,4)
+new_object # is a flat list
+c(c(1,"a"), c(0,2,4)) # for comparison with a flat vector
 ```
 
 In general, passing two or more lists as arguments to `c()` merges them all into a single list.
@@ -140,10 +143,11 @@ In general, passing two or more lists as arguments to `c()` merges them all into
 
 <!-- =========================== -->
 
-In order to append a new element to an existing list the `c()` operator works well.
-The caveat is to use the `list()` constructor around the new element.
+Appending a new element to a list can be done in two ways: creating a new longer list or increasing the length of the existing one, in place.   
+
+The former option uses the vector constructor `c()`, passing the new element wrapped by the list constructor, `list()`.
 This is useful to prevent the flattening of a vector into individual list elements when appended.
-It creates a new object leaving the original list unchanged.
+This creates a new list leaving the original one unchanged.
 
 ```{r, new-element-appending-in-new-list, exercise=TRUE, exercise.lines=9, exercise.setup="subsettingListsSingleBracketSetup"}
 print(paste("length of original list =",length(my_list)))
@@ -157,8 +161,9 @@ print(paste("length of new list =",length(new_list)))
 new_list[[length(new_list)]]
 ```
 
-The `[[]]` operator allows insertion of new elements of any type into a list, that means no coercion will be used.
-This is the similar functionality of the operator `[]` for vectors.
+The second method for appending to a list uses the `[[]]` operator.
+It allows insertion of new elements of any type into a list, that means no coercion will be used.
+Operator `[[]]` works for lists the same way as operator `[]` for vectors.
 
 ```{r, new-element-of-list-appending-in-place, exercise=TRUE, exercise.lines=7, exercise.setup="subsettingListsSingleBracketSetup"}
 print(paste("length of original list =",length(my_list)))
@@ -314,8 +319,8 @@ quiz(
   question_radio("Is a  vector more general a concept than a list in R?
 
   Tip: Think about the kind of data types each can store and conclude which one could be a subset of the other? Subset is more specific a concept, by contrast, the superset is a more general one.",
-    answer("Yes", correct = FALSE, message = "A vector is more specific because it stores homogeneous types while a list stores hetereogeneous ones. A vector conceptually is a subset of a list because a list can be made out of a vector but not the other way around."),
-    answer("No", correct = TRUE, message = "A vector is more specific because while the list can store different data type in a seemingly linear data structure, the vector can only store objects of the same type."),
+    answer("Yes", correct = FALSE, message = "A list is more general than a vector because every list can be turned into a vector but the opposite does not hold. "),
+    answer("No", correct = TRUE, message = "A vector is more specific because it only stores elements of one data type while the list can store elements of different types. Converting a list to a vector may involve loss of generality due to coercion of every element into the most general type."),
     allow_retry = TRUE,
     random_answer_order = TRUE),
   question_radio(
