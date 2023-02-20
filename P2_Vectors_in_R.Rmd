@@ -674,7 +674,7 @@ sum(v, na.rm = TRUE)
 An old but still very handy blog on NA treatment in R is [@NAsHandlingBlogByBruin]. 
 
 
-## Vector attributes
+## Vector attributes (Adv.)
 
 Vectors can also be interrogated for their class and their attributes.
 
