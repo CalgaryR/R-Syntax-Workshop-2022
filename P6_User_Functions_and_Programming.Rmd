@@ -193,14 +193,14 @@ Let's have a look at concrete examples.
 
 ```{r, sapply-example-on-vector, exercise=TRUE, exercise.lines=4}
 set.seed(456)
-(v <- runif(5, 1, 5))
+(v <- sample(1:10, 5))
 # now iterate over the vector applying your operation to square each element
 (squares2 <- sapply(v, function(a) {a*a}))
 ```
 
 ```{r, sapplyVsForLoopComparisonSetup}
 set.seed(456)
-v <- runif(5, 1, 5)
+(v <- sample(1:10, 5))
 ```
 
 Now use the for-loop to achieve the same transformation.
