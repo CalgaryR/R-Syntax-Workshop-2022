@@ -9,3 +9,6 @@ The code chunks are fully interactive R sessions and can be made to keep state f
 This provides a workshop with zero-time spent on setup and leaving the time and attention to focus on R syntax exclusively.
 
 So far 4 iterations of these workshops have given feedback to  present a more modular approach to each basic syntax concept starting from basic operators, variables, and built-in functions to data types, data structures, and ultimately user functions and basics of control flow for  programming.
+
+The latest workshop is scheduled for two sessions: one on Monday, Aug 27
+covering parts 1, 2 and 3. The second is on Tuesday, Aug 29, covering Part 5.
