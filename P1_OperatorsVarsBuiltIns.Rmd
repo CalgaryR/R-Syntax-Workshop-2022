@@ -546,7 +546,8 @@ print(paste0("a = ", a, "; e = ", round( x = e, digits = 4)))
 
 ```{r other-operators-hint}
 log10(a)
-log(e, base = e)
+log(e)
+log(512, base = 2)
 ```
 
 From the previous exercise you might have noticed that the operators `<-` and `=` behave identically in stand alone expressions. Technically speaking, their effect is to create name-value pairs for each variable,  <span style="color:red">(_a_, 10)</span> and  <span style="color:red">(_e_, 2.7183)</span>, in the global environment.
