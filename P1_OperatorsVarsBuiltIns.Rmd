@@ -423,7 +423,7 @@ first_name <- "Rob"
 typeof(first_name)
 ```
 
-Let's investigate the type of the R function `type` itself.
+Let's investigate the type of the R function `typeof` itself.
 
 ```{r mode-of-mode, exercise=TRUE, exercise.lines=2}
 typeof(typeof)
@@ -610,8 +610,11 @@ We could use the `<-` operator for the named argument, the expression `log(x, ba
 ```{r named-param-4, exercise = TRUE}
 base = 100
 log(1000, base = 10)
-# What value does 'base' have in the global environment after log gest evaluated?
+# What value does 'base' have in the global environment after log gets evaluated?
 base
+# Try un-commenting the lines below and compare
+# log(1000, base <- 10)
+# base
 ```
 
 <!-- ```{r named-param-4, exercise = TRUE}
@@ -633,12 +636,12 @@ log(base <- 10, 1000)
 log(base = 10, 1000)
 ```
 
-Why `log(base <- 10, 1000)` does not do the named argument assignment as when using `base=10`? The difference is that `base <- 10` creates a pair `(base, 10)` in the global environment but does not create a local variable `base`, it only passes the value of `10` in position 1.
+Why does `base <- 10` not do the named argument assignment the same way `base = 10` does? The reason is the scope of the name-value pair `(base, 10)` created by `base <- 10`. The scope of this definition is the global environment outside of the function `log`. The function does no receive a variable definition `(base, 10)` to work with internally. Instead of that it sees the value `10` in position 1.
 
-In summary, to avoid ambiguities and unplanned side effects, when assigning values to variables use `<-` for stand-alone expressions and `=` for function named parameters. On the next section there are a few exercises to solidify these concepts.
+In summary, to avoid ambiguities and unexpected side effects, when assigning values to variables use `<-` for stand-alone expressions and `=` for named parameters. On the next section there are a few exercises to solidify these concepts.
 
 
-
+Note: as a side bar if you need to write a robust function that behaves like `log` check out the reference [@wrapr-named-arguments] (Consult the References section at the end of this document.)
 
 
 ## On number representation (Adv.)
@@ -722,5 +725,6 @@ all.equal(sum_calc, sum_expected)
   
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
   
+
 ## References
 
