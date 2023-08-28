@@ -463,7 +463,7 @@ There should be no output. The value of the function `exp` with the argument `1`
 
 ```{r two-for-one,  exercise = TRUE, exercise.lines=2}
 # this accomplishes the assignment and prints the value of the variable in one line
-(e <- exp(1))
+(e <- exp(1))  # Euler's constant in R
 ```
 
 ## Other built-in functions
