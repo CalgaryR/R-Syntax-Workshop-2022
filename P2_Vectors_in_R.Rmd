@@ -104,11 +104,11 @@ R was designed to manipulate data using these structures, they don't come from l
 
 This is important because a computer language has to allow the manipulation of values in memory using a certain recipe called an _algorithm_. These algorithms rely on the properties of the data structures and the data types themselves. They are intimately related. A computer language allows a human to write solutions to a problem in terms of the data structures and types that it provides. R has the fundamental data structures and types that we just discussed. Let's see how to start using them to represent information.
 
-**Note:** To reveal the data structure of R objects the built-in function `str()` may be handy although the output for complex objects may be difficult to interpret.
+**Note:** The built-in function `str()` may be useful to reveal the data structure of many R objects. However the output for complex objects may be difficult to interpret. Usually those objects have other methods to inspect their internal composition.
 
 ## Vectors
 
-From the table we just saw one could read: if you need a one-dimension data structure to store  objects of the same type, then use a vector. An important characteristic of vectors is that their contents can be stored in contiguous memory because all the elements require the same space thanks to being of the same type.
+From the table we just saw one could read: if you need a one-dimension data structure to store  objects of the same type, <span style="color:green">_then use a vector_</span>. An important characteristic of vectors is that their contents can be stored in <span style="color:blue">contiguous memory</span> because all the elements require the same space thanks to being of the same type.
 
 ### Constructing a vector
 
@@ -119,12 +119,12 @@ library(here)
 knitr::include_graphics(here("images","vector.png"), dpi = 86)
 ```
 
-And as code you would use the function `c()`:
+And as code you would use the function <span style="color:green">**`c()`**</span>:
 ```{r vector-construction, exercise = TRUE, exercise.lines=1}
 c(5, -1, 3, 0, -4, 1)
 ```
 
-The function `c()` takes a variable number of arguments with or without names. Once a vector has been constructed and assigned to a variable `x`, its elements can be extracted with the sub-setting operator `[]`. `x[1]` subsets the vector represented by the name `x` returning another vector with the element from the first position.
+The function <span style="color:green">**`c()`**</span> takes a variable number of arguments with or without names. Once a vector has been constructed and assigned to a variable `x`, its elements can be extracted with the sub-setting operator `[]`. `x[1]` subsets the vector represented by the name `x` returning <span style="color:blue">another vector</span> with the element from the first position.
 
 Try to answer the questions with your code, use the hint if necessary.
 
@@ -151,17 +151,17 @@ x[length(x)] - x[1]
 
 ## A vector in disguise
 
-Did you notice the language used to explain subsetting? `x[1]` returns a vector with the first element of `x`. In R the subsetting function returns another vector. Let's verify these statements with R itself:
+Did you notice the language used to explain subsetting? `x[1]` returns a vector with the first element of `x`. In R the subsetting function returns <span style="color:blue">another vector</span>. Let's verify these statements with R itself:
 
 ```{r verify-data-structure-subsetting-a-vector, exercise=TRUE, exercise.lines=6}
 x <- c(5, -1, 3, 0, -4, 1)
-first_element <- x[1]
 typeof(x)
 is.vector(x)
+first_element <- x[1]
 typeof(first_element)
 is.vector(first_element)
 ```
-
+This settles the issue: the subset of a vector is another vector.
 
 ## Naming the elements of a vector
 
@@ -172,7 +172,8 @@ A vector can also have named elements. These may help future you or another read
 x <- c(5, -1, 10)
 temperature_labels = c("current_temp", "forecast_low", "forecast_high")
 # assign the names after creation of the vector
-names(x) <- temperature_labels
+#names(x) <- temperature_labels
+temperature_labels -> names(x)
 # assign names while creating the vector
 y <- c(current_temp = 5, forecast_low = -1, forecast_high = 10)
 # now print out the x and y vectors, do you see any differences?
