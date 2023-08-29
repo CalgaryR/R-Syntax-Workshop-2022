@@ -630,6 +630,17 @@ Here are other two important cases where `NA`s can be introduced in data structu
   * When sub-setting with a position that is larger than the size of the vector.
   * When coercing non-numeric symbols to a numeric type.
 
+Below an example of the first case:
+
+```{r, examples-introducing-NAs-position-out-of-range, exercise=TRUE, exercise.lines=5}
+control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_length")
+# subset the manipulated variables by position
+(manipulated <- control_variables[c(1,4,6)])
+# if true then we know NAs were introduced by mistake:
+sum(is.na(manipulated)) > 0
+```
+
+And now an example of the second case:
 
 ```{r, examples-introducing-NAs-coercing-non-numeric-symbols, exercise=TRUE, exercise.lines=10}
 # supposed we read these values from a text file with results from an experiment
@@ -648,16 +659,6 @@ is.na(numbers_expected)
 # if adding the elements of the logical vector returned by 'is.na' is greater than 0
 # then there was at least one NA among the numbers
 sum(is.na(numbers_expected)) > 0
-```
-
-The other common case for `NA` creation happens when sub-setting by a position that is out of the range of positions in the vector.
-
-```{r, examples-introducing-NAs-position-out-of-range, exercise=TRUE, exercise.lines=5}
-control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_length")
-# subset the manipulated variables by position
-(manipulated <- control_variables[c(1,4,6)])
-# if true then we know NAs were introduced by mistake:
-sum(is.na(manipulated)) > 0
 ```
 
 A big obstacle introduced by `NA` is that further doing arithmetic on the vector can be compromised because all results will be `NA`. 
