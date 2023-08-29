@@ -105,7 +105,7 @@ my_list[[1]]
 ```
 
 Remember the case of the ingredients for a bakery from the section on vectors?
-Well now we can make a more elaborate comparison of the ingredients requires weekly and annually using <span style="color:green">lists</span> and <span style="color:green">matrices</span>.
+Well now we can make a more elaborate comparison of the ingredients required weekly and annually using <span style="color:green">lists</span> and <span style="color:green">matrices</span>.
 
 
 ## Using lists of vectors
