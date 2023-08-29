@@ -121,11 +121,11 @@ dim(y)
 
 ```
 
-As a task, find out how to name rows and columns in a matrix.
+As a task, find out how to name rows and columns in a matrix. There is an example in the module on lists in this same series of workshops.
 
 ## Sub-setting a matrix
 
-The `[]` operator can be used on the two dimensions of the matrix. For example subset the first row and the second column:
+A matrix can be subset via positions and via values, either using logical masks or column names. The same operator `[]` is used for both dimensions of the matrix, separated by a comma inside the brackets. Just like when sub-setting vectors, a matrix can de subset with vectors of positions to extract subsets by row(s) and column(s). For example, to subset the first row and the second column of a given matrix do as follows.
 
 ```{r subsetting-matrix-rows, exercise=TRUE, exercise.lines=3}
 (m <- matrix(rep(c(rep(1:2,2), rep(3:4, 2)),2), byrow = T, nrow = 4))
@@ -189,7 +189,7 @@ cbind(m[,1], rep(6,2), m[,2:3])
 
 ## Vector, mask or matrix
 
-If you remember the rules of recycling and the fact that by default matrices are traversed element-wise along the columns from top to bottom, let's multiply a matrix by a vector:
+If you remember the rules of recycling and the fact that by default matrices are traversed element-wise along the columns from top to bottom, let's multiply a <span style="color:blue">matrix</span> by a <span style="color:blue">_vector_</span>:
 
 ```{r, multiply-matrix-times-vector, exercise=TRUE}
 # the following will make the pseudo random number generation produce the same result for reproducibility
