@@ -518,7 +518,7 @@ Vectors of type `"character"`, `"numeric"`, `"logical"`, `"complex"`, or `"raw"`
 
 ## Appending elements to a vector
 
-You cannot make nested structures with vectors. Incidentally this property becomes your way of appending elements to either end of a vector as we just did to the vector `y` above. However using the function `append` does a cleaner job because it keeps the original attributes of the vector like names, if there were  any. Try it below.
+You cannot make nested structures with vectors. Incidentally this property becomes your way of appending elements to either end of a vector as we just did to the vector `y` in the previous section _Vectors within vectors?_. However using the function `append` does a cleaner job because it keeps the original attributes of the vector like names, if there were any. Try it below.
 
 
 ```{r appendToVectorWithNames, exercise=TRUE}
