@@ -242,7 +242,9 @@ weekly_values * rep(52.18, 4)
 weekly_values <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
 ```
 
-The multiplication operator was applied element-wise as expected. Now the bakery needs to plan raw materials for a special-event week where more cakes than bread will be made. The kitchen produces a multiplier vector to adjust the weekly estimates.
+The multiplication operator was applied element-wise as expected. In Section 4 of this workshop we will enhance this example to use matrices and lists. 
+
+Now the bakery needs to plan raw materials for a special-event week where more cakes than bread will be made. The kitchen produces a multiplier vector to adjust the weekly estimates.
 
 ```{r element-wise-vector-multiplication, exercise=TRUE, exercise.lines=3, exercise.setup="setup-element-wise-vectors"}
 special_cake_contract_week <- c(1.2, 1.3, 1.2, 1)
@@ -339,7 +341,7 @@ quiz(
 
 ## Subsetting vectors
 
-Subsetting can be done by position or by value, @BaseR-Cheatsheet. Subsetting is akin to filtering some elements a vector of that we want to select while leaving the rest out.
+Subsetting can be done by position or by value, @BaseR-Cheatsheet. Subsetting is akin to retaining some elements of a vector while leaving the rest out, kind of applying a filter to retain those elements.
 
 The following are ways of subsetting a vector by selecting elements according to their **position**.
 
