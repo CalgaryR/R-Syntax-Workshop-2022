@@ -554,7 +554,7 @@ paste0(y, collapse = "")
 y <-  append(letters[24], y)
 ```
 
-### An eye-opener to type coercion in R
+## An eye-opener to type coercion in R
 
 Let's assign integers and a string of characters to a vector and check the result.
 
