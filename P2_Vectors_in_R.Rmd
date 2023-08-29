@@ -151,7 +151,7 @@ x[length(x)] - x[1]
 
 ## A vector in disguise
 
-Did you notice the language used to explain subsetting? `x[1]` returns a vector with the first element of `x`. In R the subsetting function returns <span style="color:blue">another vector</span>. Let's verify these statements with R itself:
+Did you notice the language used to explain sub-setting? `x[1]` returns a vector with the first element of `x`. In R the sub-setting function returns <span style="color:blue">another vector</span>. Let's verify these statements with R itself:
 
 ```{r verify-data-structure-subsetting-a-vector, exercise=TRUE, exercise.lines=6}
 x <- c(5, -1, 3, 0, -4, 1)
@@ -339,13 +339,13 @@ quiz(
 
 
 
-## Subsetting vectors
+## Sub-setting vectors
 
-Subsetting can be done by position or by value, @BaseR-Cheatsheet. Subsetting is akin to retaining some elements of a vector while leaving the rest out, kind of applying a filter to retain those elements.
+Sub-setting can be done by position or by value, @BaseR-Cheatsheet. Sub-setting is akin to retaining some elements of a vector while leaving the rest out, kind of applying a filter to retain those elements.
 
-The following are ways of subsetting a vector by selecting elements according to their **position**.
+The following are ways of sub-setting a vector by selecting elements according to their **position**.
 
-Combining the binary operator `:` and the subsetting operator one can extract ranges of elements of a vector.
+Combining the binary operator `:` and the sub-setting operator one can extract ranges of elements of a vector.
 
 ```{r subsetting-a-vector, exercise=TRUE, exercise.lines=3}
 x <- c(5, -1, 3, 0, -4, 1)
@@ -576,7 +576,7 @@ typeof(v_dbl)
 Why does R think `is.numeric` and `is.double` are `TRUE` while `is.integer` is `FALSE`?
 Read on to answer that question.
 
-The characters that represent integers are automatically interpreted as doubles or numeric, the more general concept. In order to ask R to be more specific, in case it is absolutely necessary for your program, use `L` as a suffix on each number. Run the following and compare the results:
+The characters that represent integers are automatically interpreted as doubles or numeric, the more general concept. In order to ask R to be more specific, in case it is absolutely necessary for your program to use integers, use `L` as a suffix on each number. Run the following and compare the results:
 
 ```{r type-int-vetor, exercise=TRUE}
 v_int <- c(0L, 1L, 3L)
@@ -594,14 +594,14 @@ typeof(v_logicals2)
 
 You can force coercion with the family of built-in functions `as.integer`, `as.character`, `as.numeric`, etc.
 
-In general R will try to coerce the elements of a vector to the most general type possible, usually _double_ or _character_.
+In general R will try to coerce the elements of a vector to the most general type possible, usually _double_ or _character_. Think of it as a principle of inclusivity, by using coercion with this principle, the more general data type can retain the meaning of the more specialized data types without losing information.
 
 
 
 ## Introducing NAs
 
 
-There are cases when special logical values, called `NA` will be  introduced by R to indicate that the intended value does not exist.
+There are cases when special logical values, called `NA` will be introduced by R to indicate that the intended value does not exist.
 
 In R, `NA` is a logical vector of length 1, (the fact that is a vector although it looks like a single isolated element should not be a surprise to you anymore at this point).
 
@@ -613,7 +613,7 @@ typeof(NA_real_)
 typeof(NA_character_)
 ```
 
-Some missing values are introduced by R code, for example trying to execute an illegal mathematical operation.
+The first case when missing values can be introduced while writing R code is executing an illegal mathematical operation.
 
 
 ```{r type-of-NaNs, exercise=TRUE, exercise.lines=4}
@@ -625,7 +625,7 @@ typeof(NaN)
 
 
 
-Here are two important cases where `NA`s can be introduced and that you need to be aware of to use R effectively:
+Here are other two important cases where `NA`s can be introduced in data structures. You need to be aware of them to use R more effectively:
 
   * When sub-setting with a position that is larger than the size of the vector.
   * When coercing non-numeric symbols to a numeric type.
@@ -838,7 +838,7 @@ How would one obtain the last two names for any length of 'v'?",
       answer(" x[-2] * y", correct = F, message = "The first vector has three elements, youa re removing only one!"),
       allow_retry = T,
       random_answer_order = T,
-      correct = "Amazing results you are getting with element wise operations and subsetting vectors!"),
+      correct = "Amazing results you are getting with element wise operations and sub-setting vectors!"),
   # https://rdrr.io/github/timelyportfolio/sortableR/man/question_rank.html
   sortable::question_rank(text = "Order the elements of the vector that result from executing  this code:
 
