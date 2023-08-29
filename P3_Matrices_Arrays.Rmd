@@ -123,7 +123,7 @@ dim(y)
 
 As a task, find out how to name rows and columns in a matrix.
 
-## Subsetting a matrix
+## Sub-setting a matrix
 
 The `[]` operator can be used on the two dimensions of the matrix. For example subset the first row and the second column:
 
