@@ -18,6 +18,7 @@ description: "Lists and its applications in R"
 
 ```{r setup, include=FALSE}
 library(learnr)
+#library(gifski) #for animations when rendering html
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
@@ -103,6 +104,48 @@ names(my_list)
 my_list[[1]]
 ```
 
+Remember the case of the ingredients for a bakery from the section on vectors?
+Well now we can make a more elaborate comparison of the ingredients requires weekly and annually using <span style="color:green">lists</span> and <span style="color:green">matrices</span>.
+
+
+## Using lists of vectors
+
+As mentioned at the end of the previous section, a common case to use lists is as arguments of vectors to create multi-dimensional objects, like matrices.Let's revisit the bakery example of the section on vectors.
+
+
+```{r, lists-of-vectors-use, exercise=TRUE, exercise.lines=8}
+# weekly consumption of ingredients at a bakery
+weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+# estimate the annual consumption of each material given 52.18 weeks per year
+weekly_values * rep(52.18, 4)
+m<-weekly_values %*% t(c(1, 52.18)) # matrix multiplication of two vectors
+#help("matrix")
+dimnames(m) <- list(supplies=c(names(weekly_values)), frequency=c("weekly","annual"))
+m
+```
+
+```{r, explainingDimnamesFromListOfVectorsSetup}
+weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+# estimate the annual consumption of each material given 52.18 weeks per year
+m<-weekly_values %*% t(c(1, 52.18)) # algebraic multiplication of two vectors
+#help("matrix")
+dimnames(m) <- list(supplies=c(names(weekly_values)), frequency=c("weekly","annual"))
+```
+
+Let's verify the dimensions of the new matrix created by multiplying the two vectors using the matrix product function `%*%` instead of the element-wise product function `*`:
+
+$$ \begin{bmatrix} 12\\450\\5\\0.35\end{bmatrix}_{4\times1} \begin{bmatrix} 1& 52.18 \end{bmatrix}_{1\times2}=\begin{bmatrix} 12.00 & 626.160 \\ 450.00 & 23481.000 \\ 5.00 & 260.900 \\
+  0.35 & 18.263\end{bmatrix}_{4\times2}$$
+A regular R vector is the equivalent of a column vector, in this case the first vector, `weekly_values`, has dimension 4 rows by 1 column. The transpose of the second R vector, `t(c(1, 52.18))`, has dimension 1 row by 2 columns. The resulting matrix has dimensions 4 by 2 as expected. Let's verify with the `dim` function and look at the list of vectors used to label the dimensions, the rows and the columns of our matrix of baking supplies.
+
+
+```{r, explainingDimnamesFromListOfVectors, exercise=TRUE, exercise.setup="explainingDimnamesFromListOfVectorsSetup"}
+dim(m)
+dimnames(m)
+```
+
+
+
 ## Accessing the elements of a list {#accessing-the-elements-of-a-list}
 
 Did you notice the use of double square brackets, `[[]]` to access the vectors stored in the list of the previous section?
@@ -160,6 +203,8 @@ print(paste("length of new list =",length(new_list)))
 # check that the last element is the vector we wanted to insert
 new_list[[length(new_list)]]
 ```
+
+<span style="color:blue">**Note:**</span> Remember that a subset of a vector is always a vector? Well it turns out that the same cannot be said of a heterogeneous data structure like a list. An example of this is in the last line of the previous code box: the last element of the list is a vector, the simplest data structure possible in R.
 
 The second method for appending to a list uses the `[[]]` operator.
 It allows insertion of new elements of any type into a list, that means no coercion will be used.
