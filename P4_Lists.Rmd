@@ -104,13 +104,13 @@ names(my_list)
 my_list[[1]]
 ```
 
-Remember the case of the ingredients for a bakery from the section on vectors?
+Remember the case of the ingredients for a bakery from the module on vectors?
 Well now we can make a more elaborate comparison of the ingredients required weekly and annually using <span style="color:green">lists</span> and <span style="color:green">matrices</span>.
 
 
 ## Using lists of vectors
 
-As mentioned at the end of the previous section, a common case to use lists is as arguments of vectors to create multi-dimensional objects, like matrices.Let's revisit the bakery example of the section on vectors.
+As mentioned at the end of the previous section, a common case to use lists is as arguments of vectors to create multi-dimensional objects, like matrices. Let's revisit the bakery example of the module on vectors.
 
 
 ```{r, lists-of-vectors-use, exercise=TRUE, exercise.lines=8}

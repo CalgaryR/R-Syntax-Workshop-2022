@@ -57,7 +57,7 @@ Let's get started.
 
 ## Data Representation in R
 
-Every computing language uses a model to represent information in memory and R is no exception. Everything in R is an object with a default constructor. We are interested in the objects that adopt certain shapes in the computer memory to hold values. The values have types that can be queried with the built-in function `typeof()` that we have seen before. We will cover these definitions and work with them in this section.
+Every computing language uses a model to represent information in memory and R is no exception. Everything in R is an object with a default constructor. We are interested in the objects that adopt certain shapes in the computer memory to hold values. The values have types that can be queried with the built-in function `typeof()` that we have seen before. We will cover these definitions and work with them in this module.
 
 Let's consider these cases:
 
@@ -242,7 +242,7 @@ weekly_values * rep(52.18, 4)
 weekly_values <- c(flour = 12, eggs = 450, yeast = 5, salt = 35)
 ```
 
-The multiplication operator was applied element-wise as expected. In Section 4 of this workshop we will enhance this example to use matrices and lists. 
+The multiplication operator was applied element-wise as expected. In module 4 of this workshop we will enhance this example to use matrices and lists. 
 
 Now the bakery needs to plan raw materials for a special-event week where more cakes than bread will be made. The kitchen produces a multiplier vector to adjust the weekly estimates.
 

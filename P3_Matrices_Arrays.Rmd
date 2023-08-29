@@ -435,7 +435,7 @@ quiz(
 You then choose the R function `as.date` to represent your times.
 
 Is this a suitable selection for your data?",
-    answer("yes", correct = FALSE, message = 'I would think twice before doing that, go back to the top of this section and read again please.'),
+    answer("yes", correct = FALSE, message = 'I would think twice before doing that, go back to the top of this module and read again please.'),
     answer("no", correct= TRUE),
     correct = 'Correct, a more appropriate data representation would be POSIXct or POSIXlt',
     random_answer_order = TRUE,

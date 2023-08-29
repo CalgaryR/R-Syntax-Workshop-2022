@@ -70,11 +70,11 @@ Let's get started.
 
 ## Data frames
 
-If you have followed the Part 4 Lists, of this tutorial, then this section should be relatively easy. Like a list, data frames store information of heterogeneous type, however there are some rules:
+If you have followed the Part 4 Lists, of this tutorial, then this module should be relatively easy. Like a list, data frames store information of heterogeneous type, however there are some rules:
 
   - Two dimensional only, like a table.
   - Any number of rows or columns
-  - The columns have to be of the same type and length
+  - Each column has to be a vector of the same length (each can store different data types)  
 
 
 Follow these rules and data frames are an almost ideal data structure for data analysis, as convenient but safer than spreadsheets, whether in memory or saved as a file to a disk, locally or in the cloud. 
@@ -107,7 +107,7 @@ census2019 <- c(T,T,T,T,F,T)
 
 If any of the vectors has a different length there will be error messages, R will not be happy about it. Try it for yourself in the previous exercise.
 
-In the above example the vector of country names, of type `character`, was converted to factors by a default named argument `stringsAsFactors = T` in the constructor `data.frame()`. A special note about this later in this section.
+In the above example the vector of country names, of type `character`, was converted to factors by a default named argument `stringsAsFactors = T` in the constructor `data.frame()`. A special note about this later in this module.
 
 Try the `str()` function on the data frame we just created. R has a special vocabulary for the rows and columns of a data frame. Each of the <span style="color:blue">vectors</span> in the list are mapped to a <span style="color:blue">variable</span> while each <span style="color:red">row</span> represents an <span style="color:red">observation</span>.
 
@@ -241,7 +241,7 @@ matrix(JohnsonJohnson, ncol=4)
 Now the matrix can be turned into a data frame. We could have also kept the matrix, can you answer why and what differences if any we would ahve encoutered? 
 
 When we construct the new data frame we can assign names to each column and row labels as each year of company financial results. Please note how we are using list and vector constructors to supply 
-the names  for the two dimensions of the data frame. remember the `:` operator we learned as a shortcut for the `seq()` function in the section creating vectors with patterns?
+the names  for the two dimensions of the data frame. remember the `:` operator we learned as a shortcut for the `seq()` function in the module on vectors when discussing creating vectors with patterns?
 
 ```{R, constructAProperDataFrame, exercise=TRUE}
 (J_and_J <- data.frame( matrix(JohnsonJohnson, 
@@ -286,7 +286,8 @@ At this point all the components are available to apply the builtin function `su
 answer the main question.
 
 ```{r, finalSubsetJAndJDataFrame, exercise=TRUE, exercise.setup="JAndJDataSetupWithTotals"}
-subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c(4,5)) 
+subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c("Qtr4","Annual")) 
+#subset(J_and_J, subset = mask.Q4.GT.60.pct.Total, select = c(4,5)) 
 ```
 
 That was a company on a roll in the 70's!
