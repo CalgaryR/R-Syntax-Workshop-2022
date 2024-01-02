@@ -41,9 +41,10 @@ Missing value types are also native to R so their occurrence can be an accurate 
 
 <!-- ======================== -->
 
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide.
-It contains explanations, fully functional code boxes, and quizzes that make it very interactive.
-If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
 The instructor may also ask short questions regarding the material.
 Should you fall behind or need more time, please follow the exercises and test problems after the live session.
 This is very important in order to cement the concepts and challenge your understanding.

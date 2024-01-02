@@ -44,8 +44,13 @@ However, those same differences can make it confusing at first for people with e
 <!-- ======================== -->
 ## About this tutorial
 <!-- ======================== -->
-
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. It contains explanations, fully functional code boxes, and quizzes that make it very interactive. If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback. The instructor may also ask short questions regarding the material. Should you fall behind or need more time, please do so after the live session. Actually this is very important in order to cement the concepts and test your understanding.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
+The instructor may also ask short questions regarding the material.
+Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
 
@@ -277,7 +282,13 @@ description = c("access variables in a namespace",
                 "help (unary and binary)")))
 ```
 
-You can get documentation like this from the R help at the command line by typing `?Syntax` or `help("Syntax")`, a full set of help functions appears on the table below. 
+
+## R Help
+
+R has several mechanisms to provide helpful information about the the language and the its modules, called libraries. 
+For instance, to generate the help on operator precedence you can type `?Syntax` or `help("Syntax")` at the command line.
+
+Run de code below to see a complete list of help commands available in any R installation.
 
 
 ```{r help-commands, exercise=TRUE, exercise.lines=1}
@@ -403,14 +414,11 @@ quiz(
 
 In R the name used to label a variable is an object itself [@RLangDef.objects], in fact everything is an object in R and in this tutorial we will refer to objects and variables interchangeably.
 
-Variables have a type and a mode. To find out the type and the mode of R variables one needs to use built-in functions `typeof()` and `mode()`. Let's then go into the subject in the next section.
+R is a strongly typed language. To find out the type of R variables one can use the built-in functions `typeof()` and `mode()`. Let's test the former.
 
-
-## Finding the type of a variable
-
-When it comes to how R stores values, let's observe the type and mode of variables.
-
-```{r type-of-variables, exercise=TRUE, exercise.lines=8}
+```{r type-of-variables, exercise=TRUE, exercise.lines=10}
+b <- "day" == "night"
+typeof(b)
 i <- 54
 typeof(i)
 j <- 54L
@@ -421,32 +429,18 @@ first_name <- "Rob"
 typeof(first_name)
 ```
 
-R stores variables using other, related, categories. These can be queried via the `mode` function:
+Remember how R uses cohercion to trasform a variable to the type expected by a logical operator like *NOT*?
+If we changed the value of `a` above to a double or an integer, and applied the negation logical operator to it it would use cohersion rules built into the language to provide a result instead of failing.
+The rule in this case is a zero is interpreted as `FALSE` while non-zero is interpreted as `TRUE`.
 
-```{r mode-of-variables, exercise=TRUE, exercise.lines=8}
-i <- 54
-mode(i)
-j <- 54L
-mode(j)
-x <- 3.1416
-mode(x)
-first_name <- "Rob"
-mode(first_name)
-```
-
-Let's investigate the type and mode of the R function `mode` itself.
-
-```{r mode-of-mode, exercise=TRUE, exercise.lines=2}
-typeof(mode)
-mode(mode)
-```
-
-In computer language _lingo_ a closure is a function and an environment to evaluate it, let's leave it at that for now. R is a unique language in more ways than one, let's move on with more basic concepts.
+We will discuss other cohercion rules when talking about homogeneous data structures.
+The homogeneous type assigned to all the elements when they are of heterogeneous types follow the rule of the most general type.
+Decreasing in generality from left to right: `character` < `double` < `integer` < `logical`. 
 
 
 ## Built-in functions
 
-R offers predefined functions. When you use an R package you also use functions to get many complex tasks done with ease. It is important to familiarize yourself with their syntax. This requires that we start simple and build up the concepts gradually. The goal is to learn how to pass information to them and how to obtain results in two forms: as direct returned objects or as side effects. A side effect would be something like a file being written to the local disk or to a file service in the cloud.
+R offers predefined functions. When you use an R package you also use functions to get many complex tasks done with ease. It is important to familiarize yourself with their syntax. This requires that we start simple and build up the concepts gradually. The goal is to learn how to pass information to them and how to obtain results from them in two forms: as directly returned objects or as side effects. A side effect would be something like a file being written to the local disk or to a file service in the cloud.
 
 
 

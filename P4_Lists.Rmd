@@ -41,12 +41,13 @@ Finally we will put in context the fact that a linear model is built upon a list
 
 <!-- ======================== -->
 
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide.
-It contains explanations, fully functional code boxes, and quizzes that make it very interactive.
-If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
 The instructor may also ask short questions regarding the material.
-Should you fall behind or need more time, please do so after the live session.
-Actually this is very important in order to cement the concepts and test your understanding.
+Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes.
 In doing so we hope to get you excited about this useful and expressive language.
@@ -110,7 +111,9 @@ Well now we can make a more elaborate comparison of the ingredients required wee
 
 ## Using lists of vectors
 
-As mentioned at the end of the previous section, a common case to use lists is as arguments of vectors to create multi-dimensional objects, like matrices. Let's revisit the bakery example of the module on vectors.
+Let's carry on with the example of the materials for the bakery from the module on Vectors.
+We want to create a double entry table showing the materials on the vertical axis and the period of time for their estimated amounts: weekly and annual, on the vertical axis.
+First we will create the table as a matrix, then we will name the rows and columns using a list of vectors. 
 
 
 ```{r, lists-of-vectors-use, exercise=TRUE, exercise.lines=8}
@@ -118,7 +121,7 @@ As mentioned at the end of the previous section, a common case to use lists is a
 weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
 # estimate the annual consumption of each material given 52.18 weeks per year
 weekly_values * rep(52.18, 4)
-m<-weekly_values %*% t(c(1, 52.18)) # matrix multiplication of two vectors
+(m<-weekly_values %*% t(c(1, 52.18))) # matrix multiplication of two vectors
 #help("matrix")
 dimnames(m) <- list(supplies=c(names(weekly_values)), frequency=c("weekly","annual"))
 m
@@ -338,7 +341,7 @@ quiz(
   question_radio(
     "The subsetting operator [ always returns a list when applied to a list.",
     answer("True", correct = TRUE),
-    answer("False", correct = FALSE, message = "Well, mayve you were thinking of [[, that one gives you the actual elelment(s) of the list."),
+    answer("False", correct = FALSE, message = "Well, maybe you were thinking of [[, that one gives you the actual elelment(s) of the list."),
     random_answer_order = TRUE,
     allow_retry = TRUE,
     correct = "You are on a roll! This is an important characteristic of lists."
@@ -371,7 +374,7 @@ quiz(
   question_radio(
     "Is it possible to construct a vector of class list in R?",
     answer("Yes", correct = FALSE, message = "The result of applying c() to a list would be to coerced the result to a list automatically."),
-    answer("No", correct = TRUE, message = "By definition in R, a vector that contains a list already has decided to store  heterogeneous objects so it must be a list. This allows code optimizations on vectors and matrices that aren't possible on lists."),
+    answer("No", correct = TRUE, message = "By definition in R, a vector has homogeneous types. If it contained a list it would be storing heterogeneous objects, which is not possible. This allows code optimizations on vectors and matrices that aren't possible on lists."),
     allow_retry = TRUE,
     random_answer_order = TRUE
   ),

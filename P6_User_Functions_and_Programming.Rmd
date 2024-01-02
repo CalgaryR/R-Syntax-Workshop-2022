@@ -40,9 +40,10 @@ In this module you will learn how to write functions, how to control the flow of
 
 <!-- ======================== -->
 
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide.
-It contains explanations, fully functional code boxes, and quizzes that make it very interactive.
-If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
 The instructor may also ask short questions regarding the material.
 Should you fall behind or need more time, please follow the exercises and test problems after the live session.
 This is very important in order to cement the concepts and challenge your understanding.
@@ -74,7 +75,7 @@ If you start writing a lot of R code, sooner or later you will find the need to 
 
 A user function behaves like a built-in function, although their scopes (the environments where they operate) are different.
 
-The values that the function receives are called <span style=color:blue">parameters</span>  in the definition of the function. The values actually passed to the function  when called are refered to as the <span style=color:blue">arguments</span>.
+The values that the function receives are called <span style=color:blue">parameters</span>  in the definition of the function. The values actually passed to the function  when called are referred to as the <span style=color:blue">arguments</span>.
 
 ### How to write a user-defined function
 

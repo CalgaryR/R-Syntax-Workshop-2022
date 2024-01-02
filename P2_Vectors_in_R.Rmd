@@ -40,7 +40,13 @@ March on.
 ## About this tutorial
 <!-- ======================== -->
 
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. It contains explanations, fully functional code boxes, and quizzes that make it very interactive. If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback. The instructor may also ask short questions regarding the material. Should you fall behind or need more time, please do so after the live session. Actually this is very important in order to cement the concepts and test your understanding.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
+The instructor may also ask short questions regarding the material.
+Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
 
@@ -83,7 +89,7 @@ The fundamental values that R can represent and manipulate in the computer memor
 
 There are two less commonly used: _complex_ and _raw_ that we will leave for another time.
 
-### Data Structures
+## Data Structures
 
 These are the shapes of the data in the computer memory, literally. There are two types of data structures according to the type of values they can store: homogeneous and heterogeneous.
 
@@ -448,7 +454,7 @@ morning >= afternoon
 
 R is a vectorized language so operators work natively on vector objects.
 
-Let's find out on what days we got both morning and afternoon results below or above their weekly mean:
+Let's find out on what days we got both morning and afternoon results below their weekly mean:
 
 
 ```{r equal-operator-on-vectors, exercise=TRUE, exercise.setup="equalonvectorssetup", exercise.lines=9}
@@ -456,10 +462,10 @@ week_days <- c("Mon", "Tue", "Wed", "Thu", "Fri")
 print(paste0("morning   mean = ", format(mean(morning), nsmall = 2)))
 print(paste0("afternoon mean = ", format(mean(afternoon), nsmall = 2)))
 # Create logical masks for temperatures greater than the average
-gt_mean_mornings <- ( morning > mean(morning) )
-gt_mean_afternoons <- ( afternoon > mean(afternoon) )
+gt_mean_mornings <- ( morning < mean(morning) )
+gt_mean_afternoons <- ( afternoon < mean(afternoon) )
 # Combine the masks to create yet a new logical mask
-week_days[gt_mean_mornings == gt_mean_afternoons]
+week_days[gt_mean_mornings & gt_mean_afternoons]
 ```
 
 If we wanted to answer the question on what days the experiments gave higher than weekly mean results on either morning or afternoon we can use the logical 'OR' operator `|`:

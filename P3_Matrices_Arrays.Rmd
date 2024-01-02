@@ -36,7 +36,13 @@ Finally you will learn what arrays are and the type of multi-dimensional data th
 ## About this tutorial
 <!-- ======================== -->
 
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. It contains explanations, fully functional code boxes, and quizzes that make it very interactive. If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback. The instructor may also ask short questions regarding the material. Should you fall behind or need more time, please do so after the live session. Actually this is very important in order to cement the concepts and test your understanding.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
+The instructor may also ask short questions regarding the material.
+Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
 
@@ -189,7 +195,9 @@ cbind(m[,1], rep(6,2), m[,2:3])
 
 ## Vector, mask or matrix
 
-If you remember the rules of recycling and the fact that by default matrices are traversed element-wise along the columns from top to bottom, let's multiply a <span style="color:blue">matrix</span> by a <span style="color:blue">_vector_</span>:
+If you remember the rules of recycling and the fact that by default matrices are traversed element-wise along the columns from top to bottom, let's multiply a <span style="color:blue">matrix</span> by a <span style="color:blue">_vector_</span>.
+Have in mind that by default these operations are element-wise.
+How can you explain the result below?
 
 ```{r, multiply-matrix-times-vector, exercise=TRUE}
 # the following will make the pseudo random number generation produce the same result for reproducibility
