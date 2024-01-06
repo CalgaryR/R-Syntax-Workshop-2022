@@ -429,11 +429,11 @@ first_name <- "Rob"
 typeof(first_name)
 ```
 
-Remember how R uses cohercion to trasform a variable to the type expected by a logical operator like *NOT*?
-If we changed the value of `a` above to a double or an integer, and applied the negation logical operator to it it would use cohersion rules built into the language to provide a result instead of failing.
+Remember how R uses coercion to transform a variable to the type expected by a logical operator like *NOT*?
+If we changed the value of `a` above to a double or an integer, and applied the negation logical operator to it it would use coercion rules built into the language to provide a result instead of failing.
 The rule in this case is a zero is interpreted as `FALSE` while non-zero is interpreted as `TRUE`.
 
-We will discuss other cohercion rules when talking about homogeneous data structures.
+We will discuss other coercion rules when talking about homogeneous data structures.
 The homogeneous type assigned to all the elements when they are of heterogeneous types follow the rule of the most general type.
 Decreasing in generality from left to right: `character` < `double` < `integer` < `logical`. 
 
@@ -516,7 +516,7 @@ quiz(
   What is the result of executing the line above in the R console?",
     answer("the value 2 gets assigned to _a_ and printed to the console", message = "the operaror _assignment_ has no side effects so nothing should be printed to the console"),
     answer("error, _log10_ of 10 is undefined", message = "That's not quite right, check your the definition of a logarithm and try again"),
-    answer("nothing gets printed", correct = TRUE, message = "The operator _assignment_ has no side effects so nothing gest printed after the value 2 gets associated with the variable _a_"),
+    answer("nothing gets printed", correct = TRUE, message = "The operator _assignment_ has no side effects so nothing gets printed after the value 2 gets associated with the variable _a_"),
     answer("the value of _a_ gets printed", message = "The operator _assignment_ has no other effect than to associate a value with a variable name"),
     allow_retry = TRUE,
     random_answer_order = TRUE
@@ -595,12 +595,12 @@ log(1000, base = 10)
 log(1000, 10)
 ```
 
-Now compare the flexibility of using the explicit name assignment.
+Now compare the flexibility and safety of using the explicit name assignment.
 
 ```{r named-param-3, exercise = TRUE}
 # the first argument is now a named argument so the second gets position one instead
 log(base = 10, 1000)
-# in absence of hints x = 10 (position one) and base = 1000 (named)
+# in absence of hints, x = 10 (position one) and base = 1000 (anonymous argument)
 log(10, 1000)
 ```
 
@@ -608,18 +608,18 @@ log(10, 1000)
 
 We already saw how the `=` operator for a named argument does not affect the global environment where the function is created. Variable assignment is like creating a pair (variable-name, expression) that lives in a scope where it can be reached for further evaluation.
 
-We could use the `<-` operator for the named argument, the expression `log(x, base <- exp(1))` would assign the expression `exp(1)` to the local variable `base`. However, before that gets done, the name-expression pair gets created in the global environment. That implies that there will be a global variable `base` with the value of evaluating `exp(1)` outside of the function `log` after exiting `log`. Let's test that. 
+We could use the `<-` operator for the named argument, the expression `log(x, base <- exp(1))` would assign the expression `exp(1)` to the local variable `base`. However, before that gets done, the name-expression pair gets created in the global environment. That implies that there will be a global variable `base` with the value resulting from evaluating `exp(1)` after exiting `log`. Let's test that. 
 
 ```{r named-param-4, exercise = TRUE}
 base = 100
 log(1000, base = 10)
-# Does 'base' exist in the global environment after log gest evaluated?
+# Does 'base' exist in the global environment after log gets evaluated?
 base
 ```
 
 <!-- ```{r named-param-4, exercise = TRUE}
 log(1000, base <- 10)
-# Does 'base' exist in the global environment after log gest evaluated?
+# Does 'base' exist in the global environment after log gets evaluated?
 if (exists("base")) {
   print(paste0("base exists outside of log, base = ", base)) 
 } else {
@@ -636,9 +636,11 @@ log(base <- 10, 1000)
 log(base = 10, 1000)
 ```
 
-Did you get the same result of using `log(base = 10, 1000)`? That is almost true, the difference is that now there is a variable assignment represented by the pair `(base, 10)` that outlives the call to `log`.
+Did you get the same result of using `log(base = 10, 1000)`? That is almost true, the difference when using the global assingment operator, `<-`, is that an object with name `base` and value 10, gets created while calling `log` and continues to exist in the global environment after the function goes away.
 
-In summary, to avoid ambiguities and unplanned side effects, when assigning values to variables use `<-` for stand-alone expressions and `=` for function named parameters. On the next section there are a few exercises to solidify these concepts.
+In summary, to avoid ambiguities and unplanned side effects, use `<-` for stand-alone expressions and `=` for function named parameters. 
+Also, be explicit when calling named parameters, it makes your code explicit in its intention and thus, easier to read for future you or others.
+This is a fundamental feature of R syntax and it is not common in other data-oriented languages.
 
 
 

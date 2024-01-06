@@ -97,6 +97,7 @@ my_list <- list(some_strings = c("hello", "world"),
 # check the names
 
 # extract the first element of the list
+
 ```
 
 ```{r list-constructor-hint}

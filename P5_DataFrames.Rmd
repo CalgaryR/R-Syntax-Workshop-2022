@@ -239,7 +239,7 @@ class(JohnsonJohnson)
 matrix(JohnsonJohnson, ncol=4)
 ```
 
-Now the matrix can be turned into a data frame. We could have also kept the matrix, can you answer why and what differences if any we would ahve encoutered? 
+Now the matrix can be turned into a data frame. We could have also kept the matrix, can you answer why and what differences if any we would have encountered? 
 
 When we construct the new data frame we can assign names to each column and row labels as each year of company financial results. Please note how we are using list and vector constructors to supply 
 the names  for the two dimensions of the data frame. remember the `:` operator we learned as a shortcut for the `seq()` function in the module on vectors when discussing creating vectors with patterns?
@@ -306,7 +306,7 @@ Notice a convenient use or R's vector recycling property to make the code expres
 ```{r, aggregating-examples, exercise=TRUE, exercise.lines=7}
 set.seed(5529)
 treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
-results <- round(runif(6), digits = 2)
+results <- round(runif(12), digits = 2)
 passes.GT.0.7 <- results>0.7
 (experiments <- data.frame(treatment=treatment, 
                  val_1=results,
@@ -318,7 +318,7 @@ Then subset by treatment while adding `Val_1` and counting the number of observa
 ```{r, aggregationExamplesSetup}
 set.seed(5529)
 treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
-results <- round(runif(6), digits = 2)
+results <- round(runif(12), digits = 2)
 passes.GT.0.7 <- results>0.7
 experiments <- data.frame(treatment=treatment, 
                  val_1=results,
