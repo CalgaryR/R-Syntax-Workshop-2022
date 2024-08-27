@@ -510,6 +510,11 @@ Is this a suitable selection for your data?",
 
 ## Tutorials &  online-resources
 
+  About matrices:
+  
+  1. https://www.datacamp.com/tutorial/matrices-in-r (easy to follow)
+  2. https://r-coder.com/matrix-operations-r/ (good examples)
+
   General:
   
   1. https://cran.r-project.org/manuals.html (all of them)
@@ -534,9 +539,10 @@ Is this a suitable selection for your data?",
   
   Statistics:
   
-  1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  3. https://www.stat.berkeley.edu/~spector/s243/
+  1. https://rowannicholls.github.io/R.html (good free introduction to statistics and graphs in R) 
+  2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
+  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  4. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   

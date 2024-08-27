@@ -690,6 +690,14 @@ all.equal(sum_calc, sum_expected)
 
 ## Tutorials &  online-resources
 
+  On Variables in R:
+  
+  1. https://statisticsglobe.com/assignment-operators-in-r (Joachim Schork is an R connoisseur)
+  2. https://masterr.org/r/RFP-part3-variables/ (advanced but insightful)
+  3. https://www.datacamp.com/tutorial/variables-in-r (easy to follow)
+  4. https://masterr.org/r/RFP-part4-shadowing/ (advanced but necessary if writing big R programs)
+  5. https://masterr.org/r/RFP-part6/ (about the assignment operator, <<-)
+
   General:
   
   1. https://cran.r-project.org/manuals.html (all of them)
@@ -712,9 +720,10 @@ all.equal(sum_calc, sum_expected)
   
   Statistics:
   
-  1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  3. https://www.stat.berkeley.edu/~spector/s243/
+  1. https://rowannicholls.github.io/R.html (good free introduction to statistics and graphs in R) 
+  2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
+  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  4. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   

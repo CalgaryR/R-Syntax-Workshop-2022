@@ -259,6 +259,14 @@ Now you choose your style according to the task at hand. Practice will make you 
 
 ## Tutorials &  online-resources
 
+  About functions in R:
+  
+  1. https://www.datacamp.com/tutorial/functions-in-r-a-tutorial (Easy to follow)
+  2. https://rstudio.github.io/r-manuals/r-intro/Writing-your-own-functions.html 
+  3. https://masterr.org/r/RFP-part7-functions00/ (Functions, variables bindings and environments)
+  4. https://masterr.org/r/RFP-part8-functions01/ and https://masterr.org/r/understand-r-environments-part2/ (environments)
+  5. https://masterr.org/r/RFP-part8-functions01/ (Short blog post, but a chain of posts follow to explain more complex concepts)
+
   General:
   
   1. https://cran.r-project.org/manuals.html (all of them)

@@ -412,6 +412,13 @@ quiz(
 
 <!-- =============================== -->
 
+For this module on lists:
+
+1. https://masterr.org/r/RFP-part2-lists/ (to gain mastery)
+2. https://rstudio.github.io/r-manuals/r-intro/Lists-and-data-frames.html (good for an executive summary) 
+3. https://r-coder.com/list-r/ (excellent subsetting examples)
+
+
 General:
 
 1.  <https://cran.r-project.org/manuals.html> (all of them)
@@ -436,9 +443,10 @@ Computing:
 
   Statistics:
   
-  1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  3. https://www.stat.berkeley.edu/~spector/s243/
+  1. https://rowannicholls.github.io/R.html (good free introduction to statistics and graphs in R) 
+  2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
+  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  4. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   

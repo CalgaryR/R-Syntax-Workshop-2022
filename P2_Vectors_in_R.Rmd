@@ -751,7 +751,7 @@ How would one obtain the last two names for any length of 'v'?",
   random_answer_order = TRUE
   ),
   question("Select all applicable answers that construct a vector of characters",
-           answer("c(1,2,'c')", correct = T, message = "The last option you ticked is also correct. "),
+           answer("c(1,2,'c')", correct = T, message = "The option c(1,2,'c') is also correct because coercion rules turn doubles into characters, the more general type. This  happens to satisfy the requirement of a vector to have only elements of the same type. "),
            answer("c(1, T, FALSE)", correct = F, message = "Did  you pick an answer that contains numeric and boolean types? Everything gets coerced into numeric, the most general type."),
            answer("c(1, c(2L, 4L))", correct = F, message = "Did  you select an answer that has only numeric elements? Remember integers are a subset of numeric."),
            answer("c(\"hi\", 'there', 'c')", correct = T, message = "Well done!"),
@@ -962,6 +962,11 @@ quiz(
 
 ## Tutorials &  online-resources
 
+  For this module on Vectors:
+  
+  1. https://masterr.org/r/RFP-part1-vectors/
+  2. https://eriqande.github.io/rep-res-web/lectures/vectorization_recycling_and_indexing.html
+
   General:
   
   1. https://cran.r-project.org/manuals.html (all of them)
@@ -985,9 +990,10 @@ quiz(
   
   Statistics:
   
-  1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  3. https://www.stat.berkeley.edu/~spector/s243/
+  1. https://rowannicholls.github.io/R.html (good free introduction to statistics and graphs in R) 
+  2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
+  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  4. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   

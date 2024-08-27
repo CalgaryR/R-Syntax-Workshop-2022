@@ -495,6 +495,14 @@ The 'runif' functions computes n random values from a uniformly distributed vari
 
 ## Tutorials &  online-resources
 
+  About data frames:
+  
+  1. https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/data.frame (written like a Unix manual page)
+  2. https://r-coder.com/dataframe-r/ (easy to follow)
+  3. https://www.programiz.com/r/dataframe (short and simple examples)
+  4. https://statisticsglobe.com/data-frame-r (Joachim is on a mission to teach R to the world, practical examples)
+  5. https://rowannicholls.github.io/R/intro/data_frames.html (very comprehensive and well written code, recommended study)
+
   General:
   
   1. https://cran.r-project.org/manuals.html (all of them)
@@ -510,8 +518,8 @@ The 'runif' functions computes n random values from a uniformly distributed vari
   
   1. http://adv-r.had.co.nz/ (Free access to Advanced R book by Wickham himself)
   2. https://cran.r-project.org/doc/manuals/r-release/R-exts.pdf (writing R packages)
-  2. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
-  3. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
+  3. https://cran.r-project.org/doc/manuals/r-release/R-ints.html (low level language details)
+  4. https://www.stat.berkeley.edu/~s133/ [@UBerkeleyS133.ConceptsComputeWithData]
   
   Data cleaning:
   
@@ -519,9 +527,10 @@ The 'runif' functions computes n random values from a uniformly distributed vari
   
   Statistics:
   
-  1. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  2. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  3. https://www.stat.berkeley.edu/~spector/s243/
+  1. https://rowannicholls.github.io/R.html (good free introduction to statistics and graphs in R) 
+  2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
+  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  4. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   
