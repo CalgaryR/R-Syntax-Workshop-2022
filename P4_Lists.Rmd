@@ -30,8 +30,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 By the end of this tutorial, you will know the basics of lists in R.
 We will cover the nature of lists, their core role in the R language, the syntax to construct them, how to modify them, and how to inspect them.
-You will reuse syntax from vectors and matrices that extend to lists.
-Specifically you will re-visit recycling, sub-setting using the the `[` syntax or using logical masks, and we will introduce a new operator to select or sub-set lists, the `[[` operator.
+You will reuse syntax from vectors and matrices that apply to lists.
+Specifically you will re-visit recycling, sub-setting using the the `[` index operator or using logical masks, and we will introduce a new way to select or sub-set lists, the `[[` index operator.
 
 Finally we will put in context the fact that a linear model is built upon a list in the R language.
 
@@ -46,7 +46,7 @@ It contains explanations, fully functional code boxes, and quizzes that make it 
 When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
 This provides invaluable hands-on feedback. 
 The instructor may also ask short questions regarding the material.
-Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+Should you fall behind or need more time for the exercises and quizzes, please complete them after the live session.
 This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes.
@@ -63,8 +63,7 @@ If you receive the source code and have RStudio, you can render it as a fully in
 Using an Rstudio (Posit) solution it can also be deployed on a ShinyR server.
 You can also do these things and much more if you move forward in your R journey.
 
-Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it.
-If you want to reset your answers and the code you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel.
+Finally, if you are following this material in a browser, every time you reopen the tutorial, it will be in the same state you left it the last time you worked on it. That means the code you have run, the answers to the quizzes you have worked, and the sections you have visited will be remembered. If you want to reset this information, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel.
 
 Let's get started.
 

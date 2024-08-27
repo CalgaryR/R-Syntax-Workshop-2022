@@ -32,7 +32,9 @@ Armed with this knowledge you will be able to use R at the command line as a pow
 
 In another tutorial of this series you will learn the syntax to create your own functions.
 This will be fundamental to avoid repetitive code and to write more readable programs.
-You will absolutely need to write a custom function whenever you can't find one that meets your requirements from among the built-in functions or from those available in R packages.
+The R base package has 1403 built-in functions and there are many thousands of R Packages available in
+CRAN, the public R repository with packages to carry out many types of computation and even whole frameworks like the tidyverse. If you still need to write something specific to your analysis, R has you covered with
+plain R syntax and the possibility to seamlessly integrate C++ code in your functions for added performance.
 
 Our main goal with this tutorial is to teach patterns of the R language basic syntax, also called the dollar syntax. 
 We believe this knowledge will set you on a positive trajectory at any point in your R language journey. 
@@ -45,7 +47,13 @@ However, those same differences can make it confusing at first for people with e
 ## About this tutorial
 <!-- ======================== -->
 
-This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. It contains explanations, fully functional code boxes, and quizzes that make it very interactive. If time allows during a guided session, the student can execute code to prod and test how the syntax works providing invaluable hands-on feedback. The instructor may also ask short questions regarding the material. Should you fall behind or need more time, please do so after the live session. Actually this is very important in order to cement the concepts and test your understanding.
+This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
+It contains explanations, fully functional code boxes, and quizzes that make it interactive. 
+When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
+This provides invaluable hands-on feedback. 
+The instructor may also ask short questions regarding the material.
+Should you fall behind or need more time for the exercises and quizzes, please complete them after the live session.
+This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
 
@@ -54,7 +62,7 @@ Several sources describe the three types of R Syntax [@RSyntax-Cheatsheet], [@RS
 
 This tutorial was built entirely in R using a package called `learnr`. It was compiled to an html document using Rmarkdown syntax and the `Knitr` package. If you receive the source code and have RStudio (Posit), you can render it as a fully interactive web page. Using an Rstudio solution it can also be deployed on a ShinyR server. You can also do these things and much more if you move forward in your R journey.
 
-Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it. If you want to reset your answers and the code  you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel. 
+Finally, if you are following this material in a browser, every time you reopen the tutorial, it will be in the same state you left it the last time you worked on it. That means the code you have run, the answers to the quizzes you have worked, and the sections you have visited will be remembered. If you want to reset this information, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel. 
 
 Let's get started.
 
@@ -79,7 +87,7 @@ Note the output, there is a [1] and the result of the calculation. We will addre
 
 Please try running the following lines of code, each representing a different mathematical operation.   
 
-```{r operators-1, exercise=TRUE, exercise.lines=5}
+```{r operators-1, exercise=TRUE}
 # white space between operands and operator does not matter below, try it!
 450 - 100 # subtraction
 3 * 10 # multiplication
@@ -190,14 +198,14 @@ kable( data.frame(relation1, value1, and, relation2, value2, equals, result,
 
 Finally the negation or NOT logical operator is represented in R by the exclamation mark `!`. It negates or turns the logical value into its opposite.
 
-```{r negation-logical-operator, exercise=TRUE, exercise.lines=2}
+```{r negation-logical-operator, exercise=TRUE}
 !(-4 > 0 )
 
 ```
 
 Thanks to the parenthesis the negation operator can be applied to the result of a more complex logical operation on the results of two relational operators.
 
-```{r negation-logical-operator-complex-exp, exercise=TRUE, exercise.lines=3}
+```{r negation-logical-operator-complex-exp, exercise=TRUE}
 !(-4 > 0  & 0 > 1)
 
 ```
@@ -206,7 +214,7 @@ Thanks to the parenthesis the negation operator can be applied to the result of 
 The relational operators require numbers while the logical operators require true or false values. What does R do when a logical operator is applied to a number? Let's assume that the parenthesis is left out accidentally from the previous expression.
 
 
-```{r negation-precedence, exercise=TRUE, exercise.lines=3}
+```{r negation-precedence, exercise=TRUE}
 !-4 > 0  & 0 > 1
 ```
 As it turns out R coerces a value of `0` to `FALSE` and any non-zero to `TRUE` when in need to calculate using a logical operator, like `!` on -4. Thus the expression `!-4` translates into `!TRUE = FALSE = 0`, which in turn makes `!-4 > 0` into `0 > 0` and therefore it computes `FALSE`.
@@ -218,7 +226,7 @@ The change in final result depending on the order of evaluation of the operators
 
 Operators that act on a single value are _unary_ while those that receive two arguments are _binary_. The execution order of an expression containing several operators follows the rules of operator precedence. These rules determine the  priority of execution given to some operators over others. Let's look at an example:
 
-```{r op-precendence-A, exercise=TRUE, exercise.lines=2}
+```{r op-precendence-A, exercise=TRUE}
 # predict the result computed by R before pressing the Run Code button
 1 + 5 * 5
 ```
@@ -227,7 +235,7 @@ Did you predict the result correctly? For R, multiplication takes precedence ove
 
 You can force the execution of addition over multiplication by use of parenthesis as illustrated below:
 
-```{r op-precendence-B, exercise=TRUE, exercise.lines=2}
+```{r op-precendence-B, exercise=TRUE}
 # predict the new result using parenthesis around the addition operator
 (1 + 5) * 5
 ```
@@ -412,7 +420,7 @@ Variables have types in R. The built-in function `typeof()` can be used to get t
 
 By observing the type that R associates with some values we can start to appreciate how R works internally.
 
-```{r type-of-variables, exercise=TRUE, exercise.lines=8}
+```{r type-of-variables, exercise=TRUE}
 i <- 54
 typeof(i)
 j <- 54L
@@ -425,7 +433,7 @@ typeof(first_name)
 
 Let's investigate the type of the R function `typeof` itself.
 
-```{r mode-of-mode, exercise=TRUE, exercise.lines=2}
+```{r mode-of-mode, exercise=TRUE}
 typeof(typeof)
 ```
 
@@ -442,7 +450,7 @@ R offers predefined functions. When you use an R package you also use functions 
 
 Expressions can be made by assigning the value returned from a function to a variable. Let's look at the result of running the following lines:
 
-```{r executing-function, exercise.lines=4, exercise=TRUE}
+```{r executing-function, exercise=TRUE}
 # assign the result of the function call to the variable 'e'
 e <- exp(1)
 # print the contents of 'e' to the output
@@ -453,7 +461,7 @@ The first line executes the expression on the right of the assignment operator, 
 
 Try running the line 1 by itself below.
 
-```{r executing-function-oneline, exercise.lines=1, exercise=TRUE}
+```{r executing-function-oneline, exercise=TRUE}
 e <- exp(1)
 ```
 
@@ -461,7 +469,7 @@ There should be no output. The value of the function `exp` with the argument `1`
 
 *Note:* As it is usually the case in R, there is more than one way of getting things done. You can get a two-for-one effect by printing and doing assignment in a single expression on the console by surrounding the assignment with parenthesis. Try it!
 
-```{r two-for-one,  exercise = TRUE, exercise.lines=2}
+```{r two-for-one,  exercise = TRUE}
 # this accomplishes the assignment and prints the value of the variable in one line
 (e <- exp(1))  # Euler's constant in R
 ```
@@ -482,14 +490,14 @@ To compute logarithms, R offers the following predefined functions:
 The most fundamental R built-in functions come bundled in the `base` package.
 To read about an R package use the function call `library(help = "base")` at the command line. Packages are loaded by issuing the function `libray("base")`  but the `base` package is loaded by default when an R session is started. Try it below.
 
-```{r functions-base-package, exercise=TRUE, exercise.lines=1}
+```{r functions-base-package, exercise=TRUE}
 library(help = "base")
 ```
 
 The language R provides a standard work-flow to build packages that contain functions, variables, and data targeting a specific problem. Contributors write R packages and share them mainly via the CRAN repository. To find out what comes built-in with the `base` package we can call the 
 `builtins()` function to produce the list of `r length(builtins())` objects that are loaded in the base environment when you start R the first time.
 
-```{r number-functions-base-package, exercise=TRUE, exercise.lines=5}
+```{r number-functions-base-package, exercise=TRUE}
 # get the number of objects loaded from the base R package
 length(builtins())
 # test if a object (a function) is part of the built-ins in the base environment
@@ -530,7 +538,7 @@ Experiment now to compute logarithms in base 10 and natural logarithms (base _e_
  
 Try using the two variables already predefined in the first two lines. Add as many lines of code as you need to experiment.
 
-```{r other-operators, exercise=TRUE, exercise.lines=12}
+```{r other-operators, exercise=TRUE}
 a <- 10
 e = exp(1)
 
@@ -559,7 +567,7 @@ Read on for the answer.
 
 R functions may be built-in or user created, they may also have none, one, or more arguments. The arguments are given in between parenthesis, separated by commas, and they may be named or not. An example of a named parameter to a function is `base` in the `log` function: `log(x, base = exp(1))`. Examine the code below and guess the output before running it, did you expect the result?
 
-```{r named-param-1, exercise = TRUE, exercise.lines=3}
+```{r named-param-1, exercise = TRUE}
 (three <- log(1000, base = 10))
 # un-comment to check if base exists after executing the line above
 # base
@@ -649,25 +657,25 @@ Note: as a side bar if you need to write a robust function that behaves like `lo
 
 Computers can only store and operate on numbers in the binary system, meaning only with two states that we will call  "off" and "on" or zeros and ones. Due to this limitation there are round off errors intrinsic to the arithmetic of converting from binary to decimal, a counting system we humans are more familiar with. Let's investigate the problem and find a solution in R [@CRAN.FAQ.RDoesNotThinkNumbersAreEqual].
 
-```{r round-off-error, exercise=TRUE, exercise.lines=1}
+```{r round-off-error, exercise=TRUE}
 0.1 + 0.1 + 0.1 == 0.3
 ```
 
 Wait a second, no one saw that one coming! Let's explore what is happening and why. First let's try to see the decimal representation of these numeric types.
 
-```{r printing-double-at-max-resolution, exercise=TRUE, exercise.lines=2}
+```{r printing-double-at-max-resolution, exercise=TRUE}
 print(0.1, digits = 17)
 print(0.3, digits = 17)
 ```
 Let's investigate now what the machine's precision to represent a double floating point number from the R documentation on the meaning of `double.eps` from the constant `.Machine` (you can summon the documentation with `help(.Machine)`:
 
-```{r floating-point-precision, exercise=TRUE, exercise.lines=2}
+```{r floating-point-precision, exercise=TRUE}
 # using the R constant .Machine, find out more with help(".Machine")
 (.Machine$double.base ^ .Machine$double.ulp.digits) / 2
 ```
 This means that this is the smallest number that will make this expression `FALSE`: `1 + x == 1`:
 
-```{r precision-double-test, exercise=TRUE, exercise.lines=3}
+```{r precision-double-test, exercise=TRUE}
 1 + 1.00e-16 == 1
 1 + 1.11e-16 == 1
 1 + 1.12e-16 == 1
@@ -688,6 +696,14 @@ all.equal(sum_calc, sum_expected)
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
 ## Tutorials &  online-resources
+
+  On Variables in R:
+  
+  1. https://statisticsglobe.com/assignment-operators-in-r (Joachim Schork is an R connoisseur)
+  2. https://masterr.org/r/RFP-part3-variables/ (advanced but insightful)
+  3. https://www.datacamp.com/tutorial/variables-in-r (easy to follow)
+  4. https://masterr.org/r/RFP-part4-shadowing/ (explanation of shadowing and scopes)
+  5. https://masterr.org/r/RFP-part6/ (about the assignment operator, <<-) 
 
   General:
   

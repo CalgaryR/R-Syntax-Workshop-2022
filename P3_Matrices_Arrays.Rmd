@@ -41,7 +41,7 @@ It contains explanations, fully functional code boxes, and quizzes that make it 
 When time allows during a guided session, the student can edit and execute code to test how the syntax works. 
 This provides invaluable hands-on feedback. 
 The instructor may also ask short questions regarding the material.
-Should you fall behind or need more time, please follow the exercises and test problems after the live session.
+Should you fall behind or need more time for the exercises and quizzes, please complete them after the live session.
 This is very important in order to cement the concepts and challenge your understanding.
 
 The emphasis of this tutorial is on why R works the way it does and less on being a reference manual or a source of recipes. In doing so we hope to get you excited about this useful and expressive language. R was designed from the ground up to be vectorized and object oriented. Its aim is to be useful for both experts and beginners with the need to do computational statistics, data analysis and data visualization tasks.
@@ -51,7 +51,7 @@ Several sources describe the three types of R Syntax [@RSyntax-Cheatsheet], [@RS
 
 This tutorial was built entirely in R using a package called `learnr`. It was compiled to an html document using Rmarkdown syntax and the `Knitr` package. If you receive the source code and have RStudio, you can render it as a fully interactive web page. Using an Rstudio (Posit) solution it can also be deployed on a ShinyR server. You can also do these things and much more if you move forward in your R journey.
 
-Finally, if you are following this material on a browser, every time you reopen this page the tutorial will be in the previous state you left it the last time you worked on it. If you want to reset your answers and the code  you've run on the exercises, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel. 
+Finally, if you are following this material in a browser, every time you reopen the tutorial, it will be in the same state you left it the last time you worked on it. That means the code you have run, the answers to the quizzes you have worked, and the sections you have visited will be remembered. If you want to reset this information, erasing all of your previous history, press the `Start Over` option at the bottom left on the main panel.
 
 Let's get started.
 
@@ -74,7 +74,7 @@ knitr::include_graphics("images/matrix.png", dpi = 106)
 ```
 
 And in code it would be constructed with:
-```{r matrix-construction, exercise=TRUE, exercise.lines=1}
+```{r matrix-construction, exercise=TRUE}
 matrix(c(5, -1, 3, 0, -4, 1), ncol = 3, nrow = 2, byrow = T)
 ```
 
@@ -94,7 +94,7 @@ knitr::include_graphics("images/matrix_fill.png", dpi = 106)
 
 Try to answer the questions with your code.
 
-```{r matrix-example, exercise = TRUE, exercise.lines=10}
+```{r matrix-example, exercise = TRUE}
 x <- matrix(c(5, -1, 3, 0, -4, 1), ncol = 3, nrow = 2, byrow = T)
 # extract the element on the first row and third column of x
 
@@ -115,7 +115,7 @@ x
 
 If the argument `T` had not been given to the named parameter `byrow` above, R would have constructed the matrix on a column first order. Verify this for yourself:
 
-```{r matrix-example-bycolumn, exercise = TRUE, exercise.lines=9}
+```{r matrix-example-bycolumn, exercise = TRUE}
 y <- matrix(c(5, -1, 3, 0, -4, 1), ncol = 3, nrow = 2)
 # extract the element on the first row and third column of x
 y[1,3]
@@ -133,7 +133,7 @@ As a task, find out how to name rows and columns in a matrix. There is an exampl
 
 A matrix can be subset via positions and via values, either using logical masks or column names. The same operator `[]` is used for both dimensions of the matrix, separated by a comma inside the brackets. Just like when sub-setting vectors, a matrix can de subset with vectors of positions to extract subsets by row(s) and column(s). For example, to subset the first row and the second column of a given matrix do as follows.
 
-```{r subsetting-matrix-rows, exercise=TRUE, exercise.lines=3}
+```{r subsetting-matrix-rows, exercise=TRUE}
 (m <- matrix(rep(c(rep(1:2,2), rep(3:4, 2)),2), byrow = T, nrow = 4))
 m[1,]
 m[,2]
@@ -144,7 +144,7 @@ m <- matrix(rep(c(rep(1:2,2), rep(3:4, 2)),2), byrow = T, nrow = 4)
 
 Now extract a sub-matrix defined by the first two rows and the third and fourth columns of the original matrix:
 
-```{r, subsetting-matrix-from-within-matrix, exercise=TRUE, exercise.setup="setup-subsetting-matrices", exercise.lines=2}
+```{r, subsetting-matrix-from-within-matrix, exercise=TRUE, exercise.setup="setup-subsetting-matrices"}
 m[1:2, 3:4]
 ```
 
@@ -300,7 +300,7 @@ Let's build a $2\times2\times3$ array with random values between 0 and 64.
 
 
 
-```{r, 2by2by3array, exercise=TRUE, exercise.lines=4}
+```{r, 2by2by3array, exercise=TRUE}
 set.seed(673912)
 ( a <- array(sample.int(64,size = 12,replace = TRUE), 
              dim = c(2,2,3),
@@ -309,7 +309,7 @@ set.seed(673912)
 
 Now let's build a logical mask to nullify the second frame and apply it to the original array.
 
-```{r, logical-mask-for-an-array, exercise=TRUE, exercise.lines=5}
+```{r, logical-mask-for-an-array, exercise=TRUE}
 (mask <- array(rep(1,12), 
                dim = c(2,2,3),
                dimnames = list(c(),c(),c('red','green','blue'))))
@@ -332,7 +332,7 @@ mask[,,'green'] <- matrix(rep(0,4), ncol = 2)
 ```
 
 
-```{r, apply-mask-on-array, exercise=TRUE, exercise.lines=2, exercise.setup="setup-for-array-mask"}
+```{r, apply-mask-on-array, exercise=TRUE, exercise.setup="setup-for-array-mask"}
 a * mask
 ```
 
@@ -366,7 +366,7 @@ To create a date without time one can use text and a format string using the fol
 <tr><td><tt>%Y</tt></td><td>Year (4 digit)</td></tr></table>
 </center>
 
-```{r, creating-simple-date-withot-time, exercise=TRUE, exercise.lines=5}
+```{r, creating-simple-date-withot-time, exercise=TRUE}
 # let's use the default format: 4-digit year, 2-digit month, 2-digit day, separated by either - or /
 c(as.Date("2021-2-16"),  as.Date('2021/02/17'))
 # Lets add formats: %d= Day as a decimal number; %
@@ -378,7 +378,7 @@ If you need to read a date written in a non-standard convention, the named param
 
 `Date` objects are stored as the number of days since January 1, 1970. There are functions to compute on dates, for instance to return the day of the week a certain date corresponds to. There are similarly functions to compute the month, day and the  quarter corresponding to a date.
 
-```{r, examples-compute-stuff-from-date, exercise=TRUE, exercise.lines=7}
+```{r, examples-compute-stuff-from-date, exercise=TRUE}
 famous_events <- c(Storming_of_the_Bastille=as.Date('14 July 1789', format="%d %B %Y"),
                    First_Canadian_Constitution_Act=as.Date('29th March 1867', format="%dth %B %Y"),
                    First_inauguration_of_Obama=as.Date('January 20, 2009', format='%B %d, %Y'))
@@ -399,7 +399,7 @@ The usual choice is to use POSIXct unless you really need the list version.
 The creation of instances is done with the functions `as.POSIXct` and `as.POSIXlt`. 
 There is a standard format for the date and the time parts of the input, execute the code below to confirm this.
 
-```{r, create-dates-as-POSIX, exercise=TRUE, exercise.lines=3}
+```{r, create-dates-as-POSIX, exercise=TRUE}
 # for better results all dates should have date and time parts
 text_dates <- c('2021-02-16 16:00', '2021-02-16 16:45', '2021-02-16 17:00:01')
 as.POSIXct(text_dates)
@@ -425,7 +425,7 @@ To tell R the input is in non-standard form use the function `strptime` and the 
 <tr><td><tt>%z</tt></td><td>Offset from GMT</td><td><tt>%Z</tt></td><td>Time zone (character)</td></tr></tbody></table>
 </center>
 
-```{r, inputing-time-POSIX-non-standard-format, exercise=TRUE, exercise.lines=3}
+```{r, inputing-time-POSIX-non-standard-format, exercise=TRUE}
 (started_YYC = strptime('16/Feb/2021T16:01:00',format='%d/%b/%YT%H:%M:%S'))
 (started_LON = strptime('16/Feb/2021T16:01:00',format='%d/%b/%YT%H:%M:%S',tz = 'UTC'))
 started_LON - started_YYC
