@@ -341,7 +341,7 @@ quiz(
   question_radio(
     "The subsetting operator [ always returns a list when applied to a list.",
     answer("True", correct = TRUE),
-    answer("False", correct = FALSE, message = "Well, maybe you were thinking of [[, that one gives you the actual elelment(s) of the list."),
+    answer("False", correct = FALSE, message = "Well, maybe you were thinking of [[, that one gives you the actual element(s) of the list."),
     random_answer_order = TRUE,
     allow_retry = TRUE,
     correct = "You are on a roll! This is an important characteristic of lists."

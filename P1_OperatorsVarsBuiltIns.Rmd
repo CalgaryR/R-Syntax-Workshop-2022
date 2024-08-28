@@ -316,7 +316,7 @@ kable( data.frame(long_form, short_form, description,
 quiz(
   question_radio(
     "The NOT operator is represented in R by the symbol ~", 
-    answer("yes", correct = FALSE, message = 'This is a good question though!'),
+    answer("yes", correct = FALSE, message = 'In some languages this might be true, not in R though!'),
     answer("no", correct= TRUE),
     correct = 'Correct, it is actually the exclamation mark so !TRUE will give FALSE',
     random_answer_order = TRUE,

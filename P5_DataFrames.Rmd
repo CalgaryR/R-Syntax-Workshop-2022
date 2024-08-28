@@ -160,7 +160,7 @@ df[df$population > 80, 'country']
 df[df$population > 80,]
 ```
 
-This way of sub-setting a data frame uses a **_logical mask_**. The mask is nothing but a boolean vector generated using a logical operator. The boolean vector is then used to sub-setting another vector using the `[]` operator selecting the elements of the vector at the positions where the mask is `TRUE`. Since the columns of a data frame are vectors, this is a natural way of sub-setting. 
+This way of sub-setting a data frame uses a **_logical mask_**. The mask is nothing but a Boolean vector generated using a logical operator. The Boolean vector is then used to sub-set another vector using the `[]` operator selecting the elements of the vector at the positions where the mask is `TRUE`. Since the columns of a data frame are vectors, this is a natural way of sub-setting. 
 
 This image helps explain it.
 
