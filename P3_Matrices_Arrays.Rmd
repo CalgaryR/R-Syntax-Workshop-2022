@@ -539,7 +539,7 @@ Is this a suitable selection for your data?",
   
   Statistics:
   
-  1. https://rowannicholls.github.io/R.html (good free introduction to statistics and graphs in R) 
+  1. https://cran.r-project.org/doc/contrib/Lemon-kickstart/ (very short but juicy)
   2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
   3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
   4. https://www.stat.berkeley.edu/~spector/s243/
@@ -547,7 +547,8 @@ Is this a suitable selection for your data?",
   Biology:
   
   1. https://www.bioconductor.org/ (packages for bio-statistics)
-  2. https://github.com/eacton/CAGEF (University of Toronto - Centre for the Analysis of Genome Evolution & Function)
+  2. https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html
+  3. https://github.com/eacton/CAGEF (University of Toronto - Centre for the Analysis of Genome Evolution & Function)
 
   Language Reference:
   
