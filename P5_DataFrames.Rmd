@@ -298,47 +298,82 @@ That was a company on a roll in the 70's!
 
 ## Subsetting and transforming
 
-A very common operation on data frames is to aggregate the values in one or more columns of observations that belong to the same category. The nature of the aggregation can be an operation like counting, adding, or by extension, applying any function that takes a value and returns it in a transformed state.
+A very common operation on data frames is to aggregate the values in one or more columns of observations that belong to the same category. 
+The nature of the aggregation can be an operation like counting, adding, or by extension, applying any function that takes a value and returns it in a transformed state.
+
+In the following example we will walk through an application of this pattern to answer the question of how many of the treatments in a controlled experiment resulted in a minimum passing threshold value and what was their mean result. 
 
 First create a data frame with some results from a fictional experiment that was done by triplicate.
 Notice a convenient use or R's vector recycling property to make the code expressive.
 
 ```{r, aggregating-examples, exercise=TRUE, exercise.lines=7}
-set.seed(5529)
-treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
-results <- round(runif(12), digits = 2)
-passes.GT.0.7 <- results>0.7
-(experiments <- data.frame(treatment=treatment, 
-                 val_1=results,
-                 passes=passes.GT.0.7))
+set.seed(5529) # comment this line to see the impact on reproducibility
+treatment <- LETTERS[sample(x = 1:26, size = 3, replace = FALSE)] # vector to be recycled by data frame
+results <- round(runif(9), digits = 2) # equally distributed values between 0 and 1
+passes_GT_0.7 <- results > 0.7
+(experiments <- data.frame(treatment = treatment, 
+                outcome = results,
+                passes = passes_GT_0.7))
 ```
 
-Then subset by treatment while adding `Val_1` and counting the number of observations that pass our test (are greater than `0.7` by the definition of column `passes`).
+Then we will answer the two questions separately.
+First by calculating the mean of the results per treatment in a new data frame called `outcome_mean_by_treatment`.
+Then by counting the number of cases that pass our criteria (greater than `0.7` by the value of the column `passes`) in the data frame `num_successful_cases_by_treatment`.
 
 ```{r, aggregationExamplesSetup}
 set.seed(5529)
-treatment <- LETTERS[sample(x = 1:26, size = 2)] # vector to be recycled by data frame
+treatment <- LETTERS[sample(x = 1:26, size = 3, replace = FALSE)] # vector to be recycled by data frame
 results <- round(runif(12), digits = 2)
-passes.GT.0.7 <- results>0.7
-experiments <- data.frame(treatment=treatment, 
-                 val_1=results,
-                 passes=passes.GT.0.7)
+passes_GT_0.7 <- results > 0.7
+experiments <- data.frame(treatment = treatment, 
+                 outcome=results,
+                 passes = passes_GT_0.7)
+# first calculate the mean of val_1 by treatment
+outcome_mean_by_treatment <- aggregate(x = experiments$outcome,
+                                   by = list(experiments$treatment),
+                                   FUN = "mean")
+num_successful_cases_by_treatment <- aggregate(x = experiments$passes,
+                                               by = list(experiments$treatment),
+                                               FUN = "sum")
 ```
 
-```{r, aggregation-example-adding, exercise=TRUE, exercise.lines=12, exercise.setup="aggregationExamplesSetup"}
+```{r, aggregation-example-adding, exercise=TRUE, exercise.lines=8, exercise.setup="aggregationExamplesSetup"}
 # first calculate the mean of val_1 by treatment
-(val_1_by_treatment <- aggregate(x = experiments$val_1,
-                                 by = list(experiments$treatment), 
-                                 FUN = "mean"))
+(outcome_mean_by_treatment <- aggregate(x = experiments$outcome,
+                                   by = list(experiments$treatment),
+                                   FUN = "mean"))
 # the calculate the number of results that are greater than 0.7
-(num_gt_point_seven_by_treatment <- aggregate(x = experiments$passes, 
-                                     by = list(experiments$treatment), 
-                                     FUN = "sum"))
+(num_successful_cases_by_treatment <- aggregate(x = experiments$passes,
+                                                by = list(experiments$treatment),
+                                                FUN = "sum"))
+```
+The function `aggregate` gives default names to the columns of the resulting data frame: `Group.1` and `x`.
+There are at least two ways of generating a single data frame from these two partial results.
+First we will use `cbind` to append the column of results from the second data frame, called `x`, to the first data frame.
+
+
+```{r, final-cbind, exercise=TRUE, exercise.lines=5, exercise.setup="aggregationExamplesSetup"}
 # now put them together in a single data frame
-aggregated_df <- cbind(val_1_by_treatment, num_gt_point_seven_by_treatment$x)
-names(aggregated_df) <- c("treatment", "mean_val_1", "num_gt_0_pt_7")
+aggregated_df <- cbind(outcome_mean_by_treatment,
+                       num_successful_cases_by_treatment$x) # we pass the list 'x'
+names(aggregated_df) <- c("treatment", "mean","# of cases>0.7")
 aggregated_df
 ```
+
+A second, arguably more elegant solution is to apply the R built-in function `merge` to join the two partial results for mean outcome and number of outcomes greater than 0.7.
+An important requisite to merge two data frames is that they share a column with the same identifier. 
+In our case that column is `Group.1`, created by the function `aggregate` in the previous step.
+
+```{r, merge, exercise=TRUE, exercise.lines=6, exercise.setup="aggregationExamplesSetup"}
+results_df <- merge( x = outcome_mean_by_treatment, 
+                     y = num_successful_cases_by_treatment, 
+                     by = "Group.1", 
+                     all = TRUE)
+names(results_df) = c("treatment", "mean","# of cases>0.7")
+results_df
+```
+
+When this function is called with the argument `all = TRUE`, this is equivalent to a SQL query for a full `JOIN` function between two tables. 
 
 
 ## Factors or strings
