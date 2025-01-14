@@ -102,6 +102,7 @@ An R user-defined function is called exactly the way you would call a built-in f
 subract2numbers <- function(a, b) {
   return(a - b)
 }
+
 (result <- subract2numbers(5, 4))
 ```
 
@@ -111,6 +112,7 @@ The value returned by a function is the one defined by the last expression withi
 add_2_numbers <- function(a, b) {
   a + b
 }
+
 (result_2 <- add_2_numbers(5, 4))
 ```
 
@@ -119,18 +121,29 @@ add_2_numbers <- function(a, b) {
 
 ## Named parameters
 
-Just like with built-ins you can name parameters. You can also use default values.
+Just like with built-ins you can name parameters. 
+You can also use default values.
+In the following example we will create a function to add two vectors using the default R base built-in function `sum` to illustrate this pattern.
+Our initial version will accept two positional arguments, expecting to process two vectors and using recycling if necessary.
+
 
 ```{r, named-parameters-in-user-defined-functions, exercise=TRUE}
 add_2_vectors <- function(x, y) {
   sum(x, y)
 }
+
 # now use the function
 set.seed(1234)
-(a <- sample(c(1:100), size = 10, replace = T))
-(b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T))))
+
+(a <- sample(1:100, size = 10, replace = T))
+
+(b <- c(sample(1:10, size = 4, replace = T), 
+        NA, 
+        sample(1:100, size = 5, replace = T)))
+
 add_2_vectors(x = a,
               y = b)
+
 ```
 We might want to fix this hiccup by adding a default parameter to indicate that if `NA`s are found they can be safely ignored.
 
@@ -141,10 +154,11 @@ b <- c(sample(c(1:100), 4, T), NA, c(sample(c(1:100), 5, T)))
 ```
 
 ```{r, named-parameters-in-user-defined-functions-NAs-addressed, exercise=TRUE, exercise.setup="namedParametersInUserDefinedFunctionsNAsAddressedSetup"}
-add_2_vectors <- function(x, y, remove.na = TRUE) {
+add_2_vectors_better <- function(x, y, remove.na = TRUE) {
   sum(x, y, na.rm = remove.na)
 }
-add_2_vectors(x = a, y = b)
+
+add_2_vectors_better(x = a, y = b)
 ```
 
 Most R functions have parameters to ignore the presence of missing values when processing the input.
@@ -189,35 +203,52 @@ Let's have a look at concrete examples.
 
 ## Iterating  over a vector
 
+```{r, sapplyVsForLoopComparisonSetup}
+set.seed(456)
+(values <- sample(1:10, 5))
+```
 
- First illustrate the  `sapply` function to square all the elements of a numeric vector.
+Let's create a vector of 5 reproducible random values between one and 10.
 
 ```{r, sapply-example-on-vector, exercise=TRUE}
 set.seed(456)
-(v <- sample(1:10, 5))
+
+(values <- sample(1:10, 5))
+```
+
+Now transform the values into their squares using the functional style built-in function `sapply`, for simple apply.
+
+
+```{r, functional-style, exercise=TRUE, exercise.setup="sapplyVsForLoopComparisonSetup"}
 # now iterate over the vector applying your operation to square each element
-(squares2 <- sapply(v, function(a) {a*a}))
+(squares2 <- sapply(X = values, # input list
+                    FUN = function(a) { a * a })) # function to apply to each member 
 ```
 
-```{r, sapplyVsForLoopComparisonSetup}
-set.seed(456)
-(v <- sample(1:10, 5))
-```
+We could have written that call in one line. 
+Functional style tends to be declarative.
+You instruct R what to do instead of how to do it.
 
-Now use the for-loop to achieve the same transformation.
+
+Now use the procedural style, using a for-loop to achieve the same transformation.
 
 ```{r, for-loop-example-on-vector, exercise=TRUE, exercise.setup="sapplyVsForLoopComparisonSetup"}
-square_vals <- rep(0, length(v))
-i = 1
-for (a in v) {
-  square_vals[i] = a*a
-  i = i + 1
+square_vals <- rep(0, length(values)) # pre-allocate space for speed
+
+i = 1 # start counter
+# start iteration
+for (a in values) {
+  square_vals[i] = a*a # allocate values
+  i = i + 1 # increase counter
 }
+
 # display the answer
 square_vals
 ```
 
-Notice the preallocation of space for the vector in the first line. 
+Notice the pre-allocation of space for the vector in the first line. 
+
+The procedural style can be more verbose because it gives step by step instructions.
 
 
 ## Conditionally walking over a vector
