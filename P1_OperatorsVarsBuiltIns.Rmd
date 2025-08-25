@@ -217,7 +217,7 @@ The relational operators require numbers while the logical operators require tru
 ```{r negation-precedence, exercise=TRUE}
 !-4 > 0  & 0 > 1
 ```
-As it turns out R coerces a value of `0` to `FALSE` and any non-zero to `TRUE` when in need to calculate using a logical operator, like `!` on -4. Thus the expression `!-4` translates into `!TRUE = FALSE = 0`, which in turn makes `!-4 > 0` into `0 > 0` and therefore it computes `FALSE`.
+As it turns out R coerces a value of `0` to `FALSE` or `F` and any non-zero to `TRUE` or `T` when in need of calculating the result of a logical operator, like `!` applied to a number like `-4`. Thus the expression `!-4` translates into `!TRUE = FALSE`, which in turn makes the relational operator `>` be faced with solving `F > 0`. The greater than operator, `>`, coerces the boolean and numeric values to characters to be able to process them, thus it compares their values on the ASCII table: `'F'=70` and `'0'=48`, therefore it computes `70 > 48 = TRUE`. The rest is similar, `'T' & 0 > 1` is reduced to `TRUE & FALSE` which is `FALSE`.
 
 The change in final result depending on the order of evaluation of the operators brings us into the subject of operator precedence.
 
@@ -421,14 +421,16 @@ Variables have types in R. The built-in function `typeof()` can be used to get t
 By observing the type that R associates with some values we can start to appreciate how R works internally.
 
 ```{r type-of-variables, exercise=TRUE}
-i <- 54
-typeof(i)
-j <- 54L
-typeof(j)
-x <- 3.1416
-typeof(x)
-first_name <- "Rob"
-typeof(first_name)
+age <- 25; typeof(age)
+# Uncomment the lines below one by one and check the result
+#year <- 54L; typeof(year)
+
+#number.pi <- 3.1416; typeof(number.pi)
+
+#first.name <- "Rob"; typeof(first.name)
+
+#is.Sunday <- ( weekdays(Sys.Date()) == "Sunday" )
+#typeof(is.Sunday)
 ```
 
 Let's investigate the type of the R function `typeof` itself.
@@ -488,7 +490,7 @@ To compute logarithms, R offers the following predefined functions:
 ```
 
 The most fundamental R built-in functions come bundled in the `base` package.
-To read about an R package use the function call `library(help = "base")` at the command line. Packages are loaded by issuing the function `libray("base")`  but the `base` package is loaded by default when an R session is started. Try it below.
+To read about an R package use the function call `library(help = "base")` at the command line. Packages are loaded by executing the function `libray("base")`, however this is not necessary for this package because it is loaded by default when an R session starts. Try the help about the package.
 
 ```{r functions-base-package, exercise=TRUE}
 library(help = "base")

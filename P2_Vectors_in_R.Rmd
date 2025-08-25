@@ -318,7 +318,7 @@ quiz(
     allow_retry = T,
     random_answer_order = T,
     correct = "Wow, that was impressive, you are really beginning to get a kick out of R!"),
-  question("What would the result of executing the following expression be?
+  question("What would be the result of executing the following expression?
 
           times_each <- c(9,2,7)
           x <- rep(x = 0:2, times = times_each)
@@ -401,9 +401,9 @@ x[mask]
 cat(paste("The positions of the elements greater than 2: 'match(x[mask], x)' "))
 match(x[mask], x)
 cat(paste("Compute how many values greater than two were found in 'x' using length(x[mask])"))
- length(x[mask])
- cat(paste("Another way is to find how many TRUE values there are in the mask: sum(mask)"))
- sum(mask)
+length(x[mask])
+cat(paste("Another way is to find how many TRUE values there are in the mask: sum(mask)"))
+sum(mask)
 ```
 
 Another way of sub-setting a vector by selecting values is using the `%in%` operator. It checks if any of the elements of the vector  is present in the sequence provided as second argument to `%in%`. An exercise will clarify its use:
