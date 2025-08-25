@@ -34,7 +34,7 @@ In another tutorial of this series you will learn the syntax to create your own 
 This will be fundamental to avoid repetitive code and to write more readable programs.
 The R base package has 1403 built-in functions and there are many thousands of R Packages available in
 CRAN, the public R repository with packages to carry out many types of computation and even whole frameworks like the tidyverse. If you still need to write something specific to your analysis, R has you covered with
-plain R syntax and the possibility to seamlessly integrate C++ code in your functions for added performance.
+plain R syntax and the possibility to seamlessly integrate C++ or Rust code in your functions for added performance.
 
 Our main goal with this tutorial is to teach patterns of the R language basic syntax, also called the dollar syntax. 
 We believe this knowledge will set you on a positive trajectory at any point in your R language journey. 

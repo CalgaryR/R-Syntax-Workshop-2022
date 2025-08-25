@@ -248,7 +248,7 @@ square_vals
 
 Notice the pre-allocation of space for the vector in the first line. 
 
-The procedural style can be more verbose because it gives step by step instructions.
+<!-- The procedural style can be more verbose because it gives step by step instructions. -->
 
 
 ## Conditionally walking over a vector
