@@ -84,7 +84,12 @@ Data frames are similar to tables of a sophisticated relational data base, where
 
 ## ✅️ Why is a data frame different?
 
-Under the hood a data frame is implemented as a list of vectors of the same length. The algorithms to search and select items in data frames can be optimized because its two more prominent features: table-like geometry and vector columns of equal length. The elements of a vector are stored in contiguous memory of constant size and this gives the data frame some advantages. They are natively implemented so the `$` and `[` syntax we have already covered can be safely reused for data frames.
+Under the hood a data frame is implemented as a list of vectors of the same length. The algorithms to search and select items in data frames can be optimized because its two more prominent features:
+
+ * table-like geometry
+ * vector columns of equal length. 
+ 
+The elements of a vector are stored in contiguous memory of constant size and this gives the data frame some advantages. The good news is data frames have been natively implemented to use the `$` and `[` operator syntax that we already know. This knowledge can be safely reused for data frames.
 
 
 ## ✅️ Constructing a data frame
@@ -106,9 +111,7 @@ census2019 <- c(T,T,T,T,F,T)
 
 *Note:* In R the dot for names has no special meaning, it is like `_`. The dot syntax for formulas and in generic object dispatch has special meaning, but those are topics for more advanced material.
 
-If any of the vectors has a different length there will be error messages, R will not be happy about it. Try it for yourself in the previous exercise.
-
-In the above example the vector of country names, of type `character`, was converted to factors by a default named argument `stringsAsFactors = T` in the constructor `data.frame()`. A special note about this later in this module.
+If any of the vectors has a different length there will be error messages, R will not be happy about it. Try it for yourself in the previous code box.
 
 Try the `str()` function on the data frame we just created. R has a special vocabulary for the rows and columns of a data frame. Each of the <span style="color:blue">vectors</span> in the list are mapped to a <span style="color:blue">variable</span> while each <span style="color:red">row</span> represents an <span style="color:red">observation</span>.
 
@@ -378,11 +381,11 @@ When this function is called with the argument `all = TRUE`, this is equivalent 
 
 ## ✅️ Factors or strings
 
-Did you notice that in the previous section we got the countries as a vector of factors with 6 levels? Remember that special case of vectors called factors specialized on manipulating categorical variables? Well here we go again. 
+It used to be that R converted strings to factors unless told otherwise, so the countries defined in the previous section would have been defined as a vector of factors with 6 levels instead of a vector of six character strings representing country names. 
 
 When you construct a data frame from vectors the type of each vector will be interpreted by the data frame constructor. R will coerce the elements of the vector to the most general data type to be able to work with them. An ordering of types from more  general to more specific is `character` > `complex` > `double` > `integer` > `logical`. 
 
-You can give R hints, though, for instance you can tell it to interpret the strings in vectors as factors or not, base R will do so by default.
+You can give R hints, though, for instance you can tell it to interpret the strings in vectors as factors, base R recently stopped doing so by default.
 
 ```{r example-data-frame-strings-as-factors, exercise=TRUE, exercise.lines=7}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
@@ -393,7 +396,7 @@ country_stats <- data.frame( country,
 # the function 'str()' shows us the structure of the object
 str(country_stats)
 ```
-The R constructor for data frames interpreted the strings as 6 factors. Perhaps not what you expected, compare with this case.
+The R constructor for data frames used to interpret the strings as factors by default, perhaps not what one would expect, this is the reason this behaviour was recently modified so factors have to be explicitly requested while processing character vectors for a data frame constructor. 
 
 ```{r exampleDataFrameStringsAsIsSetup}
 country <- c("Canada", "EEUU", "United Kingdom", "Germany", "Italy", "Poland")
@@ -402,7 +405,7 @@ population <- c(37, 331, 67, 83, 60, 39)
 
 
 ```{r example-data-frame-strings-as-is, exercise=TRUE, exercise.lines=2, exercise.setup="exampleDataFrameStringsAsIsSetup"}
-country_stats <- data.frame( country, population, stringsAsFactors = FALSE)
+country_stats <- data.frame( country, population)
 str(country_stats)
 ```
 
