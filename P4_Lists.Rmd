@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <!-- ======================== -->
 
-## What you will learn
+## 🟢 What you will learn
 
 <!-- ======================== -->
 
@@ -37,7 +37,7 @@ Finally we will put in context the fact that a linear model is built upon a list
 
 <!-- ======================== -->
 
-## About this tutorial
+## 🟢 About this tutorial
 
 <!-- ======================== -->
 
@@ -70,7 +70,7 @@ Let's get started.
 
 <!-- ====================== -->
 
-## What are Lists?
+## ✅️ What are Lists?
 
 <!-- ====================== -->
 
@@ -78,7 +78,7 @@ Lists are one-dimensional vector objects that can store information of heterogen
 R's linear model object, with constructor `lm()`, is a list.
 Lists are very versatile and are at the center of R's model and data handling capabilities.
 
-## Constructing lists
+## ✅️ Constructing lists
 
 Here is a graphical representation of a list with three components.
 
@@ -90,9 +90,9 @@ And here is your turn to create it with R code using the constructor `list()`.
 Try to complete the exercise before looking at the hint.
 
 ```{r list-constructor, exercise=TRUE, exercise.lines=7}
-my_list <- list(some_strings = c("hello", "world"),
+(my_list <- list(some_strings = c("hello", "world"),
                 some_numbers = 10:15,
-                some_booleans = c(T,T,T,F))
+                some_booleans = c(T,T,T,F)))
 # check the names
 
 # extract the first element of the list
@@ -100,8 +100,11 @@ my_list <- list(some_strings = c("hello", "world"),
 ```
 
 ```{r list-constructor-hint}
+# first, check what attributes are present in the object
 attributes(my_list)
+# print the names given in the constructor via the named arguments
 names(my_list)
+# extract the first element of the list, note the double square brackets
 my_list[[1]]
 ```
 
@@ -109,7 +112,7 @@ Remember the case of the ingredients for a bakery from the module on vectors?
 Well now we can make a more elaborate comparison of the ingredients required weekly and annually using <span style="color:green">lists</span> and <span style="color:green">matrices</span>.
 
 
-## Using lists of vectors
+## ✅️ Using lists of vectors
 
 Let's carry on with the example of the materials for the bakery from the module on Vectors.
 We want to create a double entry table showing the materials on the vertical axis and the period of time for their estimated amounts: weekly and annual, on the vertical axis.
@@ -118,9 +121,9 @@ First we will create the table as a matrix, then we will name the rows and colum
 
 ```{r, lists-of-vectors-use, exercise=TRUE, exercise.lines=8}
 # weekly consumption of ingredients at a bakery
-weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
+(weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350))
 # estimate the annual consumption of each material given 52.18 weeks per year
-weekly_values * rep(52.18, 4)
+weekly_values * rep(52.18, times=4)
 (m<-weekly_values %*% t(c(1, 52.18))) # matrix multiplication of two vectors
 #help("matrix")
 dimnames(m) <- list(supplies=c(names(weekly_values)), frequency=c("weekly","annual"))
@@ -149,7 +152,7 @@ dimnames(m)
 
 
 
-## Accessing the elements of a list {#accessing-the-elements-of-a-list}
+## ✅️ Accessing the elements of a list {#accessing-the-elements-of-a-list}
 
 Did you notice the use of double square brackets, `[[]]` to access the vectors stored in the list of the previous section?
 Had you chosen to use single brackets `[]` the result would have been a named list of one vector as its only element, try it now if you did not before:
@@ -185,7 +188,7 @@ In general, passing two or more lists as arguments to `c()` merges them all into
 
 <!-- =========================== -->
 
-## Appending a new element {#appending-a-new-element}
+## ✅️ Appending a new element {#appending-a-new-element}
 
 <!-- =========================== -->
 
@@ -225,7 +228,7 @@ my_list[[length(my_list)]]
 
 <!-- =============================== -->
 
-## Accessing nested lists
+## ✅️ Accessing nested lists
 
 <!-- =============================== -->
 
@@ -264,7 +267,7 @@ to_do_list$items$drinks
 
 <!-- =============================== -->
 
-## Referencing elements by name
+## ✅️ Referencing elements by name
 
 <!-- =============================== -->
 
@@ -315,7 +318,7 @@ to_buy$drinks
 
 <!-- =============================== -->
 
-## Conversion of lists to vectors {#conversion-of-lists-to-vectors}
+## ✅️ Conversion of lists to vectors {#conversion-of-lists-to-vectors}
 
 <!-- =============================== -->
 
@@ -332,7 +335,7 @@ str(vector_version)
 
 <!-- =============================== -->
 
-## Test your knowledge
+## 🛑 Test your knowledge
 
 <!-- =============================== -->
 
@@ -399,7 +402,7 @@ quiz(
 ```
 
 
-## License
+## 📌 License
 
 <!-- =============================== -->
 
@@ -407,7 +410,7 @@ quiz(
 
 <!-- =============================== -->
 
-## Tutorials & online-resources
+## 📌 Tutorials & online-resources
 
 <!-- =============================== -->
 
@@ -456,4 +459,4 @@ Computing:
   
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)  
 
-## References
+## 📌 References

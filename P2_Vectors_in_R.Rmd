@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <!-- ======================== -->
-## What you will learn
+## 🟢 What you will learn
 <!-- ======================== -->
 
 By the end of this tutorial, you will know the basics of vectors in R. 
@@ -37,7 +37,7 @@ March on.
 
 
 <!-- ======================== -->
-## About this tutorial
+## 🟢 About this tutorial
 <!-- ======================== -->
 
 This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
@@ -61,7 +61,7 @@ Let's get started.
 
 
 
-## Data Representation in R
+## ✅️ Data Representation in R
 
 Every computing language uses a model to represent information in memory and R is no exception. Everything in R is an object with a default constructor. We are interested in the objects that adopt certain shapes in the computer memory to hold values. The values have types that can be queried with the built-in function `typeof()` that we have seen before. We will cover these definitions and work with them in this module.
 
@@ -77,7 +77,7 @@ A simple spreadsheet could have been enough up to storing the data. However, aut
 Although solving this problem is beyond the scope of this tutorial, the idea of using a programming language forces you to think of the type of data and the structures that you need to store and manipulate it in order to accomplish your goal. That is exactly the reason we need to address the syntax of those data types and structures in the R language.
 
 
-## Data Types
+## ✅️ Data Types
 
 The fundamental values that R can represent and manipulate in the computer memory are:
 
@@ -89,7 +89,7 @@ The fundamental values that R can represent and manipulate in the computer memor
 
 There are two less commonly used: _complex_ and _raw_ that we will leave for another time.
 
-## Data Structures
+## ✅️ Data Structures
 
 These are the shapes of the data in the computer memory, literally. There are two types of data structures according to the type of values they can store: homogeneous and heterogeneous.
 
@@ -112,11 +112,11 @@ This is important because a computer language has to allow the manipulation of v
 
 **Note:** The built-in function `str()` may be useful to reveal the data structure of many R objects. However the output for complex objects may be difficult to interpret. Usually those objects have other methods to inspect their internal composition.
 
-## Vectors
+## ✅️ Vectors
 
 From the table we just saw one could read: if you need a one-dimension data structure to store  objects of the same type, <span style="color:green">_then use a vector_</span>. An important characteristic of vectors is that their contents can be stored in <span style="color:blue">contiguous memory</span> because all the elements require the same space thanks to being of the same type.
 
-### Constructing a vector
+### 🟢 Constructing a vector
 
 A vector of six integer values would be represented graphically as a long structure of six boxes of equal size:
 
@@ -148,14 +148,18 @@ x <- c(5, -1, 3, 0, -4, 1)
 ```
 
 ```{r vector-example-hint, echo=TRUE}
+# extract the third element of x
 x[3]
+# subtract the first element from the last and print the result
 x[6] - x[1]
+# compute the length of x
 length(x)
+# compute the difference between the last and first elements using the length
 x[length(x)] - x[1]
 ```
 
 
-## A vector in disguise
+## ✅️ A vector in disguise
 
 Did you notice the language used to explain sub-setting? `x[1]` returns a vector with the first element of `x`. In R the sub-setting function returns <span style="color:blue">another vector</span>. Let's verify these statements with R itself:
 
@@ -169,7 +173,7 @@ is.vector(first_element)
 ```
 This settles the issue: the subset of a vector is another vector.
 
-## Naming the elements of a vector
+## ✅️ Naming the elements
 
 A vector can also have named elements. These may help future you or another reader of the code to understand the intended meaning of the data. These names can be assigned when creating the vector or later with the _unary_ function `names`. Here are examples for you to try.
 
@@ -188,7 +192,7 @@ y <- c(current_temp = 5, forecast_low = -1, forecast_high = 10)
 ```
 
 
-## Constructing vectors with patterns
+## ✅️ Constructing with patterns
 
 Creating vectors can become a tedious task so there are a number of techniques to lighten this burden. The functions `rep()` and `seq()` can be pretty helpful to achieve this. Study the output of these functions.
 
@@ -204,15 +208,17 @@ seq(0, 100, by = 5)
 rep(seq(1,9), times = 2)
 # repeat the sequence of digits two at a time
 rep(seq(1:9), each = 2)
-# generate 5 numbers between 0 and 5
-seq(0,5, length=5) # can you make this vector of type "integer"?
+# generate 4 equally spaced gaps between 0 and 5
+seq(0,5, length=5) 
+# generate 5 equally spaced gaps between 0 and 5
 ```
 
 ```{r rep-seq-mix-hint, echo=TRUE}
+# generate 5 equally spaced gaps between 0 and 5
 seq(0,5,length=6)
 ```
 
-As you may remember from a previous module of this tutorial series, either `FALSE`, `F`, or `0` mean the same. Similarly `TRUE`, `T`, or `1` are synonymous. They are also called the boolean data type and can only have two values, each defined as the negation of the other. You can add logical values as if they were zeros and ones. This is useful to count the number of positive or TRUE values in a vector:
+As you may remember from a previous module of this tutorial series, either `FALSE`, `F` mean the same. Similarly `TRUE`, `T` are synonymous. They are also called the boolean data type and can only have two values, each defined as the negation of the other. Under the right conditions a vector of booleans can be coerced into numeric values, `F` to `0` and `T` to `1`. You can add logical values as if they were zeros and ones due to this coercion rule. This is useful to count the number of positive or TRUE values in a vector:
 
 ```{r logical-sum, exercise= TRUE}
 is_positive <- rep(rep(c(F, F, T, F, F, F, F, T, T, F, F, F, F, T), each = 2), times = 7)
@@ -221,6 +227,7 @@ is_positive <- rep(rep(c(F, F, T, F, F, F, F, T, T, F, F, F, F, T), each = 2), t
 ```
 
 ```{r logical-sum-hint}
+# how many TRUE values are there in is_positive?
 sum(is_positive)
 ```
 
@@ -234,7 +241,7 @@ The binary operator `:` can be used with integer values as a short version of `s
 *Note:* the execution of the previous expression creates a vector of doubles from 1 to 50. At this point in our tutorial, with the output of this vector spreading over more than one line on the console, we can interpret the meaning of the numbers in square brackets on the left of the output. They indicate the position within the vector of the first value presented in that line of the output. Therefore the second line of output begins with the 26th element of the vector, which happens to be the number 26 in the sequence.
 
 
-## More operations on vectors
+## ✅️ More operations on vectors
 
 How about arithmetic operations? R applies the arithmetic operators element-wise by default. Have a look below.
 
@@ -258,7 +265,7 @@ special_week <- weekly_values * special_cake_contract_week
 weekly_values == special_week
 ```
 
-## Vector recycling
+## ✅️ Vector recycling
 
 Continuing on from the previous examples, what would happen if the multiplier vector provided by the kitchen had estimates for two materials only? How would we get the estimates for next week?
 
@@ -279,7 +286,7 @@ new_weekly_estimates[4] == weekly_values[4] * 1.2
 
 
 <!-- ======================== -->
-## Time to practice
+## 🛑 Time to practice
 <!-- ======================== -->
 
 ```{r quiz-constructing-vectors, echo=FALSE, cache=FALSE}
@@ -346,7 +353,7 @@ quiz(
 
 
 
-## Sub-setting vectors
+## ✅️ Sub-setting vectors
 
 Sub-setting can be done by position or by value, @BaseR-Cheatsheet. Sub-setting is akin to retaining some elements of a vector while leaving the rest out, kind of applying a filter to retain those elements.
 
@@ -378,10 +385,11 @@ x
 
 
 ```{r subset-from-a-point-to-the-end-hint}
+# subset all but the first element of the vector 'x'
 x[-1]
-
+# subset all but the last element using the function 'length()' to avoid depending on the number of elements
 x[-length(x)]
-
+# subset all but the first and last elements. The solution should work for any size vector grater than 1
 x[2:(length(x)-1)]
 ```
 
@@ -458,7 +466,7 @@ Behind the scenes R recycled the mask to look like this c(TRUE, FALSE, TRUE, FAL
 
 **Note:** A useful case for recycling is in the simplification of the syntax for vector to matrix multiplication. The example just above, however, may be the source of unexpected and confusing results. R will not always give a warning if the lengths of the vectors are not multiple of each other.
 
-## Comparing vectors
+## ✅️ Comparing vectors
 
 
 Suppose you have two vectors with values related to the same experiment repeated on  each day of the work week, one run in the morning and the other in the afternoon. Let's supposed you wanted to know if each of the results from the mornings are greater than or equal those in the afternoon throughout the week.
@@ -524,7 +532,7 @@ that answer complex questions without  using a single if-then-else operation.
 
 
 
-## Vectors within vectors?
+## ✅️ Vectors within vectors?
 
 When a vector is created within another vector the result is a longer one.
 
@@ -545,7 +553,7 @@ c(vx, vy)
 Vectors of type `"character"`, `"numeric"`, `"logical"`, `"complex"`, or `"raw"` are always <span style="color:red">flat structures</span>, they can't have branches. They are called atomic  vectors. Another type of vectors, called  `list` can have branches and cannot be described by any of the types of atomic vectors. More on this later.
 
 
-## Appending elements to a vector
+## ✅️ Appending elements
 
 You cannot make nested structures with vectors. Incidentally this property becomes your way of appending elements to either end of a vector as we just did to the vector `y` in the previous section _Vectors within vectors?_. However using the function `append` does a cleaner job because it keeps the original attributes of the vector like names, if there were any. Try it below.
 
@@ -580,10 +588,11 @@ paste0(y, collapse = "")
 ```
 
 ```{r append-z-to-head-hint}
+# append the 24th letter to the head of 'y'
 y <-  append(LETTERS[24], y)
 ```
 
-## An eye-opener to type coercion in R
+## ✅️ An eye-opener to type coercion
 
 Let's assign integers and a string of characters to a vector and check the result.
 
@@ -627,7 +636,7 @@ In general R will try to coerce the elements of a vector to the most general typ
 
 
 
-## Introducing NAs
+## ✅️ Introducing NAs
 
 
 There are cases when special logical values, called `NA` will be introduced by R to indicate that the intended value does not exist.
@@ -711,7 +720,7 @@ sum(v, na.rm = TRUE)
 An old but still very handy blog on NA treatment in R is [@NAsHandlingBlogByBruin]. 
 
 
-## Vector attributes (Adv.)
+## ✅️ Vector attributes (Adv.)
 
 Vectors can also be interrogated for their class and their attributes.
 
@@ -751,7 +760,7 @@ dim(v)
 
 
 <!-- ======================== -->
-## Time to practice
+## 🛑 Time to practice
 <!-- ======================== -->
 
 ```{r quiz-more-on-vectors, echo=FALSE, cache=FALSE}
@@ -891,7 +900,7 @@ How would one obtain the last two names for any length of 'v'?",
 ```
 
 
-## Factors
+## ✅️ Factors
 
 These are vectors used to model categorical variables that are better described by their discrete values. This is an example of a vector whose attribute `class` has been redefined to alter its behaviour. For example the vector of musical genres for a sample of music titles from a play list may be described by:
 
@@ -938,7 +947,7 @@ table(music_genres_2)
 ```
 
 <!-- ======================== -->
-## Time to practice
+## 🛑 Time to practice
 <!-- ======================== -->
 
 ```{r quiz-factors, echo=FALSE, cache=FALSE}
@@ -982,12 +991,12 @@ quiz(
 
 
 
-## License
+## 📌 License
 
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
-## Tutorials &  online-resources
+## 📌 Tutorials &  online-resources
 
   For this module on Vectors:
   
@@ -1032,5 +1041,5 @@ quiz(
   
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)  
 
-## References
+## 📌 References
 

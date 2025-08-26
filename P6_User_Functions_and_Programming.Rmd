@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 <!-- ======================== -->
 
-## What you will learn
+## 🟢 What you will learn
 
 <!-- ======================== -->
 
@@ -36,7 +36,7 @@ In this module you will learn how to write functions, how to control the flow of
 
 <!-- ======================== -->
 
-## About this tutorial
+## 🟢 About this tutorial
 
 <!-- ======================== -->
 
@@ -69,7 +69,7 @@ Let's get started.
 
 
 
-## User functions
+## ✅️ User functions
 
 If you start writing a lot of R code, sooner or later you will find the need to reuse the same functionality over and over. Functions help you package that functionality in a single scope and reuse it in a convenient form.
 
@@ -119,7 +119,7 @@ add_2_numbers <- function(a, b) {
 <!-- **Note: ** A user-defined function that modifies an object creates a copy of  it  before affecting it. If the object was passed from the environment where the function was created then it will maintain all references to it unchanged but it will be a copy in memory nonetheless. Only primitive functions modify objects without making copies. That is why to make the fastest possible user-defined R function try to reuse as many primitive functions as you can to write its functionality. -->
 
 
-## Named parameters
+## ✅️ Named parameters
 
 Just like with built-ins you can name parameters. 
 You can also use default values.
@@ -163,7 +163,7 @@ add_2_vectors_better(x = a, y = b)
 
 Most R functions have parameters to ignore the presence of missing values when processing the input.
 
-## Control of execution
+## ✅️ Control of execution
 
 For a program or a function to do interesting calculations it is necessary to operate repetitively over data structures like vectors and lists to generate new values or a single one representing the desired target.
 
@@ -193,7 +193,7 @@ for (variable in sequence) {
 }
 ```
 
-## The functional style
+## ✅️ The functional style
 
 The functional forms of these structures can be formulated depending on the object that the user-function is applied to. For a vector the applications are straight forward.
 
@@ -201,7 +201,7 @@ The functional and procedural styles of writing programs are  equivalent, howeve
 
 Let's have a look at concrete examples.
 
-## Iterating  over a vector
+## ✅️ Iterating  over a vector
 
 ```{r, sapplyVsForLoopComparisonSetup}
 set.seed(456)
@@ -251,7 +251,7 @@ Notice the pre-allocation of space for the vector in the first line.
 <!-- The procedural style can be more verbose because it gives step by step instructions. -->
 
 
-## Conditionally walking over a vector
+## ✅️ Conditionally walking a vector
 
 In functional style this is done via sub-setting. In procedural style  a combination of a for-loop and the conditional-statements with if-else can achieve the same result. Let us have a look at the air fare to sun destinations at or below $1200, first using functional style.
 
@@ -283,12 +283,12 @@ Now you choose your style according to the task at hand. Practice will make you 
 
 
 
-## License
+## 📌 License
 
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
-## Tutorials &  online-resources
+## 📌 Tutorials &  online-resources
 
   About functions in R:
   
@@ -337,5 +337,5 @@ Now you choose your style according to the task at hand. Practice will make you 
   
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)  
 
-## References
+## 📌 References
 

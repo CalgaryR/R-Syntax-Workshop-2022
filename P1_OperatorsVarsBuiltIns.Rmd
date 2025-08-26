@@ -23,7 +23,7 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 <!-- ======================== -->
-## What you will learn
+## 🟢 What you will learn
 <!-- ======================== -->
 
 By the end of this tutorial, you will know the basics of R operators and operator precedence, how to store values in variables, how to find and use built-in functions to get things done quickly, and how to get help within R.
@@ -44,7 +44,7 @@ However, those same differences can make it confusing at first for people with e
 
 
 <!-- ======================== -->
-## About this tutorial
+## 🟢 About this tutorial
 <!-- ======================== -->
 
 This introductory tutorial about the base R syntax can be used as a presentation by an instructor or as a self-study guide. 
@@ -69,7 +69,7 @@ Let's get started.
 
 
 <!-- ======================== -->
-## Operators in R
+## ✅️ Operators in R
 <!-- ======================== -->
 
 R has a console to interact with it. Let's use it as a calculator to add two numbers. 
@@ -83,7 +83,7 @@ Here is an example of a line of code to add two plus two and the resulting outpu
 Note the output, there is a [1] and the result of the calculation. We will address the meaning of the number between square brackets when discussing `Vectors`. For now pretend it tells you the position of the single answer provided: a `[1]` indicates that the number `4` is the first value in the answer.
 
 
-## Mathematical operators in R
+## ✅️ Mathematical operators in R
 
 Please try running the following lines of code, each representing a different mathematical operation.   
 
@@ -99,7 +99,7 @@ Each result appears on its own line after running the code. The `#` symbol prece
 
 There are many more operators. We will now go over some of the most important and show how to search for all of the ones that R offers so you can find them when you need them.
 
-## Relational operators
+## ✅️ Relational operators
 
 These operators have R compute numerical equality or inequality between objects. Don't get intimidated by the word objects: in R everything is an object, although some appear to be just numeric values. 
 
@@ -127,7 +127,7 @@ For example `"d" < "b"` for line 3 to produce `FALSE`.
 
 <!-- roundoff error using the equality operator deferred for later when we have covered functions --> 
 
-## Logical operators
+## ✅️ Logical operators
 
 These operators are used to combine the results of two or more relational operators into a single result. Here is the AND operator represented in R by the ampersand symbol `&`:
 
@@ -222,7 +222,7 @@ As it turns out R coerces a value of `0` to `FALSE` or `F` and any non-zero to `
 The change in final result depending on the order of evaluation of the operators brings us into the subject of operator precedence.
 
 
-## Operator precedence
+## ✅️ Operator precedence
 
 Operators that act on a single value are _unary_ while those that receive two arguments are _binary_. The execution order of an expression containing several operators follows the rules of operator precedence. These rules determine the  priority of execution given to some operators over others. Let's look at an example:
 
@@ -309,7 +309,7 @@ kable( data.frame(long_form, short_form, description,
 ```
 
 <!-- ======================== -->
-## Test your understanding
+## 🛑 Time to practice
 <!-- ======================== -->
 
 ```{r quiz-operator-precedence, echo=FALSE, cache=FALSE}
@@ -365,7 +365,7 @@ quiz(
 
 
 <!-- ======================== -->
-## Variables in R
+## ✅️ Variables in R
 <!-- ======================== -->
 
 Just like in mathematics and statistics, the concept of variables is that of a placeholder for values. In R or any other programming language it is a good idea to store results in variables so we can keep them around to use them in other expressions. Here is an exercise to declare and assign values to variables.
@@ -386,7 +386,7 @@ The operator assignment has subtleties in R that we will cover when addressing t
 
 
 <!-- ======================== -->
-## Test your understanding
+## 🛑 Time to practice
 <!-- ======================== -->
 
 ```{r quiz-simple-assignment, echo=FALSE, cache=FALSE}
@@ -409,14 +409,14 @@ quiz(
 
 
 
-## Variables and objects
+## ✅️ Variables and objects
 
 In R the name used to label a variable is an object itself [@RLangDef.objects], in fact everything is an object in R and in this tutorial we will refer to objects and variables interchangeably.
 
 Variables have types in R. The built-in function `typeof()` can be used to get the type of any object. Let's explore types in the next section.
 
 
-## Finding the type of a variable
+## ✅️ Finding the type of a variable
 
 By observing the type that R associates with some values we can start to appreciate how R works internally.
 
@@ -442,13 +442,13 @@ typeof(typeof)
 In computer language _lingo_ a closure is a function and the environment to evaluate it, let's leave it at that for now. R is a unique language in more ways than one, let's move on with more basic concepts.
 
 
-## Built-in functions
+## ✅️ Built-in functions
 
 R offers predefined functions. When you use an R package you also use functions to get many complex tasks done with ease. It is important to familiarize yourself with their syntax. This requires that we start simple and build up the concepts gradually. The goal is to learn how to pass information to them and how to obtain results in two forms: as direct returned objects or as side effects. A side effect would be something like a file being written to the local disk or to a file service in the cloud.
 
 
 
-## Assignment from built-ins 
+## ✅️ Assignment from built-ins 
 
 Expressions can be made by assigning the value returned from a function to a variable. Let's look at the result of running the following lines:
 
@@ -476,7 +476,7 @@ There should be no output. The value of the function `exp` with the argument `1`
 (e <- exp(1))  # Euler's constant in R
 ```
 
-## Other built-in functions
+## ✅️ Other built-in functions
 
 To compute logarithms, R offers the following predefined functions:
 
@@ -508,7 +508,7 @@ length(builtins())
 
 
 <!-- ======================== -->
-## Test your understanding
+## 🛑 Time to practice
 <!-- ======================== -->
 
 ```{r quiz-complex-expressions, echo=FALSE, cache=FALSE}
@@ -530,7 +530,7 @@ quiz(
 
 
 
-## The assignment operators
+## ✅️ The assignment operators
 
 Experiment now to compute logarithms in base 10 and natural logarithms (base _e_). Try to answer the following: 
 
@@ -565,7 +565,7 @@ From the previous exercise you might have noticed that the operators `<-` and `=
 So, you might ask: why are there two operators to do the same in R?
 Read on for the answer.
 
-## Named and positional arguments 
+## ✅️ Named and positional args 
 
 R functions may be built-in or user created, they may also have none, one, or more arguments. The arguments are given in between parenthesis, separated by commas, and they may be named or not. An example of a named parameter to a function is `base` in the `log` function: `log(x, base = exp(1))`. Examine the code below and guess the output before running it, did you expect the result?
 
@@ -612,7 +612,7 @@ log(10, 1000)
 Check out the excellent, free material on this at [@DataCarpentry.org-Funcs-and-Args] (see the References section for an URL).
 
 
-## More on variable assignment
+## ✅️ More on variable assignment
 
 We already saw how the `=` operator for a named argument does not affect the global environment where the function is created. Variable assignment is like creating a pair (variable-name, expression) that lives in a scope where it can be reached for further evaluation.
 
@@ -655,7 +655,7 @@ In summary, to avoid ambiguities and unexpected side effects, when assigning val
 Note: as a side bar if you need to write a robust function that behaves like `log` check out the reference [@wrapr-named-arguments] (Consult the References section at the end of this document.)
 
 
-## On number representation (Adv.)
+## ✅️ On number representation
 
 Computers can only store and operate on numbers in the binary system, meaning only with two states that we will call  "off" and "on" or zeros and ones. Due to this limitation there are round off errors intrinsic to the arithmetic of converting from binary to decimal, a counting system we humans are more familiar with. Let's investigate the problem and find a solution in R [@CRAN.FAQ.RDoesNotThinkNumbersAreEqual].
 
@@ -692,12 +692,12 @@ all.equal(sum_calc, sum_expected)
 
 
 
-## License
+## 📌 License
 
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
-## Tutorials &  online-resources
+## 📌 Tutorials &  online-resources
 
   On Variables in R:
   
@@ -747,5 +747,5 @@ all.equal(sum_calc, sum_expected)
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)
   
 
-## References
+## 📌 References
 
