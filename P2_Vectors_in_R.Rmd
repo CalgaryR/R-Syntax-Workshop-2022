@@ -367,77 +367,96 @@ x <- c(5, -1, 3, 0, -4, 1)
 ```
 
 ```{r subset-from-a-point-to-the-end, exercise=TRUE, exercise.setup="setup-vector-to-subset-examples"}
+x
 # subset all but the first element of the vector 'x'
-
-# extract the last element using the function 'length()' to give the desired position
-
+# x[?]
+# subset all but the last element using the function 'length()' to avoid depending on the number of elements
+# x[?]
+# subset all but the first and last elements. The solution should work for any size vector grater than 1
+# x[?]
 ```
 
 
 ```{r subset-from-a-point-to-the-end-hint}
 x[-1]
-x[length(x)]
+
+x[-length(x)]
+
+x[2:(length(x)-1)]
 ```
+
+#### Subsetting by position
 
 You can subset the elements at specific locations using a vector of positions.
 
 ```{r, subsetting-vectors-with-vectos-of-positions, exercise=TRUE, exercise.setup="setup-vector-to-subset-examples"}
 # create a vector of positions
 pos <- c(1, 5)
-# subset (filter)
+# subset (filter) by position
 x[pos]
 ```
 
+#### Subsetting by value
+
 Sub-setting selected elements can be done depending not only of position but also on the values of the elements at any position in the vector. This is appropriately called  sub-setting by **value**.
 
-The first example is using logical masks to extract a subset of the vector. The logical mask can be created with the target vector and the logical operators applied to satisfy a condition like elements equal to or less than a given value. R is vectorized so the syntax is straight forward:
+In the first example below, we create a logical mask to subset the vector. This mask can be created with the target vector and the logical operators applied to satisfy a logical condition, usually suggested by a research question. R is vectorized so the syntax is straight forward:
 
 ```{r, subsetting-vectors-with-logical-masks, exercise=TRUE, exercise.setup="setup-vector-to-subset-examples"}
 cat("The original vector x = [", paste0( x, collapse =", "), "]")
-cat(paste("The mask is a vector of logical types: mask = x > 2"))
+cat("The mask is a vector of logical types: mask = x > 2")
 (mask = x > 2)
-cat(paste("The mask is used to subset x, it acts like a filter: x[mask]"))
+cat("The mask is used to subset x, it acts like a filter: x[mask]")
 x[mask]
-cat(paste("The positions of the elements greater than 2: 'match(x[mask], x)' "))
+cat("The positions of the elements greater than 2 using 'match(x[mask], x)' ")
 match(x[mask], x)
-cat(paste("Compute how many values greater than two were found in 'x' using length(x[mask])"))
+cat("Compute how many values greater than two were found in 'x' using length(x[mask])")
 length(x[mask])
-cat(paste("Another way is to find how many TRUE values there are in the mask: sum(mask)"))
+cat("Thanks to coercion of T to 1 and F to 0 this anwers the same question: sum(mask)")
 sum(mask)
 ```
+
+#### Creative ways of creating filters to subset by value
 
 Another way of sub-setting a vector by selecting values is using the `%in%` operator. It checks if any of the elements of the vector  is present in the sequence provided as second argument to `%in%`. An exercise will clarify its use:
 
 ```{r, subsetting-by-value-with-in-operator, exercise=TRUE, exercise.setup="setup-vector-to-subset-examples"}
 cat("The original vector x = [", paste0( x, collapse =", "), "]")
-cat(paste("Put together a logical mask, first create some values to include"))
-(include_these <- seq(-4,0))
-cat(paste("Create the filter to retain values from the target vector with 'filter <- x %in% include_these'"))
+cat("First, create a logical mask with '(seq(-4,0) -> include_these)'")
+(seq(-4,0) -> include_these)
+cat("Create the filter to retain values from the target vector with 'filter <- x %in% include_these'")
 (filter <- x %in% include_these)
-cat(paste("Filter and sort in ascending order with 'sort(x[filter])'"))
+cat("Filter and sort in ascending order with 'sort(x[filter])'")
 sort(x[filter])
-cat(paste("Find the positions of the elements found with 'match(x[filter],x)'"))
-match(x[filter],x)
+cat("Find the positions of the elements found above with 'match(sort(x[filter]),x)'")
+match(sort(x[filter]),x)
 ```
 
-The names of the elements can be used as values to create subsets. The exercise below will illustrate this use.
+#### Subsetting by names as proxies for values
+
+R vectors can have named elements, these can be used as values to create subsets. The exercise below illustrates this case.
 
 ```{r, subsetting-by-value-with-element-name, exercise=TRUE}
-y <- c(fruit="pears, bananas, apples", vegetables="lettuce, carrots")
+(y <- c(fruit="pears, bananas, apples", vegetables="lettuce, carrots"))
+# get only the vegetables by name
 y["vegetables"]
 ```
+
+#### The correct filter length
+
+The **correct** filter length is the length of the vector that it will be applied to. R will not give you an error if you don't follow this advice.
 
 Remember vector recycling? What if we used a logical mask that was shorter than the vector `x` from the previous exercise? `x` has 6 elements.
 
 ```{r recycling-a-logical-mask, exercise=TRUE, exercise.setup="setup-vector-to-subset-examples"}
+x
 mask_short <- c(TRUE, FALSE, TRUE, FALSE)
 x[mask_short]
 ```
 
 Behind the scenes R recycled the mask to look like this c(TRUE, FALSE, TRUE, FALSE, <span style="color:blue">TRUE, FALSE</span>) so the two vector lengths were 6.
 
-**Note:** In some cases this may be a useful feature, but if not done with careful attention, it may be source of unexpected and confusing results! R will give a warning if the lengths of the vectors are not multiple of each other as a minimum.
-
+**Note:** A useful case for recycling is in the simplification of the syntax for vector to matrix multiplication. The example just above, however, may be the source of unexpected and confusing results. R will not always give a warning if the lengths of the vectors are not multiple of each other.
 
 ## Comparing vectors
 
@@ -532,19 +551,19 @@ You cannot make nested structures with vectors. Incidentally this property becom
 
 
 ```{r appendToVectorWithNames, exercise=TRUE}
-y <- letters[1:5]
+y <- LETTERS[1:5]
 names(y) <- c("c1","c2", "c3","c4","c5")
 y
 ```
 
 ```{r appendToVectorWithNamessetup}
-y <- letters[1:5]
+y <- LETTERS[1:5]
 names(y) <- c("c1","c2", "c3","c4","c5")
 ```
 
 ```{r append-to-vector-with-names-extended, exercise=TRUE, exercise.setup="appendToVectorWithNamessetup"}
 # now add the sixth letter of the ascii character set
-y_extended <- append(y, letters[6])
+y_extended <- append(y, LETTERS[6])
 # check the new vector, are the first five names preserved?
 y_extended
 ```
@@ -553,15 +572,15 @@ Append the 24th lower case letter of the  ascii character set to the beginning o
 
 
 ```{r append-z-to-head, exercise=TRUE}
-y <- letters[c(15, 24, 15)]
+y <- LETTERS[c(15, 24, 15)]
 # append the 24th letter to the head of 'y'
-
+# y <-  ??
 # don't modify the following line
 paste0(y, collapse = "")
 ```
 
 ```{r append-z-to-head-hint}
-y <-  append(letters[24], y)
+y <-  append(LETTERS[24], y)
 ```
 
 ## An eye-opener to type coercion in R
@@ -623,7 +642,10 @@ typeof(NA_real_)
 typeof(NA_character_)
 ```
 
-The first case when missing values can be introduced while writing R code is executing an illegal mathematical operation.
+
+#### NAs through illegal mathematical operations
+
+R penalizes doing the wrong math with `NA`s of different types, according to the type of mathematical breach.
 
 
 ```{r type-of-NaNs, exercise=TRUE}
@@ -633,14 +655,14 @@ log(-10)
 typeof(NaN)
 ```
 
-
+#### NAs through out-of-bound references and unreasonable coercion 
 
 Here are other two important cases where `NA`s can be introduced in data structures. You need to be aware of them to use R more effectively:
 
   * When sub-setting with a position that is larger than the size of the vector.
   * When coercing non-numeric symbols to a numeric type.
 
-Below an example of the first case:
+Below an example of the first case. **Note:**  remember the caveat about the length of the filter being shorter and triggering unexpected recycling? Here is a hidden bug coming from a filter referencing a vector by a position greater than its length. To avoid unpleasant surprises, the filter should be neither longer nor shorter than the length of the vector that it will be applied to. 
 
 ```{r, examples-introducing-NAs-position-out-of-range, exercise=TRUE}
 control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_length")
@@ -650,7 +672,7 @@ control_variables <- c("temperature", "humidity", "daylight_hours", "light_wave_
 sum(is.na(manipulated)) > 0
 ```
 
-And now an example of the second case:
+And below an example of the second case, due to unsolvable coercion:
 
 ```{r, examples-introducing-NAs-coercing-non-numeric-symbols, exercise=TRUE}
 # supposed we read these values from a text file with results from an experiment
