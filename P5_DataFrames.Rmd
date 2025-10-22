@@ -223,7 +223,7 @@ As a very special case of a list, you would expect to be able to reuse some of y
 
 ## ✅️ The subsetting function
 
-The built-in function `subset` takes a data frame and returns a new object with the requested data frame. This function receives a logical vector as named argument `subset`, this vector signals with `TRUE` the elements that should be included and `FALSE` otherwise. Another optional parameter called `select` is a vector with the column positions or names to include by default, unless a third parameter called `drop` is set to TRUE, in which case the selected values are dropped from the resulting subset.
+The built-in function `subset` takes a data frame and returns a new object with the requested data frame. This function receives a logical vector as named argument `subset`, this vector marks with `TRUE` the elements that should be included and `FALSE` otherwise. Another optional parameter called `select` is a vector with the column positions or names to include by default, unless a third parameter called `drop` is set to TRUE, in which case the selected values are dropped from the resulting subset.
 
 As an example let's take the time series for quarterly earnings per share for Johnson and Johnson from 1960 to 1980, part of the `datasets` package included in modern default R installations. We are  asked to extract the years when the last quarter earnings were greater than 60% of the annual earning per share and show the last quarter and the total earnings.
 
