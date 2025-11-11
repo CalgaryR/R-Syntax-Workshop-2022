@@ -823,7 +823,7 @@ How would one obtain the last two names for any length of 'v'?",
 
       typeof(c(FALSE, 0, \"TRUE\"))",
     answer("yes", correct = TRUE),
-    answer("no", correct= FALSE, message = 'In R type "character" is even more general than "double"'),
+    answer("no", correct= FALSE, message = 'The vector constructor function tries to find the single data type that satisfies his need for type homogeneity when given a "boolean", a "double" and a "character". It solves the dilemma by promoting everything to a "character". Every "boolean" and "double" can be converted into a "character" and back without information loss, however the opposite is not true, making the "character" the most general type in R.'),
     correct = 'Well done, you have a natural talent for R!',
     random_answer_order = TRUE,
     allow_retry = TRUE
@@ -834,7 +834,7 @@ How would one obtain the last two names for any length of 'v'?",
     answer("c(x, c(5))", correct = T),
     answer("x[5] = 5", correct = T),
     answer("x[ length(x) + 1] <- 5", correct = T),
-    answer("x(5) <- 5", correct = F),
+    answer("x(5) <- 5", correct = F, message = 'Attention: the parenthesis operator is not to be confused with the square bracket operator.'),
     answer("append(x, 5) ", correct = T),
     allow_retry = T,
     random_answer_order = T,
@@ -881,7 +881,7 @@ How would one obtain the last two names for any length of 'v'?",
       answer(" x[-2] * y", correct = F, message = "The first vector has three elements, youa re removing only one!"),
       allow_retry = T,
       random_answer_order = T,
-      correct = "Amazing results you are getting with element wise operations and sub-setting vectors!"),
+      correct = "You are getting amazin results applying recyling, element wise multiplication, and sub-setting vectors!"),
   # https://rdrr.io/github/timelyportfolio/sortableR/man/question_rank.html
   sortable::question_rank(text = "Order the elements of the vector that result from executing  this code:
 
