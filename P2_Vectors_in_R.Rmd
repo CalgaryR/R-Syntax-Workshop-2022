@@ -114,7 +114,9 @@ This is important because a computer language has to allow the manipulation of v
 
 ## ✅️ Vectors
 
-From the table we just saw one could read: if you need a one-dimension data structure to store  objects of the same type, <span style="color:green">_then use a vector_</span>. An important characteristic of vectors is that their contents can be stored in <span style="color:blue">contiguous memory</span> because all the elements require the same space thanks to being of the same type.
+From the table we just saw one could read: if you need a one-dimension data structure to store  objects of the same type, <span style="color:green">_then use a vector_</span>. An important characteristic of vectors is that their contents can be stored in <span style="color:blue">contiguous memory</span>.
+Storing elements of the same type makes possible to give each one the same amount of space in memory.
+This expedites fetching any element given its position from the start of the vector.
 
 ### 🟢 Constructing a vector
 
@@ -833,7 +835,7 @@ How would one obtain the last two names for any length of 'v'?",
     x <- 1:4",
     answer("c(x, c(5))", correct = T),
     answer("x[5] = 5", correct = T),
-    answer("x[length(x)] <- 5", correct = T),
+    answer("x[ length(x) + 1 ] <- 5", correct = T),
     answer("x(5) <- 5", correct = F),
     answer("append(x, 5) ", correct = T),
     allow_retry = T,
@@ -905,10 +907,12 @@ How would one obtain the last two names for any length of 'v'?",
 These are vectors used to model categorical variables that are better described by their discrete values. This is an example of a vector whose attribute `class` has been redefined to alter its behaviour. For example the vector of musical genres for a sample of music titles from a play list may be described by:
 
 ```{r music-sample-genres, exercise=TRUE}
+set.seed(1234)
 # The genres on an eclectic play list
 genre_sample <- c(rep("Indie", times = 5),
                 rep("Electronic", times = 9),
                 rep("Country", times = 27))
+(genre_sample <- sample(genre_sample,size = length(genre_sample),replace = FALSE))
 class(genre_sample)
 ```
 
@@ -919,10 +923,12 @@ What if we wanted this vector to recognize the distinct musical genres, furtherm
 First let's turn the character vector into an actual factor.
 
 ```{r, setup-music-sample-genres}
+set.seed(1234)
 # The genres on an eclectic play list
 genre_sample <- c(rep("Indie", times = 5),
                 rep("Electronic", times = 9),
                 rep("Country", times = 27))
+genre_sample <- sample(genre_sample,size = length(genre_sample),replace = FALSE)
 ```
 
 ```{r, music-sample-genres-as-factors, exercise=TRUE, exercise.setup="setup-music-sample-genres"}
@@ -1028,8 +1034,9 @@ quiz(
   
   1. https://cran.r-project.org/doc/contrib/Lemon-kickstart/ (very short but juicy)
   2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  4. https://www.stat.berkeley.edu/~spector/s243/
+  3. https://keithmcnulty.github.io/siop-lec-workshop-2025/materials/talks/1-preliminaries.html#1 (Fundamentals of Regression Analysis applied to People Data in R)
+  4. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  5. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   

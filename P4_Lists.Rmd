@@ -176,7 +176,7 @@ my_list[[1]]
 The list class is kind of a super set of the vector class, thus R's coercion philosophy will be to coerce vectors into lists whenever confronted with the dilemma.
 In the following case, attempting to create a vector given a list and a vector, first coerces the vector into a list (a list is a more general concept than a vector) and then merges the two lists into a single one. The net effect is flattening the list.
 
-```{r, coercion-of-vector-to-list, exercise=TRUE, exercise.lines=5}
+```{r, coercion-of-vector-to-list, exercise=TRUE}
 # the result of concatenating a list and a vector is a flat list
 c(list(one=1,a="a"), 
   c(zero=0,two=2,four=4))
@@ -348,7 +348,7 @@ to_buy$drinks
 A list can be coerced into a vector using the `unlist()` function.
 It uses the same coercion rules that `c()` uses to create homogeneous types for each element.
 
-```{r, using-unlist-to-convert-list-to-vector, exercise=TRUE, exercise.lines=5}
+```{r, using-unlist-to-convert-list-to-vector, exercise=TRUE}
 set.seed(67284)
 outcomes <- round(runif(3),4)
 pass <- outcomes>0.75
@@ -374,7 +374,7 @@ quiz(
     allow_retry = TRUE,
     correct = "You are on a roll! This is an important characteristic of lists."
   ),
-  question_checkbox("Your rent went up by 3% this month. I know, this is a crazy neighbourhood.
+  question_checkbox("Your rent will go up by 3% this month. I know, this is a crazy neighbourhood.
 
           to_do <- list(errands = c(\"Doctor's appointment\",
                                     \"pick up milk\", \"Call dad\"),
@@ -472,14 +472,16 @@ Computing:
   
   1. https://cran.r-project.org/doc/contrib/Lemon-kickstart/ (very short but juicy)
   2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  4. https://www.stat.berkeley.edu/~spector/s243/
+  3. https://keithmcnulty.github.io/siop-lec-workshop-2025/materials/talks/1-preliminaries.html#1 (Fundamentals of Regression Analysis applied to People Data in R)
+  4. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  5. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   
   1. https://www.bioconductor.org/ (packages for bio-statistics)
   2. https://a-little-book-of-r-for-bioinformatics.readthedocs.io/en/latest/index.html
   3. https://github.com/eacton/CAGEF (University of Toronto - Centre for the Analysis of Genome Evolution & Function)
+  
   Language Reference:
   
   1. https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf (latest)  

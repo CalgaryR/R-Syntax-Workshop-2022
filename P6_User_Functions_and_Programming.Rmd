@@ -324,8 +324,9 @@ Now you choose your style according to the task at hand. Practice will make you 
   
   1. https://cran.r-project.org/doc/contrib/Lemon-kickstart/ (very short but juicy)
   2. https://www.youtube.com/playlist?list=PLDcUM9US4XdMROZ57-OIRtIK0aOynbgZN (Statistical Rethinking playlist)
-  3. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
-  4. https://www.stat.berkeley.edu/~spector/s243/
+  3. https://keithmcnulty.github.io/siop-lec-workshop-2025/materials/talks/1-preliminaries.html#1 (Fundamentals of Regression Analysis applied to People Data in R)
+  4. https://github.com/rmcelreath/stat_rethinking_2022 (Statistical Rethinking resources)
+  5. https://www.stat.berkeley.edu/~spector/s243/
   
   Biology:
   
