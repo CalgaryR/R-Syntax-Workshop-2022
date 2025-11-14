@@ -907,23 +907,24 @@ How would one obtain the last two names for any length of 'v'?",
 These are vectors used to model categorical variables that are better described by their discrete values. This is an example of a vector whose attribute `class` has been redefined to alter its behaviour. For example the vector of musical genres for a sample of music titles from a play list may be described by:
 
 ```{r music-sample-genres, exercise=TRUE}
-set.seed(1234)
+set.seed(1234L)
 # The genres on an eclectic play list
 genre_sample <- c(rep("Indie", times = 5),
                 rep("Electronic", times = 9),
                 rep("Country", times = 27))
+# The following shuffles the order of the genre entries 
 (genre_sample <- sample(genre_sample,size = length(genre_sample),replace = FALSE))
 class(genre_sample)
 ```
 
 
-What if we wanted this vector to recognize the distinct musical genres, furthermore what if we wanted it to automatically track the number of songs of each genre on our play list. Introducing the factor class:
+What if we wanted to track the count of entries of each distinct musical genre? We could put a number to the question of the type of music, if any, that is predominant in our play list. Introducing the factor class:
 
 
-First let's turn the character vector into an actual factor.
+First, let's turn the character vector into an actual factor data structure. A `factor` understands categories as enumerations of items of the same kind.
 
 ```{r, setup-music-sample-genres}
-set.seed(1234)
+set.seed(1234L)
 # The genres on an eclectic play list
 genre_sample <- c(rep("Indie", times = 5),
                 rep("Electronic", times = 9),
@@ -932,10 +933,14 @@ genre_sample <- sample(genre_sample,size = length(genre_sample),replace = FALSE)
 ```
 
 ```{r, music-sample-genres-as-factors, exercise=TRUE, exercise.setup="setup-music-sample-genres"}
-music_genres <- factor(genre_sample)
+(music_genres <- factor(genre_sample))
 attributes(music_genres)
 ```
-What if we get a recommendation to listen to a new genre but we have not actually listened to any song belonging to that category, this can be expressed with factors by adding a new character string to the vector of levels  without adding any element to the factor class.
+
+If you ran the exercise code in the box above, you are now aware of a new attribute that  explains how a factor behaves: the attribute  `levels`. Levels are the _categories_ of items we are tracking. They may look to you as characters at first glance, however notice the lack of double quotes around them. This hints of labels or _enumerations_ more than actual characters. 
+
+
+Now suppose we get a recommendation to listen to a new genre but we have not listened to any song belonging to that category yet. This can be expressed through a factor by adding a new character string to the vector of levels  we can store, without adding any _element_ to the factor class.
 
 ```{r, music-sample-adding_new-level, exercise=TRUE, exercise.setup="setup-music-sample-genres"}
 # add a new musical genre (a new level of the categorical variable)
@@ -944,7 +949,8 @@ levels(music_genres) <- c(levels(music_genres), "Classical")
 table(music_genres)
 ```
 
-When we start listening to songs of that new genre they will get reckoned appropriately. In R adding a new element to a factor has to be done on the original vector because factors <span style="color:red">cannot be combined or concatenated</span>.
+When we start listening to songs of that new genre they will get reckoned appropriately. In R, adding a new element to a factor has to be done on the original vector because factors <span style="color:red">cannot be combined or concatenated</span>.
+Hopefully we still keep the original vector around, `genre_sample`, in this case.
 
 ```{r, music-sample-genres-levels, exercise=TRUE, exercise.setup="setup-music-sample-genres"}
 # add new entries
