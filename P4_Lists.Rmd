@@ -124,25 +124,22 @@ First we will create the table as a matrix, then we will name the rows and colum
 (weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350))
 # estimate the annual consumption of each material given 52.18 weeks per year
 weekly_values * rep(52.18, times=4)
-(m<-weekly_values %*% t(c(1, 52.18))) # matrix multiplication of two vectors
+(m <- c(1, 52.18) %*% t(weekly_values)) # matrix multiplication of two vectors
 #help("matrix")
-dimnames(m) <- list(supplies=c(names(weekly_values)), frequency=c("weekly","annual"))
+dimnames(m) <- list(frequency=c("weekly","annual"), supplies=c(names(weekly_values)))
 m
 ```
 
 ```{r, explainingDimnamesFromListOfVectorsSetup}
 weekly_values <- c(flour_kg = 12, eggs_units = 450, yeast_kg = 5, salt_kg = 0.350)
-# estimate the annual consumption of each material given 52.18 weeks per year
-m<-weekly_values %*% t(c(1, 52.18)) # algebraic multiplication of two vectors
-#help("matrix")
-dimnames(m) <- list(supplies=c(names(weekly_values)), frequency=c("weekly","annual"))
+m <- c(1, 52.18) %*% t(weekly_values) # matrix multiplication of two vectors
+dimnames(m) <- list(frequency=c("weekly","annual"), supplies=c(names(weekly_values)))
 ```
 
 Let's verify the dimensions of the new matrix created by multiplying the two vectors using the matrix product function `%*%` instead of the element-wise product function `*`:
 
-$$ \begin{bmatrix} 12\\450\\5\\0.35\end{bmatrix}_{4\times1} \begin{bmatrix} 1& 52.18 \end{bmatrix}_{1\times2}=\begin{bmatrix} 12.00 & 626.160 \\ 450.00 & 23481.000 \\ 5.00 & 260.900 \\
-  0.35 & 18.263\end{bmatrix}_{4\times2}$$
-A regular R vector is the equivalent of a column vector, in this case the first vector, `weekly_values`, has dimension 4 rows by 1 column. The transpose of the second R vector, `t(c(1, 52.18))`, has dimension 1 row by 2 columns. The resulting matrix has dimensions 4 by 2 as expected. Let's verify with the `dim` function and look at the list of vectors used to label the dimensions, the rows and the columns of our matrix of baking supplies.
+$$ \begin{bmatrix} 1 \\ 52.18\end{bmatrix}_{2\times1} \begin{bmatrix} 12 & 450 & 5 & 0.35 \end{bmatrix}_{1\times4}=\begin{bmatrix} 12.00 & 450 & 5.0 & 0.350\\ 626.16 & 23481 & 260.9 & 18.263\end{bmatrix}_{2\times4}$$
+An R vector is a column vector, the vector made of the week multipliers, `c(1, 52.18)`, has implicit dimension of 2 rows by 1 column. The transpose of the second vector, `t( weekly_values)`, has dimension 1 row by 4 columns, one for each type of material used in the bakery. The resulting matrix has dimensions 2 by 4, as expected. Let's verify with the `dim` function and look at the list of vectors used to label the dimensions, the rows and the columns of our matrix of baking supplies.
 
 
 ```{r, explainingDimnamesFromListOfVectors, exercise=TRUE, exercise.setup="explainingDimnamesFromListOfVectorsSetup"}
