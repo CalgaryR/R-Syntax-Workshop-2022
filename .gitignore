@@ -54,3 +54,7 @@ vignettes/*.pdf
 *.pdf
 *.gz
 .positai
+
+# renv
+renv/library/
+
